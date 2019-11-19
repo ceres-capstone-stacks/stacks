@@ -1,41 +1,46 @@
 package com.stack.stacks.models;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
+import java.sql.Date;
 
 @Entity
-@Table (name= "income")
-public class Income {
+@Table(name = "expenses")
+public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private long id;
 
-    @Column (nullable = false)
-    private String type;
-
     @Column (precision = 10, scale = 2)
     private double amount;
 
     @Column
-    private int frequency;
+    private java.sql.Date date;
 
-    @Column (name = "is_regular")
+    @Column
+    private String description;
+
+    @Column
     private boolean isRegular;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user")
     private User user;
 
-    public Income () {
+//    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
+//    private Type type;
+
+    public Expense() {
     }
 
-    public Income(String type, double amount, int frequency, boolean isRegular) {
-        this.type = type;
+    public Expense(double amount, Date date, String description, boolean isRegular, User user) {
         this.amount = amount;
-        this.frequency = frequency;
+        this.date = date;
+        this.description = description;
         this.isRegular = isRegular;
+        this.user = user;
+//        this.type = type;
     }
 
     public long getId() {
@@ -46,14 +51,6 @@ public class Income {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public double getAmount() {
         return amount;
     }
@@ -62,12 +59,20 @@ public class Income {
         this.amount = amount;
     }
 
-    public int getFrequency() {
-        return frequency;
+    public Date getDate() {
+        return date;
     }
 
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isRegular() {
@@ -85,4 +90,12 @@ public class Income {
     public void setUser(User user) {
         this.user = user;
     }
+
+//    public Type getType() {
+//        return type;
+//    }
+//
+//    public void setType(Type type) {
+//        this.type = type;
+//    }
 }

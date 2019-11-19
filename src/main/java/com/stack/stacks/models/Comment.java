@@ -1,37 +1,33 @@
 package com.stack.stacks.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int(11) UNSIGNED")
     private long id;
 
-    @Column(nullable = false)
-    private String title;
-
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @OneToOne
     private User user;
 
-    @ManyToMany(mappedBy = "posts")
-    private List<Tag> tags;
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private Post post;
 
-    public Post () {
+    public Comment() {
     }
 
-    public Post(String title, String content, User user) {
-        this.title = title;
+    public Comment(String content, User user, Post post) {
         this.content = content;
         this.user = user;
+        this.post = post;
     }
 
     public long getId() {
@@ -40,14 +36,6 @@ public class Post {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {
@@ -64,5 +52,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
