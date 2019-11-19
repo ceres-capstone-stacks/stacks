@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.text.DecimalFormat;
 
 @Entity
-@Table
+@Table (name= "income")
 public class Income {
 
     @Id
