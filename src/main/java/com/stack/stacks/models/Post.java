@@ -1,6 +1,6 @@
 package com.stack.stacks.models;
 
-import org.aspectj.apache.bcel.generic.Tag;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,10 +25,12 @@ public class Post {
     private User user;
 
     @ManyToMany(mappedBy = "posts")
-    private List<Tag> tags;
+    private List<com.stack.stacks.models.Tag> tags;
 
     public Post () {
     }
+
+
 
     public Post(String title, String content, User user) {
         this.title = title;
