@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Stacks</title>
-    <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stacks - Let us help your wallet grow.</title>
+<!--    <th:block th:replace="fragments/header.html :: main-header"/>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <style>
         body {
             font-family: 'Public Sans', sans-serif;
@@ -93,12 +96,26 @@
     </ul>
 </nav>
 
-<div id="container">
-    <div id="home-top">
-        <h1>Stacks</h1>
-        <h3>Let us help your wallet.</h3>
+<!--<div id="container">-->
+<!--    <div id="home-top">-->
+<!--        <h1>Stacks</h1>-->
+<!--        <h3>Let us help your wallet grow.</h3>-->
+<!--    </div>-->
+<!--</div>-->
+
+<section class="hero is-medium is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Stacks
+            </h1>
+            <h2 class="subtitle">
+                Let us help your wallet grow.
+            </h2>
+        </div>
     </div>
-</div>
+</section>
+
 <div id="middle">
     <div id="mid-1">
         <h3>We can help you <i>save</i> money by keeping track of your expenses.</h3>

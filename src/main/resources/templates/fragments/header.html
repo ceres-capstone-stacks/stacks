@@ -1,80 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
-    <meta charset="UTF-8" />
-    <title>Home</title>
-    <script
-            src="https://code.jquery.com/jquery-2.2.4.js"
-            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="main-header">
+    <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
             crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
-</head>
-<body>
-<nav th:fragment="navbar">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="/S.png" width="112" height="28">
-            </a>
-
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-
-            </a>
-            <div class="navbar-menu" id="navMenu">
-                <a class="navbar-item" href="/">
-                    Home
-                </a>
-            </div>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="/">
-                    Save
-                </a>
-
-<!--                <a class="navbar-item" href="/show" >-->
-<!--                    -->
-<!--                </a>-->
-
-<!--                <a class="navbar-item" href="/show/create" sec:authorize="isAuthenticated()" >-->
-<!--                    Create Post-->
-<!--                </a>-->
-
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-
-<!--                    <div class="buttons" sec:authorize="!isAuthenticated()">-->
-                        <a class="button is-primary" href="sign-up">
-
-                            <strong>Get Started</strong>
-                        </a>
-                        <a class="button is-light" href="/login">
-                            Log in
-                        </a>
-                    </div>
-<!--                    <div class="buttons" sec:authorize="isAuthenticated()">-->
-<!--                        <a class="button is-primary" href="/logout">-->
-
-<!--                            <strong>Logout</strong>-->
-<!--                        </a>-->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-</nav>
-</body>
-</html>
+</th:block>
