@@ -15,7 +15,7 @@ public class Tag {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "post_tags",
+            name = "post_tag",
             joinColumns = {@JoinColumn(name="tag_id")},
             inverseJoinColumns = {@JoinColumn(name="post_id")}
     )
