@@ -15,19 +15,19 @@ public class Comment {
     private String content;
 
     @OneToOne
-    private long userId;
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private long postId;
+    @JoinColumn(name = "user")
+    private Post post;
 
     public Comment() {
     }
 
-    public Comment(String content, long userId, long postId) {
+    public Comment(String content, User user, Post post) {
         this.content = content;
-        this.userId = userId;
-        this.postId = postId;
+        this.user = user;
+        this.post = post;
     }
 
     public long getId() {
@@ -46,19 +46,19 @@ public class Comment {
         this.content = content;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public long getPostId() {
-        return postId;
+    public Post getPost() {
+        return post;
     }
 
-    public void setPostId(long postId) {
-        this.postId = postId;
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
