@@ -28,7 +28,7 @@ public class Expense {
     @JoinColumn(name = "user")
     private User user;
 
-//    @OneToOne(mappedBy = "expense", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
 //    private Type type;
 
     public Expense() {
