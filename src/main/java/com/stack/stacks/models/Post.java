@@ -1,7 +1,5 @@
 package com.stack.stacks.models;
 
-
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,12 +23,10 @@ public class Post {
     private User user;
 
     @ManyToMany(mappedBy = "posts")
-    private List<com.stack.stacks.models.Tag> tags;
+    private List<Tag> tags;
 
     public Post () {
     }
-
-
 
     public Post(String title, String content, User user) {
         this.title = title;
