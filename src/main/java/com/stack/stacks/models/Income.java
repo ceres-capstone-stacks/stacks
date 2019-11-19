@@ -15,8 +15,8 @@ public class Income {
     @Column (nullable = false)
     private String type;
 
-    @Column
-    private DecimalFormat amount;
+    @Column (precision = 10, scale = 2)
+    private double amount;
 
     @Column
     private int frequency;
@@ -31,7 +31,7 @@ public class Income {
     public Income () {
     }
 
-    public Income(String type, DecimalFormat amount, int frequency, boolean isRegular) {
+    public Income(String type, double amount, int frequency, boolean isRegular) {
         this.type = type;
         this.amount = amount;
         this.frequency = frequency;
@@ -54,11 +54,11 @@ public class Income {
         this.type = type;
     }
 
-    public DecimalFormat getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(DecimalFormat amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

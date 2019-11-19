@@ -19,8 +19,8 @@ public class Goal {
     @Column
     private LocalDate date;
 
-    @Column
-    private DecimalFormat amount;
+    @Column (precision = 10, scale = 2)
+    private double amount;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -29,7 +29,7 @@ public class Goal {
     public Goal () {
     }
 
-    public Goal(String description, LocalDate date, DecimalFormat amount) {
+    public Goal(String description, LocalDate date, double amount) {
         this.description = description;
         this.date = date;
         this.amount = amount;
@@ -59,11 +59,11 @@ public class Goal {
         this.date = date;
     }
 
-    public DecimalFormat getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(DecimalFormat amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
