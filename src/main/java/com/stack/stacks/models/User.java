@@ -21,23 +21,26 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, name = "first_name")
     private String firstName;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, name = "last_name")
     private String lastName;
 
     @Column(nullable = false)
     private java.sql.Date dob;
 
-    @Column(nullable = false, columnDefinition = "boolean default false")
+    @Column(nullable = false, columnDefinition = "boolean default false", name = "is_admin")
     private boolean isAdmin;
 
-    @Column
+    @Column (name = "residual_income")
     private int residualIncome;
 
-    @Column
+    @Column (name = "retirement_age")
     private int retirementAge;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
     public long getId() {
         return id;
@@ -132,5 +135,13 @@ public class User {
     }
 
     public User() {
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
