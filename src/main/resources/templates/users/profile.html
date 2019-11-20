@@ -1,10 +1,42 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Stacks | Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        #footer {
+            background-color: rgb(56, 63, 65);
+            height: 150px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: white;
+            list-style: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<h1>See Profile here</h1>
+
+<div id="footer">
+    <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</div>
 </body>
 </html>

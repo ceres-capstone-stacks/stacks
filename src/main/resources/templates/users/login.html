@@ -1,33 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>Log In | Stacks</title>
-=======
-    <meta charset="UTF-8" />
-    <title>Log In</title>
-<!--    <th:block th:replace="fragments/header :: second-header"/>-->
->>>>>>> fae22aa599cf4af6ca750aa10d1cd359ff3d53e8
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        #footer {
+            background-color: rgb(56, 63, 65);
+            height: 150px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: white;
+            list-style: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="card">
-        <h1>Log In</h1>
-        <div th:if="${param.error}">
-            Invalid Username and Password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
+<div class="container is-fluid">
+    <div class="notification">
+        <h1>Log in to your Stacks account</h1>
         <form th:action="@{/login}" method="post">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text"/>
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password"/>
-            <input type="submit" value="Start Saving"/>
+            <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input" type="text" placeholder="Username">
+                    <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" type="password" placeholder="Password">
+                    <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-success">Login</button>
+                </p>
+            </div>
         </form>
     </div>
+</div>
+<div id="footer">
+    <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
 </div>
 <!--<div th:replace="fragments/footer :: main-footer"></div>-->
 </body>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<<<<<<< HEAD
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Stacks | Sign Up</title>
     <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <style>
         body {
             font-family: 'Public Sans', sans-serif;
@@ -44,12 +45,65 @@
     </style>
 </head>
 <body>
-<div id="container">
-<h3>Create an account with us</h3>
-    <p>Creating an account with us is the first step towards a healthier financial life. You will have access to our system
-    that will allow you to keep track of all your expenses and find out what you're truly spending your money on. You can
-        get guidance from other users and find places to shop for deals and how to save on your bills. You will also be
-        able to set savings goals for yourself to accomplish at your own pace.</p>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Create an account with us</h1>
+            <h2 class="subtitle">Creating an account with us is the first step towards a healthier financial life. You will have access to our system
+                that will allow you to keep track of all your expenses and find out what you're truly spending your money on. You can
+                get guidance from other users and find places to shop for deals and how to save on your bills. You will also be
+                able to set savings goals for yourself to accomplish at your own pace.</h2>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="card w-50">
+        <div class="card-body">
+            <h1>Create an account</h1>
+            <form th:action="@{/register}" method="POST" th:object="${user}">
+
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" placeholder="Email" th:field="*{email}">
+                        <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="text" placeholder="Username" th:field="*{username}">
+                        <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Password" th:field="*{password}">
+                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Confirm Password" th:field="*{confirmPassword}">
+                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <input class="input" type="text" placeholder="First Name" th:field="*{firstName}">
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <input class="input" type="text" placeholder="Last Name" th:field="*{lastName}">
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button is-success" type="submit">Sign Up</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <div id="footer">
     <ul>
@@ -59,53 +113,3 @@
 </div>
 </body>
 </html>
-=======
-    <meta charset="UTF-8"/>
-    <title>Sign up</title>
-<!--    <th:block th:replace="fragments/header :: third-header"/>-->
-</head>
-<body>
-<div class="container">
-    <div class="card w-50">
-        <div class="card-body">
-            <h1>Create an account</h1>
-            <form th:action="@{/register}" method="POST" th:object="${user}">
-                <div>
-                    <label for="username">Username</label>
-                    <input id="username" th:field="*{username}"/>
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input id="email" th:field="*{email}"/>
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input id="password" type="password" th:field="*{password}"/>
-                </div>
-                <div>
-                    <label for="firstName">First Name</label>
-                    <input id="firstName" type="text" th:field="*{firstName}"/>
-                </div>
-                <div>
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName" type="text" th:field="*{lastName}"/>
-                </div>
-                <div>
-                    <label for="dob">DOB</label>
-                    <input id="dob" type="text" th:field="*{dob}"/>
-                </div>
-                <div>
-                    <label for="res-inc">Residual Income</label>
-                    <input id="res-inc" type="text" th:field="*{residualIncome}"/>
-                </div>
-                <div>
-                    <label for="ret-age">Retirement Age</label>
-                    <input id="ret-age" type="text" th:field="*{retirementAge}"/>
-                </div>
-                <input value="Sign me up!" type="submit"/>
-            </form>
-        </div>
-    </div>
-</div>
-</body>
->>>>>>> fae22aa599cf4af6ca750aa10d1cd359ff3d53e8
