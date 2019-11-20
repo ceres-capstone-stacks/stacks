@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>See Profile here</h1>
+    <div sec:authorize="isAuthenticated()">
+        <h1>Hello, <span th:text="${#authentication.principal.firstName}"></span>, this is your profile</h1>
+    </div>
 </body>
 </html>
