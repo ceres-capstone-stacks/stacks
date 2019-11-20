@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Stacks | Profile</title>
@@ -31,7 +30,9 @@
     </style>
 </head>
 <body>
-
+    <div sec:authorize="isAuthenticated()">
+        <h1>Hello, <span th:text="${#authentication.principal.firstName}"></span>, this is your profile</h1>
+    </div>
 <div id="footer">
     <ul>
         <li><a href="#about">About Us</a></li>
