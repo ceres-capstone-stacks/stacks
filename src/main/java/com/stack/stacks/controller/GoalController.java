@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class GoalController {
 
 
-    @GetMapping("/")
+    @GetMapping("/goals")
+    public String showGoalsIndex () {
+        return "/goals/index";
+    }
 
-    @GetMapping ("/goals")
+    @GetMapping ("/goals/create")
     public String createGoal () {
         return "/goals/create";
     }
