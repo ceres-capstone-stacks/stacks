@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
@@ -58,3 +59,53 @@
 </div>
 </body>
 </html>
+=======
+    <meta charset="UTF-8"/>
+    <title>Sign up</title>
+<!--    <th:block th:replace="fragments/header :: third-header"/>-->
+</head>
+<body>
+<div class="container">
+    <div class="card w-50">
+        <div class="card-body">
+            <h1>Create an account</h1>
+            <form th:action="@{/register}" method="POST" th:object="${user}">
+                <div>
+                    <label for="username">Username</label>
+                    <input id="username" th:field="*{username}"/>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" th:field="*{email}"/>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input id="password" type="password" th:field="*{password}"/>
+                </div>
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" type="text" th:field="*{firstName}"/>
+                </div>
+                <div>
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" type="text" th:field="*{lastName}"/>
+                </div>
+                <div>
+                    <label for="dob">DOB</label>
+                    <input id="dob" type="text" th:field="*{dob}"/>
+                </div>
+                <div>
+                    <label for="res-inc">Residual Income</label>
+                    <input id="res-inc" type="text" th:field="*{residualIncome}"/>
+                </div>
+                <div>
+                    <label for="ret-age">Retirement Age</label>
+                    <input id="ret-age" type="text" th:field="*{retirementAge}"/>
+                </div>
+                <input value="Sign me up!" type="submit"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+>>>>>>> fae22aa599cf4af6ca750aa10d1cd359ff3d53e8
