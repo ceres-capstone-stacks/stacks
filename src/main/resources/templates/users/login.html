@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Log In</title>
-<!--    <th:block th:replace="fragments/header :: second-header"/>-->
+<!--    <th:block th:replace="fragments/header :: head"/>-->
 </head>
 <body>
 <div class="container">
@@ -15,7 +15,7 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}" method="POST">
             <label for="username">Username</label>
             <input id="username" name="username" type="text"/>
             <label for="password">Password</label>
