@@ -1,10 +1,30 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All Posts</title>
 </head>
 <body>
-<h1>See Posts Here</h1>
+<div>
+    <div th:each="post : ${posts}">
+        <div style="height: 400px; width: 300px">
+            <img th:each="postImage : ${post.images}"
+                 th:src="${postImage.url}"/>
+            <div>
+                <h4 th:text="${post.title}"></h4>
+                <div th:if="${post.content.length() > 30}">
+                    <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
+                </div>
+                <div th:if="${post.content.length() < 30}">
+                    <p>• <span th:text="${post.content}"></span></p>
+                </div>
+                <div>
+                    <a th:href="@{'posts/' + ${post.id}}">View Post</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
