@@ -42,6 +42,27 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 
+    //TESTING IF LOGIN WORKS//
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        dob = copy.dob;
+        isAdmin = copy.isAdmin;
+        residualIncome = copy.residualIncome;
+        retirementAge = copy.retirementAge;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    //testing continued^^^^^^^^^^^^//
+
+
     public long getId() {
         return id;
     }
