@@ -9,16 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class UsersController {
+public class UserController {
     private UserRepository userDao;
 
-    public UsersController(UserRepository userDao){
+    public UserController(UserRepository userDao){
         this.userDao = userDao;
     }
-//    @GetMapping("/login")
-//    public String showLogin(){
-//        return "users/login";
-//    }
 
     @GetMapping("/register")
     public String showRegisterPage(Model vmModel){

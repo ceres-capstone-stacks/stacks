@@ -27,10 +27,10 @@ public class User {
     @Column(length = 50, nullable = false, name = "last_name")
     private String lastName;
 
-    @Column(nullable = false)
+    @Column
     private java.sql.Date dob;
 
-    @Column(nullable = false, columnDefinition = "boolean default false", name = "is_admin")
+    @Column(columnDefinition = "boolean default false", name = "is_admin")
     private boolean isAdmin;
 
     @Column (name = "residual_income")
@@ -42,7 +42,21 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 
-    //TESTING IF LOGIN WORKS//
+    public User(String username, String email, String password, String firstName, String lastName, Date dob, boolean isAdmin, int residualIncome, int retirementAge) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.isAdmin = isAdmin;
+        this.residualIncome = residualIncome;
+        this.retirementAge = retirementAge;
+    }
+
+    public User() {
+    }
+
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
@@ -56,12 +70,14 @@ public class User {
         retirementAge = copy.retirementAge;
     }
 
-    public User(String username, String password) {
+    //constructor to get basic info before login
+    public User(String username, String email, String password, String firstName, String lastName) {
         this.username = username;
+        this.email = email;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-    //testing continued^^^^^^^^^^^^//
-
 
     public long getId() {
         return id;
@@ -141,21 +157,6 @@ public class User {
 
     public void setRetirementAge(int retirementAge) {
         this.retirementAge = retirementAge;
-    }
-
-    public User(String username, String email, String password, String firstName, String lastName, Date dob, boolean isAdmin, int residualIncome, int retirementAge) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.isAdmin = isAdmin;
-        this.residualIncome = residualIncome;
-        this.retirementAge = retirementAge;
-    }
-
-    public User() {
     }
 
     public List<Post> getPosts() {
