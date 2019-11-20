@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Stacks</title>
-    <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stacks - Let us help your wallet grow.</title>
+<!--    <th:block th:replace="fragments/header.html :: main-header"/>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <style>
         body {
             font-family: 'Public Sans', sans-serif;
         }
 
-        ul {
+        #nav {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #85bb65;
+            background-color: rgb(56, 63, 65);
         }
 
-        li {
+        #nav li {
             float: left;
         }
 
@@ -29,8 +32,22 @@
             text-decoration: none;
         }
 
-        li a:hover {
+        #nav li a:hover {
             background-color: rgb(102, 170, 91);
+        }
+
+        #footer {
+            background-color: rgb(56, 63, 65);
+            height: 150px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: white;
+            list-style: none;
+        }
+
+        ul {
+            list-style: none;
         }
 
         #container {
@@ -40,6 +57,7 @@
             align-items: center;
             color: white;
         }
+
         #container h1 {
             font-size: 48px;
         }
@@ -47,24 +65,80 @@
         #home-top {
             padding: 0 80px;
         }
+
+        #middle {
+
+        }
+
+        #mid-1, #mid-3 {
+            padding: 0 80px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        #mid-2, #mid-4 {
+            padding: 0 80px;
+            display: flex;
+            justify-content: flex-end;
+        }
     </style>
 </head>
 <body>
-<nav>
-    <ul>
-        <li>Logo</li>
-        <li><a href="#save">Save</a></li>
-        <li><a href="#learn">Learn?</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Get Started</a></li>
-    </ul>
-</nav>
 
-<div id="container">
-    <div id="home-top">
-    <h1>Stacks</h1>
-    <h3>Let us help your wallet.</h3>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28">
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">Save</a>
+            <a class="navbar-item">Learn</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-success is-outlined"><strong>Log In</strong></a>
+                    <a class="button is-success is-rounded">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</nav>
+<section class="hero is-medium is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Stacks</h1>
+            <h2 class="subtitle">Let us help your wallet grow.</h2>
+        </div>
+    </div>
+</section>
+<div id="middle">
+    <div id="mid-1">
+        <h3>We can help you <i>save</i> money by keeping track of your expenses.</h3>
+    </div>
+    <div id="mid-2">
+        <h3>Let's work towards reaching your <i>savings goals</i>.</h3>
+    </div>
+    <div id="mid-3">
+        <h3>Learn about <i>saving</i> by finding out tricks & tips from others.</h3>
+    </div>
+    <div id="mid-4">
+        <h3><i>Save</i> by learning about upcoming or ongoing promotions.</h3>
+    </div>
+</div>
+<div id="footer">
+    <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
 </div>
 </body>
 </html>

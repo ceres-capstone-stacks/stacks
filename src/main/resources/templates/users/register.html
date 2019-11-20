@@ -1,39 +1,117 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Sign up</title>
-<!--    <th:block th:replace="fragments/header :: third-header"/>-->
+    <meta charset="UTF-8">
+    <title>Stacks | Sign Up</title>
+    <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        #container {
+            background-color: rgb(102, 170, 91);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 100px;
+            color: white;
+        }
+
+        #footer {
+            background-color: rgb(56, 63, 65);
+            height: 150px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: white;
+            list-style: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Create an account with us</h1>
+            <h2 class="subtitle">Creating an account with us is the first step towards a healthier financial life. You will have access to our system
+                that will allow you to keep track of all your expenses and find out what you're truly spending your money on. You can
+                get guidance from other users and find places to shop for deals and how to save on your bills. You will also be
+                able to set savings goals for yourself to accomplish at your own pace.</h2>
+        </div>
+    </div>
+</section>
 <div class="container">
     <div class="card w-50">
         <div class="card-body">
             <h1>Create an account</h1>
             <form th:action="@{/register}" method="POST" th:object="${user}">
-                <div>
-                    <label for="username">Username</label>
-                    <input id="username" th:field="*{username}"/>
+
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" placeholder="Email" th:field="*{email}">
+                        <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                    </p>
                 </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input id="email" th:field="*{email}"/>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="text" placeholder="Username" th:field="*{username}">
+                        <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                    </p>
                 </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input id="password" type="password" th:field="*{password}"/>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Password" th:field="*{password}">
+                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                    </p>
                 </div>
-                <div>
-                    <label for="firstName">First Name</label>
-                    <input id="firstName" type="text" th:field="*{firstName}"/>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Confirm Password" th:field="*{confirmPassword}">
+                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                    </p>
                 </div>
-                <div>
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName" type="text" th:field="*{lastName}"/>
+                <div class="field">
+                    <p class="control">
+                        <input class="input" type="text" placeholder="First Name" th:field="*{firstName}">
+                    </p>
                 </div>
-                <input value="Sign me up!" type="submit"/>
+
+                <div class="field">
+                    <p class="control">
+                        <input class="input" type="text" placeholder="Last Name" th:field="*{lastName}">
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button is-success" type="submit">Sign Up</button>
+                    </p>
+                </div>
+
             </form>
         </div>
     </div>
 </div>
+<div id="footer">
+    <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</div>
 </body>
+</html>
