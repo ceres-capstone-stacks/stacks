@@ -32,27 +32,32 @@
 </head>
 <body>
 <div class="container is-fluid">
-    <div class="notification">
-        <h1>Log in to your Stacks account</h1>
         <form th:action="@{/login}" method="post">
-            <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                    <input class="input" type="text" name="username" placeholder="Username">
-                    <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                </p>
+            <div class="card">
+                <div class="card-content login">
+                    <p class="title">Already a member?</p>
+                    <p class="subtitle">Sign in to Stacks to continue.</p>
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="text" name="username" placeholder="Username">
+                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="password" name="password" placeholder="Password">
+                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button is-success">Login</button>
+                    </p>
+                </div>
             </div>
-            <div class="field">
-                <p class="control has-icons-left">
-                    <input class="input" type="password" name="password" placeholder="Password">
-                    <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                </p>
-            </div>
-            <div class="field">
-                <p class="control">
-                    <button class="button is-success">Login</button>
-                </p>
-            </div>
-
         </form>
     </div>
 </div>
