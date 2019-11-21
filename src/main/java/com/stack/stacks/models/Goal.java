@@ -20,6 +20,9 @@ public class Goal {
     private LocalDate date;
 
     @Column (precision = 10, scale = 2)
+    private double amountSaved;
+
+    @Column (precision = 10, scale = 2)
     private double amount;
 
     @ManyToOne
@@ -29,10 +32,11 @@ public class Goal {
     public Goal () {
     }
 
-    public Goal(String description, LocalDate date, double amount) {
+    public Goal(String description, LocalDate date, double amount, double amountSaved) {
         this.description = description;
         this.date = date;
         this.amount = amount;
+        this.amountSaved = amountSaved;
     }
 
     public long getId() {
@@ -73,5 +77,13 @@ public class Goal {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public double getAmountSaved() {
+        return amountSaved;
+    }
+
+    public void setAmountSaved(double amountSaved) {
+        this.amountSaved = amountSaved;
     }
 }
