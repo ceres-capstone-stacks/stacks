@@ -9,7 +9,6 @@
     <style>
         body {
             font-family: 'Public Sans', sans-serif;
-            min-height: 100vh;
         }
 
         #footer {
@@ -47,8 +46,8 @@
         </div>
     </div>
 </section>
-    <div class="card w-50">
-        <div class="card-body">
+    <div class="columns is-mobile is-centered">
+        <div class="column is-half">
             <h1>Create an account</h1>
             <form th:action="@{/register}" method="POST" th:object="${user}">
                 <div class="field">
@@ -66,12 +65,6 @@
                 <div class="field">
                     <p class="control has-icons-left">
                         <input class="input" type="password" placeholder="Password" th:field="*{password}">
-                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                    </p>
-                </div>
-                <div class="field">
-                    <p class="control has-icons-left">
-                        <input class="input" type="password" placeholder="Confirm Password" th:field="*{confirmPassword}">
                         <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                     </p>
                 </div>

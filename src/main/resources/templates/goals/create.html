@@ -1,9 +1,18 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>New Goal - Stacks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <style>
+        html {
+            overflow-y: hidden;
+        }
+        body {
+            margin: 0;
+        }
         #footer {
             background-color: rgb(56, 63, 65);
             height: 150px;
@@ -12,6 +21,9 @@
             justify-content: flex-start;
             color: white;
             list-style: none;
+            position: absolute !important;
+            bottom: 0 !important;
+            width: 100%;
         }
 
         ul {
@@ -28,12 +40,59 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div>
-        <h2>Goal Title</h2>
-        <div>
-            <p>Goal description, how much and what are you saving for?</p>
-            <h5>- timestamp of when goal was created, when goal will end</h5>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28"/>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">Save</a>
+            <a class="navbar-item">Learn</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-success is-outlined" href="/login"><strong>Log In</strong></a>
+                    <a class="button is-success is-rounded" href="/register">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Let's create a goal for yourself.</h1>
+        </div>
+    </div>
+</section>
+<div class="columns is-mobile is-centered">
+    <div class="column is-half">
+        <div class="field">
+            <p class="control">
+                <input class="input" type="text" placeholder="Goal Title" th:field="*{goal.description}">
+<!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
+            </p>
+        </div>
+        <div class="field">
+            <p class="control">
+                <input class="input" type="text" placeholder="Goal Total" th:field="*{goal.amount}">
+                <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
+            </p>
+        </div>
+        <div class="field">
+            <p class="control">
+                <input class="input" type="text" placeholder="Goal Date" th:field="*{goal.date}">
+                <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
+            </p>
         </div>
     </div>
 </div>
