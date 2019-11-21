@@ -104,8 +104,8 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-success is-outlined"><strong>Log In</strong></a>
-                    <a class="button is-success is-rounded">Get Started</a>
+                    <a class="button is-success is-outlined" href="/login"><strong>Log In</strong></a>
+                    <a class="button is-success is-rounded" href="/register">Get Started</a>
                 </div>
             </div>
         </div>
@@ -140,5 +140,23 @@
         <li><a href="#contact">Contact</a></li>
     </ul>
 </div>
+<script
+        src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function() {
+
+        // Check for click events on the navbar burger icon
+        $(".navbar-burger").click(function() {
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
+
+        });
+    });
+
+</script>
 </body>
 </html>
