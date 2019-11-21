@@ -39,8 +39,12 @@ public class User {
     @Column (name = "retirement_age")
     private int retirementAge;
 
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Expense> expenses;
 
     public User(String username, String email, String password, String firstName, String lastName, Date dob, boolean isAdmin, int residualIncome, int retirementAge) {
         this.username = username;
@@ -57,18 +61,6 @@ public class User {
     public User() {
     }
 
-    public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        email = copy.email;
-        username = copy.username;
-        password = copy.password;
-        firstName = copy.firstName;
-        lastName = copy.lastName;
-        dob = copy.dob;
-        isAdmin = copy.isAdmin;
-        residualIncome = copy.residualIncome;
-        retirementAge = copy.retirementAge;
-    }
 
     //constructor to get basic info before login
     public User(String username, String email, String password, String firstName, String lastName) {
@@ -78,6 +70,16 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        username = copy.username;
+        email = copy.email;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+    }
+
 
     public long getId() {
         return id;
@@ -167,4 +169,11 @@ public class User {
         this.posts = posts;
     }
 
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
 }

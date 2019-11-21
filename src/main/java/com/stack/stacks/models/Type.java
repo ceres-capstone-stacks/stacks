@@ -15,6 +15,10 @@ public class Type {
     @Column
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "expense_id")
+    private Expense expense;
+
     public Type() {
     }
 
