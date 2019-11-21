@@ -28,19 +28,19 @@ public class Expense {
     @JoinColumn(name = "user")
     private User user;
 
-//    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
-//    private Type type;
+    @OneToOne
+    private Type type;
 
     public Expense() {
     }
 
-    public Expense(double amount, Date date, String description, boolean isRegular, User user) {
+    public Expense(double amount, Date date, String description, boolean isRegular, User user, Type type) {
         this.amount = amount;
         this.date = date;
         this.description = description;
         this.isRegular = isRegular;
         this.user = user;
-//        this.type = type;
+        this.type = type;
     }
 
     public long getId() {
@@ -91,11 +91,11 @@ public class Expense {
         this.user = user;
     }
 
-//    public Type getType() {
-//        return type;
-//    }
-//
-//    public void setType(Type type) {
-//        this.type = type;
-//    }
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 }
