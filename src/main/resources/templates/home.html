@@ -4,20 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stacks - Let us help your wallet grow.</title>
-<!--    <th:block th:replace="fragments/header.html :: main-header"/>-->
+    <!--    <th:block th:replace="fragments/header.html :: main-header"/>-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <style>
         body {
             font-family: 'Public Sans', sans-serif;
-        }
-
-        #nav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: rgb(56, 63, 65);
         }
 
         #nav li {
@@ -50,26 +42,6 @@
             list-style: none;
         }
 
-        #container {
-            background-color: rgb(102, 170, 91);
-            height: 500px;
-            display: flex;
-            align-items: center;
-            color: white;
-        }
-
-        #container h1 {
-            font-size: 48px;
-        }
-
-        #home-top {
-            padding: 0 80px;
-        }
-
-        #middle {
-
-        }
-
         #mid-1, #mid-3 {
             padding: 0 80px;
             display: flex;
@@ -84,13 +56,13 @@
     </style>
 </head>
 <body>
-
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io">
             <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28">
         </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -110,7 +82,6 @@
             </div>
         </div>
     </div>
-
 </nav>
 <section class="hero is-medium is-primary is-bold">
     <div class="hero-body">
@@ -144,19 +115,13 @@
         src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
-    <script>
-    $(document).ready(function() {
-
-        // Check for click events on the navbar burger icon
-        $(".navbar-burger").click(function() {
-
-            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+<script>
+    $(document).ready(function () {
+        $(".navbar-burger").click(function () {
             $(".navbar-burger").toggleClass("is-active");
             $(".navbar-menu").toggleClass("is-active");
-
         });
     });
-
 </script>
 </body>
 </html>

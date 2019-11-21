@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stacks | Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+
         #footer {
             background-color: rgb(56, 63, 65);
             height: 150px;
@@ -30,9 +35,90 @@
     </style>
 </head>
 <body>
-    <div sec:authorize="isAuthenticated()">
-        <h1>Hello, <span th:text="${#authentication.principal.firstName}"></span>, this is your profile</h1>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/profile">
+            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28">
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">Save</a>
+            <a class="navbar-item">Learn</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-success is-outlined"><strong>Log In</strong></a>
+                    <a class="button is-success is-rounded">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container" sec:authorize="isAuthenticated()">
+            <h1 class="title">Welcome, <span th:text="${#authentication.principal.firstName}"></span>!</h1>
+        </div>
+    </div>
+</section>
+<div class="columns">
+    <div class="column">
+        <div class="columns is-mobile">
+            <div class="column">
+                <p class="bd-notification is-info">Pie Chart will be placed here along with being able to input a
+                    purchase.</p>
+            </div>
+            <div class="column">
+
+                <p class="bd-notification is-info">
+                <h3 class="list-heading">Entertainment</h3>
+                <ul>
+                    <li>($23.53) - Movie Theatre</li>
+                    <li>($9.42) - Mini Golf</li>
+                    <li>($32.43) - Bowling</li>
+                </ul>
+                <br>
+                <h3 class="list-heading">Shopping</h3>
+                <ul>
+                    <li>($23.53) - Amazon</li>
+                    <li>($9.42) - Best Buy</li>
+                    <li>($32.43) - Academy</li>
+                </ul>
+                <br>
+                <h3 class="list-heading">Food</h3>
+                <ul>
+                    <li>($10.53) - Chick Fil A</li>
+                    <li>($9.42) - Whataburger</li>
+                    <li>($7.43) - Panda Express</li>
+                </ul>
+                <a href="#">View more transactions...</a>
+            </div>
+        </div>
+        <div class="column">
+            <p class="bd-notification is-info">
+            <h3 class="list-heading">Spending Habits</h3>
+            <ul>
+                <li>(Most spent category)•You spent $231.52 on <strong><i>Entertainment</i></strong> this week. That's
+                    $21.42 more than last week!
+                </li>
+                <li>•To reach your <i>savings goal</i> of $500 by the end of this month, you will need to save $200
+                    more.
+                </li>
+                <li>•You have spent a total of $435.52 so far this month, that's $40.87 less than last. Keep it up!</li>
+                <li>•Learn more on how to save money by visiting our <i>steals & deals</i> section.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+</div>
 <div id="footer">
     <ul>
         <li><a href="#about">About Us</a></li>
