@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>New Post</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
 </head>
 <body>
-<h1>Create Posts Here</h1>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/profile">
+            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28">
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item">Save</a>
+            <a class="navbar-item">Learn</a>
+            <a class="navbar-item" href="posts">View</a>
+            <a class="navbar-item" href="/posts/create">Create Post</a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-success is-outlined"><strong>Log In</strong></a>
+                    <a class="button is-success is-rounded">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+
+<h1 class="title" >Create a Post!</h1>
+
+    </div>
+</section>
+
+<!--<form th:action="@{/create}" method="POST" th:object="${post}">-->
+<!--    <div class="field">-->
+<!--        <label class="label">Name</label>-->
+<!--        <div class="control">-->
+<!--    <input class="input" th:field="*{title} />-->
+<!--    <br />-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="field">-->
+<!--        <label class="label">Message</label>-->
+<!--        <div class="control">-->
+<!--            <textarea class="textarea" placeholder="Textarea" th:field="*{description}" ></textarea>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="field is-grouped">-->
+<!--        <div class="control">-->
+<!--            <button class="button is-link" th:field="*{content}">Post</button>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--</form>-->
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+Title:
+<input th:field="*{title}" />
+<br />
+Description:
+<input th:field="*{content}" />
+<br />
+<input type="submit" />
+</form>
+
+
+
 </body>
 </html>
