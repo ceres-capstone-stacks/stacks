@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <meta charset="UTF-8">
     <title>Log In | Stacks</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
@@ -36,13 +37,13 @@
         <form th:action="@{/login}" method="post">
             <div class="field">
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input" type="text" placeholder="Username">
+                    <input class="input" type="text" name="username" placeholder="Username">
                     <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
                 </p>
             </div>
             <div class="field">
                 <p class="control has-icons-left">
-                    <input class="input" type="password" placeholder="Password">
+                    <input class="input" type="password" name="password" placeholder="Password">
                     <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                 </p>
             </div>
@@ -51,6 +52,7 @@
                     <button class="button is-success">Login</button>
                 </p>
             </div>
+
         </form>
     </div>
 </div>

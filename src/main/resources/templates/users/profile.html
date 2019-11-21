@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,8 +64,8 @@
 </nav>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
-        <div class="container">
-            <h1 class="title">Welcome User!</h1>
+        <div class="container" sec:authorize="isAuthenticated()">
+            <h1 class="title">Welcome, <span th:text="${#authentication.principal.firstName}"></span>!</h1>
         </div>
     </div>
 </section>
