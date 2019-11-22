@@ -76,7 +76,7 @@
 <!--                <li><strong>Goal Description: </strong><span th:text="${goal.description}"></span></li>-->
                 <li><strong>Need to save: </strong>$<span th:text="${goal.amount}"></span></li>
                 <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
-                <li><strong>What you have left to go: </strong>$<span th:maxlength="4" th:text="${goal.amount} - ${goal.amountSaved}"></span></li>
+                <li><strong>What you have left to go: </strong>$<span th:value="${goal.amount} - ${goal.amountSaved}"></span></li>
             </ul>
             <p><strong>Projected accomplishment date: </strong><span th:text="${goal.date}"></span></p>
         </div>

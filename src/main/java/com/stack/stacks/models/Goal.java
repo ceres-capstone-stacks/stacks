@@ -19,7 +19,7 @@ public class Goal {
     private String description;
 
     @Column
-    private LocalDate date;
+    private Date date;
 
     @Column (precision = 10, scale = 2)
     private Double amountSaved;
@@ -34,14 +34,14 @@ public class Goal {
     public Goal () {
     }
 
-    public Goal(String description, LocalDate date, Double amount, Double amountSaved) {
+    public Goal(String description, Date date, Double amount, Double amountSaved) {
         this.description = description;
         this.date = date;
         this.amount = amount;
         this.amountSaved = amountSaved;
     }
 
-    public Goal(long id, String description, LocalDate date, Double amount){
+    public Goal(long id, String description, Date date, Double amount){
         this.id = id;
         this.description = description;
         this.date = date;
@@ -64,11 +64,11 @@ public class Goal {
         this.description = description;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
