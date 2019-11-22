@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Steals & Deals</title>
+    <title>My Expenses - Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
-        <div class="container">
-            <h1 class="title">Steals & Deals</h1>
-            <h2 class="subtitle">This page is dedicated to finding you some of the best steals & deals around you!</h2>
+        <div class="container" sec:authorize="isAuthenticated()">
+            <h1 class="title">Here are your expenses, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
         </div>
     </div>
 </section>

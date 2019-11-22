@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stacks | Profile</title>
+    <title>My Profile - Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
@@ -18,15 +18,14 @@
 <div class="columns">
     <div class="column">
         <div class="columns is-mobile">
-            <div class="column">
-
-
+            <div class="column is-one-third">
                 <canvas id="myChart" width="30" height="30"></canvas>
-
+            </div>
+            <div class="column">
                 <p class="bd-notification is-info">
                 <h3 class="list-heading">Entertainment</h3>
                 <ul>
-<!--                    <li th:text="${user.}"></li>    -->
+                    <!--                    <li th:text="${user.}"></li>    -->
                 </ul>
                 <br>
                 <h3 class="list-heading">Shopping</h3>
@@ -42,7 +41,8 @@
                     <li>($9.42) - Whataburger</li>
                     <li>($7.43) - Panda Express</li>
                 </ul>
-                <a href="#">View more transactions...</a>
+                <br>
+                <a href="profile/expenses">View more transactions...</a>
             </div>
         </div>
     </div>

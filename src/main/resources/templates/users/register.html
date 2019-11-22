@@ -2,39 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stacks | Sign Up</title>
-    <link href="https://fonts.googleapis.com/css?family=Public+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <style>
-        body {
-            font-family: 'Public Sans', sans-serif;
-        }
-
-        #footer {
-            background-color: rgb(56, 63, 65);
-            height: 150px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            color: white;
-            list-style: none;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        ul {
-            list-style: none;
-        }
-    </style>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container">
@@ -88,11 +61,6 @@
             </form>
         </div>
     </div>
-<div id="footer">
-    <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</div>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

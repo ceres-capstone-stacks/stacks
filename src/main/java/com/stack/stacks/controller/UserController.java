@@ -47,6 +47,6 @@ public class UserController {
     @GetMapping("/profile/expenses")
     public String getExpenses(Model vModel) {
         vModel.addAttribute(expenseDao.getOne(1L));
-        return "/profile";
+        return "users/expenses";
     }
 }
