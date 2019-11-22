@@ -42,9 +42,7 @@ public class PostsController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeCreated.setUser(currentUser);
         postDao.save(postToBeCreated);
-
-        return "redirect:/posts/index";
-
+        return "redirect:/posts";
     }
 
 
