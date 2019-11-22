@@ -1,0 +1,11 @@
+#mid-1, #mid-3 {
+    padding: 0 80px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#mid-2, #mid-4 {
+    padding: 0 80px;
+    display: flex;
+    justify-content: flex-end;
+}
