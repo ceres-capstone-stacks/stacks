@@ -4,9 +4,7 @@
 <th:block th:fragment="main-nav">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-                <img src="/S.png" width="112" height="28">
-            </a>
+            <a class="navbar-item" href="https://bulma.io"><img src="/S.png" width="112" height="28"></a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="true"
                data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
@@ -14,9 +12,7 @@
                 <span aria-hidden="true"></span>
             </a>
             <div class="navbar-menu" id="navMenu">
-                <a class="navbar-item" href="/">
-                    Home
-                </a>
+                <a class="navbar-item" href="/">Home</a>
             </div>
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
@@ -24,31 +20,20 @@
                 <a class="navbar-item" href="/">
                     Save
                 </a>
-                <!--                <a class="navbar-item" href="/show" >-->
-                <!--                    -->
-                <!--                </a>-->
-                <!--                <a class="navbar-item" href="/show/create" sec:authorize="isAuthenticated()" >-->
-                <!--                    Create Post-->
-                <!--                </a>-->
+                                <a class="navbar-item" href="" >
+                                    Show post
+                                </a>
+                                <a class="navbar-item" href="create"  >
+                                    Create Post
+                                </a>
+
             </div>
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <!--                    <div class="buttons" sec:authorize="!isAuthenticated()">-->
-                    <a class="button is-primary" href="/register">
-                        <strong>Get Started</strong>
-                    </a>
-                    <a class="button is-light" href="/login">
-                        Log in
-                    </a>
+                    <a class="button is-primary" href="/register"><strong>Get Started</strong></a>
+                    <a class="button is-light" href="/login">Log in</a>
                 </div>
-                <!--                    <div class="buttons" sec:authorize="isAuthenticated()">-->
-                <!--                        <a class="button is-primary" href="/logout">-->
-
-                <!--                            <strong>Logout</strong>-->
-                <!--                        </a>-->
             </div>
-        </div>
-        </div>
         </div>
     </nav>
 </th:block>
