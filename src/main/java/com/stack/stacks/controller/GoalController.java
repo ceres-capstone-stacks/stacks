@@ -32,22 +32,27 @@ public class GoalController {
     @GetMapping("/goals/create")
     public String showGoalsIndex(Model vModel) {
         vModel.addAttribute("goal", new Goal());
-        System.out.println(goalDao);
         return "/goals/createGoal";
     }
     @PostMapping("/goals/create")
     public String create(@ModelAttribute Goal goalToBeCreated){
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        goalToBeCreated.setUser(currentUser);
+//        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        goalToBeCreated.setUser(currentUser);
         Goal savedGoal = goalDao.save(goalToBeCreated);
-        return "redirect:/goals/" + savedGoal.getId();
+        return "redirect:/goals";
     }
 
-    @GetMapping("/goals/{id}")
-    public String show(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("goal", goalDao.getOne(id));
-        return "goals/show";
+    @PostMapping("/goals/{id}/delete")
+    public String deleteGoal(@PathVariable long id) {
+        goalDao.deleteById(id);
+        return "redirect:/goals";
     }
+
+//    @GetMapping("/goals/{id}")
+//    public String show(@PathVariable long id, Model vModel) {
+//        vModel.addAttribute("goal", goalDao.getOne(id));
+//        return "goals/index";
+//    }
 
 //    @PostMapping("/goals/create")
 //    public String createGoal(@ModelAttribute Goal goal) {

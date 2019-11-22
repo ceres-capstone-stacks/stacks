@@ -26,12 +26,17 @@
                th:field="*{amount}">
     </div>
     <div class="form-group">
+        <label>Amount Saved</label>
+        <input class="form-control" placeholder="How much have you saved so far?" cols="30" rows="10" th:field="*{amountSaved}">
+    </div>
+    <div class="form-group">
         <label>Date</label>
-        <input class="form-control" placeholder="Date you want to accomplish goal" cols="30" rows="10"
-               th:field="*{date}" type="date">
+        <input class="form-control" placeholder="Date you want to accomplish goal" cols="30" rows="10" th:field="*{date}">
     </div>
     <button class="btn btn-warning btn-block">Create</button>
 </form>
+
+
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>
