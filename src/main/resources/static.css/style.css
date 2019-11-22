@@ -1,23 +1,16 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333333;
+html {
+    overflow-y: hidden;
 }
 
-li {
-    float: left;
+body {
+    font-family: 'Public Sans', sans-serif;
 }
 
-li a {
-    display: block;
+.footer {
+    background-color: rgb(56, 63, 65);
+    height: 150px;
     color: white;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111111;
+    position: absolute !important;
+    bottom: 0 !important;
+    width: 100%;
 }

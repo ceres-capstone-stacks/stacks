@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Viewing steal</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

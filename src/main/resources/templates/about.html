@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Stacks - About Us</title>
+    <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
-<h1>This is about us.....</h1>
+<th:block th:replace="fragments/navbar :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">This is Stacks</h1>
+        </div>
+    </div>
+</section>
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>

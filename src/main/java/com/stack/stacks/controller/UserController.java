@@ -30,7 +30,6 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         userDao.save(user);
-        System.out.println("This is registering something");
         return "redirect:/login";
     }
 
