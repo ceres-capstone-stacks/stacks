@@ -26,7 +26,7 @@ public class GoalController {
     @GetMapping("/goals")
     public String showGoals(Model vModel) {
         vModel.addAttribute("goal", goalDao.findAll());
-        return "/goals/index";
+        return "goals/index";
     }
 
     @GetMapping("/goals/create")
