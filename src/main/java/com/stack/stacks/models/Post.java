@@ -65,4 +65,12 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }

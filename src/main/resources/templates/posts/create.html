@@ -54,11 +54,20 @@ Title:
 Description:
 <input th:field="*{content}" />
 <br />
-<input type="submit" />
+<input type="submit" id="submit-btn" />
+</form>
+<form th:action="@{/tags/create}" th:method="post" id="tags-form" >
+    <div th:each="tag : ${tags}">
+        <label th:for="${tag.id}"><span th:text="${tag.name}"></span></label>
+        <input type="checkbox" th:value="${tag.id}" name="tagged">
+    </div>
 </form>
 
-
-
-
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script>
+    $("#submit-btn").click(function () {
+        $("#tags-form").submit();
+    })
+</script>
 </body>
 </html>
