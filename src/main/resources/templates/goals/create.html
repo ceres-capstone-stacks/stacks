@@ -74,23 +74,24 @@
         </div>
     </div>
 </section>
+<form th:action="${'/goals/create'}" th:method="post" th:object="${goal}"></form>
 <div class="columns is-mobile is-centered">
     <div class="column is-half">
         <div class="field">
             <p class="control">
-                <input class="input" type="text" placeholder="Goal Title" th:field="*{goal.description}">
+                <input class="input" type="text" placeholder="Goal Title" th:field="*{}">
 <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
             </p>
         </div>
         <div class="field">
             <p class="control">
-                <input class="input" type="text" placeholder="Goal Total" th:field="*{goal.amount}">
+                <input class="input" type="text" placeholder="Goal Total">
                 <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
             </p>
         </div>
         <div class="field">
             <p class="control">
-                <input class="input" type="text" placeholder="Goal Date" th:field="*{goal.date}">
+                <input class="input" type="text" placeholder="Goal Date">
                 <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
             </p>
         </div>
