@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Goal - Stacks</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Let's create a goal for yourself.</h1>
+        </div>
+    </div>
+</section>
+<form th:action="${'/goals/create'}" th:method="post" th:object="${goal}">
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" placeholder="Enter goal description" th:field="*{description}">
+    </div>
+    <div class="form-group">
+        <label>Amount</label>
+        <input class="form-control" placeholder="Enter the amount you want to save" cols="30" rows="10"
+               th:field="*{amount}">
+    </div>
+    <div class="form-group">
+        <label>Amount Saved</label>
+        <input class="form-control" placeholder="How much have you saved so far?" cols="30" rows="10" th:field="*{amountSaved}">
+    </div>
+    <div class="form-group">
+        <label>Date</label>
+        <input class="form-control" placeholder="Date you want to accomplish goal" cols="30" rows="10" th:field="*{date}">
+    </div>
+    <button class="btn btn-warning btn-block">Create</button>
+</form>
+
+
+<th:block th:replace="fragments/footer.html :: main-footer"/>
+</body>
+</html>

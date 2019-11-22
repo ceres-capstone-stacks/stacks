@@ -1,64 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New Post</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="/profile">
-            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28">
-        </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-           data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item">Save</a>
-            <a class="navbar-item">Learn</a>
-            <a class="navbar-item" href="posts">View</a>
-            <a class="navbar-item" href="/posts/create">Create Post</a>
-        </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-success is-outlined"><strong>Log In</strong></a>
-                    <a class="button is-success is-rounded">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
-
-<h1 class="title" >Create a Post!</h1>
-
+        <h1 class="title">Create a Post!</h1>
     </div>
 </section>
 
 
 <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-Title:
-<input th:field="*{title}" />
-<br />
-Description:
-<input th:field="*{content}" />
-<br />
-<input type="submit" />
+    Title:
+    <input th:field="*{title}"/>
+    <br/>
+    Description:
+    <input th:field="*{content}"/>
+    <br/>
+    <input type="submit"/>
 </form>
-
-
-
-
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

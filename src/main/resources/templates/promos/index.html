@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Steals & Deals</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
 
 
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Steals & Deals</h1>
+            <h2 class="subtitle">This page is dedicated to finding you some of the best steals & deals around you!</h2>
+        </div>
+    </div>
+</section>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

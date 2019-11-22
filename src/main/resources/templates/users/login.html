@@ -4,69 +4,39 @@
 
     <meta charset="UTF-8">
     <title>Log In | Stacks</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <style>
-        #footer {
-            background-color: rgb(56, 63, 65);
-            height: 150px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            color: white;
-            list-style: none;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 16px;
-            text-decoration: none;
-        }
-    </style>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
 <div class="container is-fluid">
-        <form th:action="@{/login}" method="post">
-            <div class="card">
-                <div class="card-content login">
-                    <p class="title">Already a member?</p>
-                    <p class="subtitle">Sign in to Stacks to continue.</p>
-                    <div class="field">
-                        <label class="label">Username</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="text" name="username" placeholder="Username">
-                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="password" name="password" placeholder="Password">
-                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                        </div>
+    <form th:action="@{/login}" method="post">
+        <div class="card">
+            <div class="card-content login">
+                <p class="title">Already a member?</p>
+                <p class="subtitle">Sign in to Stacks to continue.</p>
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text" name="username" placeholder="Username">
+                        <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
                     </div>
                 </div>
                 <div class="field">
-                    <p class="control">
-                        <button class="button is-success">Login</button>
-                    </p>
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="password" name="password" placeholder="Password">
+                        <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                    </div>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-success">Login</button>
+                </p>
+            </div>
+        </div>
+    </form>
 </div>
-<div id="footer">
-    <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</div>
-<!--<div th:replace="fragments/footer :: main-footer"></div>-->
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>

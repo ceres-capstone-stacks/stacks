@@ -9,7 +9,6 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String loginForm () {
-        System.out.println("does this work?");
         return "users/login";
     }
 

@@ -2,6 +2,7 @@ package com.stack.stacks.models;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "expenses")
@@ -25,22 +26,22 @@ public class Expense {
     private boolean isRegular;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    private Type type;
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
+    private List<Type> types;
 
     public Expense() {
     }
 
-    public Expense(double amount, Date date, String description, boolean isRegular, User user, Type type) {
+    public Expense(double amount, Date date, String description, boolean isRegular, User user, List<Type> types) {
         this.amount = amount;
         this.date = date;
         this.description = description;
         this.isRegular = isRegular;
         this.user = user;
-        this.type = type;
+        this.types = types;
     }
 
     public long getId() {
@@ -91,11 +92,11 @@ public class Expense {
         this.user = user;
     }
 
-    public Type getType() {
-        return type;
+    public List<Type> getTypes() {
+        return types;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTypes(List<Type> types) {
+        this.types = types;
     }
 }
