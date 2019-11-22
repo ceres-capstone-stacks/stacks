@@ -1,21 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>New Post</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-<div class="container">
-    <form>
-        <div>
-
-        </div>
-        <div>
-
-        </div>
-    </form>
-</div>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <h1 class="title">Create a Post!</h1>
+    </div>
+</section>
 
 
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+    Title:
+    <input th:field="*{title}"/>
+    <br/>
+    Description:
+    <input th:field="*{content}"/>
+    <br/>
+    <input type="submit"/>
+</form>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

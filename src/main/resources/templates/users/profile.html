@@ -6,6 +6,9 @@
     <title>Stacks | Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
     <style>
         body {
             font-family: 'Public Sans', sans-serif;
@@ -51,6 +54,8 @@
         <div class="navbar-start">
             <a class="navbar-item">Save</a>
             <a class="navbar-item">Learn</a>
+            <a class="navbar-item" href="posts">View</a>
+            <a class="navbar-item" href="/posts/create">Create Post</a>
         </div>
         <div class="navbar-end">
             <div class="navbar-item">
@@ -73,16 +78,14 @@
     <div class="column">
         <div class="columns is-mobile">
             <div class="column">
-                <p class="bd-notification is-info">Pie Chart will be placed here along with being able to input a
-                    purchase.</p>
-            </div>
-            <div class="column">
+
+
+                <canvas id="myChart" width="30" height="30"></canvas>
+
                 <p class="bd-notification is-info">
                 <h3 class="list-heading">Entertainment</h3>
                 <ul>
-                    <li>($23.53) - Movie Theatre</li>
-                    <li>($9.42) - Mini Golf</li>
-                    <li>($32.43) - Bowling</li>
+<!--                    <li th:text="${user.}"></li>    -->
                 </ul>
                 <br>
                 <h3 class="list-heading">Shopping</h3>
@@ -130,5 +133,48 @@
         <li><a href="#contact">Contact</a></li>
     </ul>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [0, 0, 0, 400, 50, 200],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
 </body>
 </html>
