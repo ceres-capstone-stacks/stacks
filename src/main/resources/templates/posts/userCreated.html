@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>My Posts</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
 <div>
     <div th:each="post : ${posts}">
         <div style="height: 400px; width: 300px">
@@ -26,5 +27,6 @@
         </div>
     </div>
 </div>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

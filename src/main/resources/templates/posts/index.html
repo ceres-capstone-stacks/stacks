@@ -3,39 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>All Posts</title>
+    <title>Stacks - All Posts</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-<h1>Hellooooooo</h1>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">User Posts</h1>
+            <h2 class="subtitle">These are helpful posts created by our users.</h2>
+        </div>
+    </div>
+</section>
 <div class="card" th:each="post : ${posts}" >
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.content}"></p>
     <input type="hidden" name="id" th:value="${post.id}">
-<!--    <a th:href="@{'/show/' + ${post.id} + '/edit'}" class="btn btn-warning">Edit post</a>-->
-<!--    <form th:action="@{'/show/' + ${post.id} + '/delete'}" method="post">-->
-<!--        <button class="btn btn-danger btn-block">Delete post</button>-->
-
 </div>
-
-
-<!--<div>-->
-<!--    <div th:each="post : ${posts}">-->
-<!--        <div style="height: 400px; width: 300px">-->
-
-<!--            <div>-->
-<!--                <h4 th:text="${post.title}"></h4>-->
-<!--                <div th:if="${post.content.length() > 30}">-->
-<!--                    <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>-->
-<!--                </div>-->
-<!--                <div th:if="${post.content.length() < 30}">-->
-<!--                    <p>• <span th:text="${post.content}"></span></p>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <a th:href="@{'posts/' + ${post.id}}">View Post</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 </body>
 </html>

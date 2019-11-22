@@ -4,69 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>New Goal - Stacks</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <style>
-        html {
-            overflow-y: hidden;
-        }
-        body {
-            margin: 0;
-        }
-        #footer {
-            background-color: rgb(56, 63, 65);
-            height: 150px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            color: white;
-            list-style: none;
-            position: absolute !important;
-            bottom: 0 !important;
-            width: 100%;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 16px;
-            text-decoration: none;
-        }
-    </style>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
-            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28"/>
-        </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-           data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item">Save</a>
-            <a class="navbar-item">Learn</a>
-        </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-success is-outlined" href="/login"><strong>Log In</strong></a>
-                    <a class="button is-success is-rounded" href="/register">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container">
@@ -81,7 +22,8 @@
     </div>
     <div class="form-group">
         <label>Amount</label>
-        <input class="form-control" placeholder="Enter the amount you want to save" cols="30" rows="10" th:field="*{amount}">
+        <input class="form-control" placeholder="Enter the amount you want to save" cols="30" rows="10"
+               th:field="*{amount}">
     </div>
     <div class="form-group">
         <label>Amount Saved</label>
@@ -93,11 +35,8 @@
     </div>
     <button class="btn btn-warning btn-block">Create</button>
 </form>
-<div id="footer">
-    <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</div>
+
+
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

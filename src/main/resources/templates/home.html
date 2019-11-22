@@ -4,92 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stacks - Let us help your wallet grow.</title>
-    <!--    <th:block th:replace="fragments/header.html :: main-header"/>-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <style>
-        html {
-            overflow-y: hidden;
-        }
-
-        body {
-            font-family: 'Public Sans', sans-serif;
-        }
-
-        #nav li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        #nav li a:hover {
-            background-color: rgb(102, 170, 91);
-        }
-
-        #footer {
-            background-color: rgb(56, 63, 65);
-            height: 150px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            color: white;
-            list-style: none;
-            position: absolute !important;
-            bottom: 0 !important;
-            width: 100%;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        #mid-1, #mid-3 {
-            padding: 0 80px;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        #mid-2, #mid-4 {
-            padding: 0 80px;
-            display: flex;
-            justify-content: flex-end;
-        }
-    </style>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
-            <img src="/static.css/Stacks%20Logo%20Transparent.png" width="28" height="28"/>
-        </a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-           data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-    </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item">Save</a>
-            <a class="navbar-item">Learn</a>
-        </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-success is-outlined" href="/login"><strong>Log In</strong></a>
-                    <a class="button is-success is-rounded" href="/register">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+<th:block th:replace="fragments/navbar:: main-nav"/>
 <section class="hero is-medium is-primary is-bold">
     <div class="hero-body">
         <div class="container">
@@ -112,23 +30,6 @@
         <h3><i>Save</i> by learning about upcoming or ongoing promotions.</h3>
     </div>
 </div>
-<div id="footer">
-    <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</div>
-<script
-        src="https://code.jquery.com/jquery-2.2.4.js"
-        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-        crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $(".navbar-burger").click(function () {
-            $(".navbar-burger").toggleClass("is-active");
-            $(".navbar-menu").toggleClass("is-active");
-        });
-    });
-</script>
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>
