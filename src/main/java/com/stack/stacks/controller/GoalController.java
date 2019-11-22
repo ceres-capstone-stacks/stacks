@@ -25,14 +25,15 @@ public class GoalController {
 
     @GetMapping("/goals")
     public String showGoals(Model vModel) {
-        vModel.addAttribute(goalDao.findAll());
+        vModel.addAttribute("goal", goalDao.findAll());
         return "/goals/index";
     }
 
     @GetMapping("/goals/create")
     public String showGoalsIndex(Model vModel) {
         vModel.addAttribute("goal", new Goal());
-        return "/goals/index";
+        System.out.println(goalDao);
+        return "/goals/createGoal";
     }
     @PostMapping("/goals/create")
     public String create(@ModelAttribute Goal goalToBeCreated){

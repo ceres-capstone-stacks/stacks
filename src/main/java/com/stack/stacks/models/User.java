@@ -46,6 +46,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Expense> expense;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Goal> goals;
+
     public User(String username, String email, String password, String firstName, String lastName, Date dob, boolean isAdmin, int residualIncome, int retirementAge) {
         this.username = username;
         this.email = email;
@@ -175,5 +178,13 @@ public class User {
 
     public void setExpenses(List<Expense> expense) {
         this.expense = expense;
+    }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
     }
 }

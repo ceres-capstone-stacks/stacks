@@ -74,30 +74,50 @@
         </div>
     </div>
 </section>
-<form th:action="${'/goals/create'}" th:method="post" th:object="${goal}"></form>
-<div class="columns is-mobile is-centered">
-    <div class="column is-half">
-        <div class="field">
-            <p class="control">
-
-                <input class="input" type="text" placeholder="Goal Title">
-<!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
-            </p>
-        </div>
-        <div class="field">
-            <p class="control">
-                <input class="input" type="text" placeholder="Goal Total">
-                <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
-            </p>
-        </div>
-        <div class="field">
-            <p class="control">
-                <input class="input" type="text" placeholder="Goal Date">
-                <!--                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>-->
-            </p>
-        </div>
+<form th:action="${'/goals/create'}" th:method="post" th:object="${goal}">
+<!--    <div class="form-group">-->
+<!--        <label for="title">Title</label>-->
+<!--        <input class="form-control" type="text" placeholder="Enter post title" th:field="*{description}">-->
+<!--    </div>-->
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" placeholder="Enter goal description" th:field="*{description}">
     </div>
-</div>
+    <div class="form-group">
+        <label>Amount</label>
+        <input class="form-control" placeholder="Enter the amount you want to save" cols="30" rows="10" th:field="*{amount}">
+    </div>
+    <div class="form-group">
+        <label>Date</label>
+        <input class="form-control" placeholder="Date you want to accomplish goal" cols="30" rows="10" th:field="*{date}" type="date">
+    </div>
+    <button class="btn btn-warning btn-block">Create</button>
+</form>
+<!--<form th:action="${'/goals/create'}" th:method="post" th:object="${goal}">-->
+<!--<div class="columns is-mobile is-centered">-->
+<!--    <div class="column is-half">-->
+<!--        <div class="field">-->
+<!--            <p class="control">-->
+<!--                <input class="input" type="text" placeholder="Goal Title">-->
+<!--&lt;!&ndash;                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>&ndash;&gt;-->
+<!--            </p>-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--            <p class="control">-->
+<!--                <input class="input" type="text" placeholder="Goal Total">-->
+<!--                &lt;!&ndash;                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>&ndash;&gt;-->
+<!--            </p>-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--            <p class="control">-->
+<!--                <input class="input" type="text" placeholder="Goal Date">-->
+<!--                &lt;!&ndash;                <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>&ndash;&gt;-->
+<!--            </p>-->
+<!--        </div>-->
+<!--        <button class="btn">Create</button>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</form>-->
 <div id="footer">
     <ul>
         <li><a href="#about">About Us</a></li>

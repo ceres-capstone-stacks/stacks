@@ -3,6 +3,8 @@ package com.stack.stacks.models;
 import javax.persistence.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "goals")
@@ -20,10 +22,10 @@ public class Goal {
     private LocalDate date;
 
     @Column (precision = 10, scale = 2)
-    private double amountSaved;
+    private Double amountSaved;
 
     @Column (precision = 10, scale = 2)
-    private double amount;
+    private Double amount;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -32,11 +34,18 @@ public class Goal {
     public Goal () {
     }
 
-    public Goal(String description, LocalDate date, double amount, double amountSaved) {
+    public Goal(String description, LocalDate date, Double amount, Double amountSaved) {
         this.description = description;
         this.date = date;
         this.amount = amount;
         this.amountSaved = amountSaved;
+    }
+
+    public Goal(long id, String description, LocalDate date, Double amount){
+        this.id = id;
+        this.description = description;
+        this.date = date;
+        this.amount = amount;
     }
 
     public long getId() {
@@ -63,11 +72,11 @@ public class Goal {
         this.date = date;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -79,11 +88,11 @@ public class Goal {
         this.user = user;
     }
 
-    public double getAmountSaved() {
+    public Double getAmountSaved() {
         return amountSaved;
     }
 
-    public void setAmountSaved(double amountSaved) {
+    public void setAmountSaved(Double amountSaved) {
         this.amountSaved = amountSaved;
     }
 }
