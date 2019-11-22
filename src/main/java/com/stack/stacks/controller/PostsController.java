@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,19 +50,25 @@ public class PostsController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeCreated.setUser(currentUser);
         postDao.save(postToBeCreated);
-
         return "redirect:/posts";
 
     }
 
-    @RequestMapping(value = "/tags/create", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void addTagsToPosts(@RequestParam("tagged") List<String> tagged) {
-        System.out.println("Made it to tag add");
-        for(String tag : tagged){
-            System.out.println("tag = " + tag);
-        }
-    }
+//    @RequestMapping(value = "/tags/create", method = RequestMethod.POST)
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void addTagsToPosts(@RequestParam("tagged") List<String> tagged) {
+//        List<Tag> allTags = tagDao.findAll();
+//        List<Tag> postTags = new ArrayList<>();
+//        for(String tag : tagged){
+//            long tagId = Long.parseLong(tag);
+//            for(Tag tag1 : allTags){
+//                if(tagId == tag1.getId()){
+//                    postTags.add(tag1);
+//                }
+//            }
+//        }
+//        postToBeCreated.setTags(postTags);
+//    }
 
 
     @GetMapping("/posts/myposts")

@@ -59,7 +59,7 @@ Description:
 <form th:action="@{/tags/create}" th:method="post" id="tags-form" >
     <div th:each="tag : ${tags}">
         <label th:for="${tag.id}"><span th:text="${tag.name}"></span></label>
-        <input type="checkbox" th:value="${tag.id}" name="tagged">
+        <input type="checkbox" th:value="${tag}" th:field="*{tags}">
     </div>
 </form>
 

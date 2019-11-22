@@ -34,6 +34,13 @@ public class Post {
         this.user = user;
     }
 
+    public Post(String title, String content, User user, List<Tag> tags) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.tags = tags;
+    }
+
     public long getId() {
         return id;
     }
