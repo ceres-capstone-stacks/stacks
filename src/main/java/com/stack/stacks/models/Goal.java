@@ -1,9 +1,8 @@
 package com.stack.stacks.models;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 @Entity

@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import java.util.Calendar;
+
 @Controller
 public class GoalController {
 
@@ -25,19 +32,31 @@ public class GoalController {
 
     @GetMapping("/goals")
     public String showGoals(Model vModel) {
-        vModel.addAttribute("goal", goalDao.findAll());
-        return "/goals/index";
+        List<Goal> goalsList = goalDao.findAll();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        for(Goal aGoal : goalsList ) {
+            String strDate= formatter.format(aGoal.getDate());
+            Date date1= null;
+            try {
+                date1 = new SimpleDateFormat("MM/dd/yyyy").parse(strDate);
+            } catch (ParseException e) {
+                System.out.println("invalid date format in goalsList");
+                break;
+            }
+            aGoal.setDate(date1);
+        }
+        vModel.addAttribute("goal", goalsList);
+        return "goals/index";
     }
 
     @GetMapping("/goals/create")
     public String showGoalsIndex(Model vModel) {
         vModel.addAttribute("goal", new Goal());
-        return "/goals/createGoal";
+        return "goals/createGoal";
     }
     @PostMapping("/goals/create")
     public String create(@ModelAttribute Goal goalToBeCreated){
-//        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        goalToBeCreated.setUser(currentUser);
         Goal savedGoal = goalDao.save(goalToBeCreated);
         return "redirect:/goals";
     }
@@ -48,11 +67,11 @@ public class GoalController {
         return "redirect:/goals";
     }
 
-//    @GetMapping("/goals/{id}")
-//    public String show(@PathVariable long id, Model vModel) {
-//        vModel.addAttribute("goal", goalDao.getOne(id));
-//        return "goals/index";
-//    }
+    @GetMapping("/goals/{id}/edit")
+    public String editPost(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("goal", goalDao.getOne(id));
+        return "goals/edit";
+    }
 
 //    @PostMapping("/goals/create")
 //    public String createGoal(@ModelAttribute Goal goal) {
