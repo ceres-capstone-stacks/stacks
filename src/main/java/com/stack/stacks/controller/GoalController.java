@@ -87,16 +87,4 @@ public class GoalController {
         goalDao.save(oldGoal);
         return "redirect:/goals";
     }
-
-//    @GetMapping("/goals/{id}")
-//    public String show(@PathVariable long id, Model vModel) {
-//        vModel.addAttribute("goal", goalDao.getOne(id));
-//        return "goals/index";
-//    }
-
-//    @PostMapping("/goals/create")
-//    public String createGoal(@ModelAttribute Goal goal) {
-//        goalDao.save(goal);
-//        return "/goals/index";
-//    }
 }
