@@ -1,16 +1,14 @@
-html {
-    /*overflow-y: hidden;*/
-}
-
 body {
     font-family: 'Public Sans', sans-serif;
+    /*position: relative;*/
+    min-height: 100vh;
 }
 
 .footer {
     background-color: rgb(56, 63, 65);
     height: 150px;
     color: white;
-    position: relative;
+    /*position: absolute;*/
     bottom: 0;
     width: 100%;
 }
