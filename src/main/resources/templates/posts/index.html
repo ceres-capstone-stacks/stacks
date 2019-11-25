@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stacks - All Posts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Posts | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
@@ -16,10 +16,22 @@
         </div>
     </div>
 </section>
-<div class="card" th:each="post : ${posts}" >
+<a href="/posts/create">Create a post</a>
+<br>
+<a href="/posts/favorites">Favorite posts</a>
+<br>
+<a href="/posts/myposts">Personal posts</a>
+
+<div class="card" th:each="post : ${posts}">
     <h1 th:text="${post.title}"></h1>
-    <p th:text="${post.content}"></p>
+    <div th:if="${post.content.length() > 30}">
+        <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
+    </div>
+    <div th:if="${post.content.length() < 30}">
+        <p>• <span th:text="${post.content}"></span></p>
+    </div>
     <input type="hidden" name="id" th:value="${post.id}">
 </div>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>
