@@ -49,6 +49,14 @@ public class Goal {
         this.amount = amount;
     }
 
+    public Goal(String description, Date date, Double amountSaved, Double amount, User user) {
+        this.description = description;
+        this.date = date;
+        this.amountSaved = amountSaved;
+        this.amount = amount;
+        this.user = user;
+    }
+
     public long getId() {
         return id;
     }

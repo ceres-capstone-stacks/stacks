@@ -16,7 +16,7 @@
     </div>
 </section>
 
-<div class="container" th:each="goal : ${goal}">
+<div class="container" th:each="goal : ${goals}">
     <div style="height: 400px; width: 300px">
         <h2 th:text="${goal.description}"></h2>
         <div>
@@ -26,13 +26,7 @@
                 <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
                 <li><strong>What you have left to go: </strong>$<span th:text="${goal.amount} - ${goal.amountSaved}"></span></li>
             </ul>
-            <p><strong>Projected accomplishment date: </strong>
-            <div th:each="entry : ${dates}">
-<!--            <div th:if="${goal.id == entry.key}">-->
-                <span th:text="${entry.value}"></span>
-<!--            </div>-->
-        </div>
-            </p>
+            <p><strong>Projected accomplishment date: </strong><span th:text="${goal.date}"></span></p>
         </div>
 <!--        <button class="button">Edit</button>-->
         <button class="btn btn-light btn-block"><a th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a></button>
