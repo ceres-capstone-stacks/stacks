@@ -28,7 +28,9 @@
             </ul>
             <p><strong>Projected accomplishment date: </strong><span th:text="${goal.date}"></span></p>
         </div>
-        <button class="button">Edit</button>
+<!--        <button class="button">Edit</button>-->
+        <a th:href="@{'/goals/' + ${goal.id} + '/edit'}"><button class="btn btn-light btn-block">Edit</button></a>
+
         <button class="button">Delete</button>
     </div>
 </div>
