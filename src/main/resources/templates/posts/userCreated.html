@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Posts</title>
+    <title>My Posts | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container" sec:authorize="isAuthenticated()">
+        <h1 class="title">These are posts created by you, <span th:text="${#authentication.principal.firstName}"></span></h1>
+        </div>
+    </div>
+</section>
 <div>
     <div th:each="post : ${posts}">
         <div style="height: 400px; width: 300px">

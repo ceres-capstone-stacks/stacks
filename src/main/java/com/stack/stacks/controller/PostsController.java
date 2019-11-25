@@ -35,22 +35,19 @@ public class PostsController {
         return "posts/create";
     }
 
-
-
     @PostMapping("/posts/create")
     public String create(@ModelAttribute Post postToBeCreated) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeCreated.setUser(currentUser);
         postDao.save(postToBeCreated);
 
-        return "redirect:/posts/index";
+        return "redirect:/posts";
 
     }
 
-
     @GetMapping("/posts/myposts")
     public String usersPosts(){
-        return "posts/user_created";
+        return "posts/userCreated";
     }
 
     @GetMapping("/posts/favorites")
