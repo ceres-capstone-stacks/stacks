@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>New Post</title>
@@ -54,13 +55,12 @@ Title:
 Description:
 <input th:field="*{content}" />
 <br />
+<div th:each="tag : ${tags}">
+<!--     <label th:for="${tag.id}"><span th:text="${tag.name}"></span></label>-->
+<!--     <input type="checkbox" th:value="${tag}" th:field="*{tags}">-->
+     <form:checkbox path="tags" items="${tags}" />
+</div>
 <input type="submit" id="submit-btn" />
-</form>
-<form th:action="@{/tags/create}" th:method="post" id="tags-form" >
-    <div th:each="tag : ${tags}">
-        <label th:for="${tag.id}"><span th:text="${tag.name}"></span></label>
-        <input type="checkbox" th:value="${tag}" th:field="*{tags}">
-    </div>
 </form>
 
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>

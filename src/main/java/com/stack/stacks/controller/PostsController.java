@@ -48,6 +48,8 @@ public class PostsController {
     @PostMapping("/posts/create")
     public String create(@ModelAttribute Post postToBeCreated) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Tag> tags = postToBeCreated.getTags();
+        System.out.println(tags);
         postToBeCreated.setUser(currentUser);
         postDao.save(postToBeCreated);
         return "redirect:/posts";

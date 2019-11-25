@@ -39,6 +39,9 @@ public class User {
     @Column (name = "retirement_age")
     private int retirementAge;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Goal> goals;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 
