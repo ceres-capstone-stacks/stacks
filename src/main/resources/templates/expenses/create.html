@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Expense - Stacks</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container" sec:authorize="isAuthenticated()">
+            <h1 class="title">New Expense</h1>
+            <h2 class="subtitle">Input any new purchases you have made</h2>
+        </div>
+    </div>
+</section>
+<form th:action="@{/profile/expenses/create}" th:method="post" th:object="${expense}">
+    <div class="columns is-centered">
+        <div class="column">
+            <div class="field">
+                <label class="label">Company Name</label>
+                <div class="control has-icons-left">
+                    <input th:field="*{description}" class="input" type="text" placeholder="ex. Target, Best Buy">
+                    <span class="icon is-small is-left"><i class="fas fa-building"></i></span>
+                </div>
+<!--                <label class="label">Short Description</label>-->
+<!--                <div class="control has-icons-left">-->
+<!--                    <input th:field="*{description}" class="input" type="text" placeholder="ex. Living Room Decoration, Computer Monitor">-->
+<!--                    <span class="icon is-small is-left"><i class="fas fa-comment-dots"></i></span>-->
+<!--                </div>-->
+                <label class="label">Amount</label>
+                <div class="control has-icons-left">
+                    <input th:field="*{amount}" class="input" type="text" placeholder="ex. 45.25, 176.97">
+                    <span class="icon is-small is-left"><i class="fas fa-dollar-sign"></i></span>
+                </div>
+                <label class="label">Date</label>
+                <div class="control has-icons-left">
+                    <input th:field="*{date}" class="input" type="text" placeholder="ex. 12/11/2019, 12-11-2019">
+                    <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
+</body>
+</html>
