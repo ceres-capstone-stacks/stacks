@@ -41,7 +41,9 @@ public class PostsController {
         postToBeCreated.setUser(currentUser);
         postDao.save(postToBeCreated);
 
+
         return "redirect:/posts";
+
 
     }
 

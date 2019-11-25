@@ -16,6 +16,65 @@
         </div>
     </div>
 </section>
+
+<table class="table is-bordered" >
+    <thead>
+<tr>
+    <th>Store</th>
+    <th>Code</th>
+    <th>Description</th>
+    </tr>
+    </thead>
+    <tbody id="mon">
+
+    </tbody>
+</table>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script
+        src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
+
+
+<script>
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://kuponiko.p.rapidapi.com/recent/US",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "kuponiko.p.rapidapi.com",
+            "x-rapidapi-key": "bdecd33faamsh57590d18918e026p1ba8bajsn8488dfca75c1"
+        }
+
+    };
+
+    $.ajax(settings).done(function (respone) {
+        var data = respone;
+        var result = [];
+        var newhtml = "";
+
+
+        data.forEach(function (item) {
+            if(item.description != ""){
+                result.push(item)
+            }
+            return result;
+        });
+        console.log(result);
+        console.log(result[3].code);
+        for(var i = 0; i <= result.length - 1; i++){
+            console.log(result[i].code);
+        newhtml +=        '<tr>';
+        newhtml +=        '<th>'+ result[i].store_name + '</th>';
+        newhtml +=        '<th>' + result[i].code + '</th>';
+        newhtml +=        '<th>' + result[i].description + '</th>';
+        newhtml +=        '</tr>';
+        }
+        $('#mon').append(newhtml);
+    })
+
+
+</script>
 </body>
 </html>
