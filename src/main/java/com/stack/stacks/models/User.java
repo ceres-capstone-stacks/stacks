@@ -170,4 +170,11 @@ public class User {
         this.posts = posts;
     }
 
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
+    }
 }
