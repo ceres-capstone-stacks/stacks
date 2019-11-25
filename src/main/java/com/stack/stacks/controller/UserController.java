@@ -1,6 +1,7 @@
 package com.stack.stacks.controller;
 
 import com.stack.stacks.models.Expense;
+import com.stack.stacks.models.Post;
 import com.stack.stacks.models.User;
 import com.stack.stacks.repositories.ExpenseRepository;
 import com.stack.stacks.repositories.UserRepository;
@@ -47,6 +48,24 @@ public class UserController {
     @GetMapping("/profile/expenses")
     public String getExpenses(Model vModel) {
         vModel.addAttribute(expenseDao.getOne(1L));
-        return "/profile";
+        return "expenses/index";
+    }
+
+    @GetMapping("/profile/expenses/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("expense", new Expense());
+        return "expenses/create";
+    }
+
+
+
+    @PostMapping("/profile/expenses/create")
+    public String create(@ModelAttribute Expense expenseToBeCreated) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        expenseToBeCreated.setUser(currentUser);
+        expenseDao.save(expenseToBeCreated);
+
+        return "redirect:profile/expenses";
+
     }
 }
