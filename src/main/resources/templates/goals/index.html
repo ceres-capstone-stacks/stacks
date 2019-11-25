@@ -16,7 +16,7 @@
     </div>
 </section>
 
-<div class="container" th:each="goal : ${goals}">
+<div class="container" th:each="goal : ${goal}">
     <div style="height: 400px; width: 300px">
         <h2 th:text="${goal.description}"></h2>
         <div>
@@ -26,8 +26,8 @@
                 <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
                 <li><strong>What you have left to go: </strong>$<span th:text="${goal.amount} - ${goal.amountSaved}"></span></li>
             </ul>
-            <p><strong>Projected accomplishment date: </strong><span th:text="${goal.date}"></span></p>
-        </div>
+            <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}" class="date-span"></span></p>
+
 <!--        <button class="button">Edit</button>-->
         <button class="btn btn-light btn-block"><a th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a></button>
         <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
@@ -38,5 +38,17 @@
 </div>
 <a class="button is-success is-rounded" href="/goals/create">Create a goal</a>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script>
+    $(document).ready(function () {
+        $(".date-span").each(function () {
+            let dateText = $(this).text();
+            let partOne = dateText.substr(5, 2);
+            let partTwo = dateText.substr(8, 2);
+            let partThree = dateText.substr(0, 4);
+            let formatDate = (partOne + "-" + partTwo + "-" + partThree);
+            $(this).text(formatDate);
+        })
+    })
+</script>
 </body>
 </html>

@@ -1,8 +1,10 @@
 package com.stack.stacks.models;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -20,7 +22,7 @@ public class Goal {
     private String description;
 
     @Column
-    private Date date;
+    private String date;
 
     @Column (precision = 10, scale = 2)
     private Double amountSaved;
@@ -35,21 +37,22 @@ public class Goal {
     public Goal () {
     }
 
-    public Goal(String description, Date date, Double amount, Double amountSaved) {
+    public Goal(String description, String date, Double amount, Double amountSaved) {
         this.description = description;
         this.date = date;
         this.amount = amount;
         this.amountSaved = amountSaved;
     }
 
-    public Goal(long id, String description, Date date, Double amount){
+    public Goal(long id, String description, String date, Double amount){
         this.id = id;
         this.description = description;
         this.date = date;
         this.amount = amount;
     }
 
-    public Goal(String description, Date date, Double amountSaved, Double amount, User user) {
+    public Goal(long id, String description, String date, Double amountSaved, Double amount, User user) {
+        this.id = id;
         this.description = description;
         this.date = date;
         this.amountSaved = amountSaved;
@@ -73,11 +76,11 @@ public class Goal {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
