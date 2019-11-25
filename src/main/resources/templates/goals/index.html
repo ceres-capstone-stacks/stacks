@@ -26,12 +26,20 @@
                 <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
                 <li><strong>What you have left to go: </strong>$<span th:text="${goal.amount} - ${goal.amountSaved}"></span></li>
             </ul>
-            <p><strong>Projected accomplishment date: </strong><span th:text="${goal.date}"></span></p>
+            <p><strong>Projected accomplishment date: </strong>
+            <div th:each="entry : ${dates}">
+<!--            <div th:if="${goal.id == entry.key}">-->
+                <span th:text="${entry.value}"></span>
+<!--            </div>-->
+        </div>
+            </p>
         </div>
 <!--        <button class="button">Edit</button>-->
-        <a th:href="@{'/goals/' + ${goal.id} + '/edit'}"><button class="btn btn-light btn-block">Edit</button></a>
-
-        <button class="button">Delete</button>
+        <button class="btn btn-light btn-block"><a th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a></button>
+        <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
+            <button class="btn btn-danger btn-block">Delete</button>
+        </form>
+<!--        <button class="button">Delete</button>-->
     </div>
 </div>
 <a class="button is-success is-rounded" href="/goals/create">Create a goal</a>
