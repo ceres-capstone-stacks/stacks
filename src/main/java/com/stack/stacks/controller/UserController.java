@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -60,7 +61,7 @@ public class UserController {
 
 
     @PostMapping("/profile/expenses/create")
-    public String create(@ModelAttribute Expense expenseToBeCreated) {
+    public String create(@ModelAttribute Expense expenseToBeCreated, @RequestParam(defaultValue = "false") boolean isRegular) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         expenseToBeCreated.setUser(currentUser);
         expenseDao.save(expenseToBeCreated);
