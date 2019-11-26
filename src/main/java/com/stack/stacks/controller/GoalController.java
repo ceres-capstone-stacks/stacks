@@ -28,14 +28,12 @@ public class GoalController {
         List<Goal> goals = new ArrayList<>();
         HashMap<Long, String> dates = new HashMap<>();
         //Loop to find goals specific to user
-        try {
-            for(Goal goal : allGoals){
-                if(goal.getUser().getId() == currentUser.getId()){
+        for(Goal goal : allGoals){
+            if(goal.getUser() != null) {
+                if (goal.getUser().getId() == currentUser.getId()) {
                     goals.add(goal);
                 }
             }
-        } catch (Exception e){
-            e.printStackTrace();
         }
         vModel.addAttribute("goal", goals);
         return "goals/index";
