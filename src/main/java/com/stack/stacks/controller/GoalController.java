@@ -7,11 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,12 +21,6 @@ public class GoalController {
         this.goalDao = goalDao;
     }
 
-//    @GetMapping ("/goals")
-//    public String showGoals(Model vModel) {
-//        vModel.addAttribute("goals", goalDao.findAll());
-//        return "goals/index";
-//    }
-
     @GetMapping("/goals")
     public String showGoals(Model vModel) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -43,13 +33,6 @@ public class GoalController {
                 goals.add(goal);
             }
         }
-        //Once fixed this should creat HashMap of formatted dates
-//        for(Goal thisGoal : goals){
-//            LocalDate thisDate = thisGoal.getDate();
-//            thisDate = thisDate.substring(8, 10) + "-" + thisDate.substring(5, 7) + "-" + thisDate.substring(0, 4);
-//            dates.put(thisGoal.getId(), thisDate);
-//        }
-//        vModel.addAttribute("dates", dates);
         vModel.addAttribute("goal", goals);
         return "goals/index";
     }
@@ -87,16 +70,4 @@ public class GoalController {
         goalDao.save(oldGoal);
         return "redirect:/goals";
     }
-
-//    @GetMapping("/goals/{id}")
-//    public String show(@PathVariable long id, Model vModel) {
-//        vModel.addAttribute("goal", goalDao.getOne(id));
-//        return "goals/index";
-//    }
-
-//    @PostMapping("/goals/create")
-//    public String createGoal(@ModelAttribute Goal goal) {
-//        goalDao.save(goal);
-//        return "/goals/index";
-//    }
 }
