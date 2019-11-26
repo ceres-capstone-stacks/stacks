@@ -22,6 +22,7 @@ public class GoalController {
     }
 
     @GetMapping("/goals")
+
     public String showGoals(Model vModel) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Goal> allGoals = goalDao.findAll();
