@@ -29,10 +29,10 @@
                         <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                     </div>
                 </div>
-                <div th:if="${param.error}">
+                <div th:if="${param.error}" class="bad-login">
                     Invalid Username or Password.
                 </div>
-                <div th:if="${param.logout}">
+                <div th:if="${param.logout}" class="good-logout">
                     You have been logged out.
                 </div>
             </div>
