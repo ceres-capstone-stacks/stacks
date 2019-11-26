@@ -36,7 +36,6 @@ public class GoalController {
             }
         } catch (Exception e){
             e.printStackTrace();
-            return "redirect:/profile";
         }
         vModel.addAttribute("goal", goals);
         return "goals/index";

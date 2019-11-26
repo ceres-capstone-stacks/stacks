@@ -62,7 +62,6 @@ public class UserController {
             }
         } catch (Exception e){
             e.printStackTrace();
-            return "redirect:/profile";
         }
         vModel.addAttribute("expenses", expenses);
         return "expenses/index";
