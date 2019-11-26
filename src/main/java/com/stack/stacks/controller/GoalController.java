@@ -39,10 +39,15 @@ public class GoalController {
         List<Goal> goals = new ArrayList<>();
         HashMap<Long, String> dates = new HashMap<>();
         //Loop to find goals specific to user
-        for(Goal goal : allGoals){
-            if(goal.getUser().getId() == currentUser.getId()){
-                goals.add(goal);
+        try {
+            for(Goal goal : allGoals){
+                if(goal.getUser().getId() == currentUser.getId()){
+                    goals.add(goal);
+                }
             }
+        } catch (Exception e){
+            e.printStackTrace();
+            return "redirect:/profile";
         }
         //Once fixed this should creat HashMap of formatted dates
 //        for(Goal thisGoal : goals){
