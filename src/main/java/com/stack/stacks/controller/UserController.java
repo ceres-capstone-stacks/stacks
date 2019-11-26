@@ -74,8 +74,6 @@ public class UserController {
         return "expenses/create";
     }
 
-
-
     @PostMapping("/profile/expenses/create")
     public String create(@ModelAttribute Expense expenseToBeCreated, @RequestParam(defaultValue = "false") boolean isRegular) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
