@@ -9,6 +9,7 @@
 <body>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
 <div class="container is-fluid">
+
     <form th:action="@{/login}" method="post">
         <div class="card">
             <div class="card-content login">
@@ -27,6 +28,12 @@
                         <input class="input" type="password" name="password" placeholder="Password">
                         <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                     </div>
+                </div>
+                <div th:if="${param.error}">
+                    Invalid Username or Password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
                 </div>
             </div>
             <div class="field">

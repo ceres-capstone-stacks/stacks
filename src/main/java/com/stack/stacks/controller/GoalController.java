@@ -24,7 +24,6 @@ public class GoalController {
 
     @GetMapping("/goals")
     public String showGoals(Model vModel) {
-        vModel.addAttribute("goal", goalDao.findAll());
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Goal> allGoals = goalDao.findAll();
         List<Goal> goals = new ArrayList<>();
