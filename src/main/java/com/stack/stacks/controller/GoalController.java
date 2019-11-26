@@ -2,16 +2,18 @@ package com.stack.stacks.controller;
 
 import com.stack.stacks.models.Goal;
 import com.stack.stacks.models.User;
-import com.stack.stacks.repositories.ExpenseRepository;
 import com.stack.stacks.repositories.GoalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class GoalController {
@@ -23,21 +25,45 @@ public class GoalController {
         this.goalDao = goalDao;
     }
 
+//    @GetMapping ("/goals")
+//    public String showGoals(Model vModel) {
+//        vModel.addAttribute("goals", goalDao.findAll());
+//        return "goals/index";
+//    }
+
     @GetMapping("/goals")
     public String showGoals(Model vModel) {
         vModel.addAttribute("goal", goalDao.findAll());
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Goal> allGoals = goalDao.findAll();
+        List<Goal> goals = new ArrayList<>();
+        HashMap<Long, String> dates = new HashMap<>();
+        //Loop to find goals specific to user
+        for(Goal goal : allGoals){
+            if(goal.getUser().getId() == currentUser.getId()){
+                goals.add(goal);
+            }
+        }
+        //Once fixed this should creat HashMap of formatted dates
+//        for(Goal thisGoal : goals){
+//            LocalDate thisDate = thisGoal.getDate();
+//            thisDate = thisDate.substring(8, 10) + "-" + thisDate.substring(5, 7) + "-" + thisDate.substring(0, 4);
+//            dates.put(thisGoal.getId(), thisDate);
+//        }
+//        vModel.addAttribute("dates", dates);
+        vModel.addAttribute("goal", goals);
         return "goals/index";
     }
 
     @GetMapping("/goals/create")
     public String showGoalsIndex(Model vModel) {
         vModel.addAttribute("goal", new Goal());
-        return "goals/createGoal";
+        return "/goals/create";
     }
     @PostMapping("/goals/create")
     public String create(@ModelAttribute Goal goalToBeCreated){
-//        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        goalToBeCreated.setUser(currentUser);
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        goalToBeCreated.setUser(currentUser);
         Goal savedGoal = goalDao.save(goalToBeCreated);
         return "redirect:/goals";
     }
@@ -45,6 +71,21 @@ public class GoalController {
     @PostMapping("/goals/{id}/delete")
     public String deleteGoal(@PathVariable long id) {
         goalDao.deleteById(id);
+        return "redirect:/goals";
+    }
+
+    @GetMapping("/goals/{id}/edit")
+    public String editGoal(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("goals",goalDao.getOne(id));
+        return "goals/editGoal";
+    }
+
+    @PostMapping("/goals/{id}/edit")
+    public String updateGoal (@PathVariable long id, @RequestParam double amountSaved, @RequestParam String date) {
+        Goal oldGoal = goalDao.getOne(id);
+        oldGoal.setAmountSaved(amountSaved);
+        oldGoal.setDate(date);
+        goalDao.save(oldGoal);
         return "redirect:/goals";
     }
 

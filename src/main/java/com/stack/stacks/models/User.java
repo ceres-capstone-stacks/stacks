@@ -61,6 +61,21 @@ public class User {
         this.retirementAge = retirementAge;
     }
 
+    public User(String username, String email, String password, String firstName, String lastName, Date dob, boolean isAdmin, int residualIncome, int retirementAge, List<Post> posts, List<Expense> expense, List<Goal> goals) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.isAdmin = isAdmin;
+        this.residualIncome = residualIncome;
+        this.retirementAge = retirementAge;
+        this.posts = posts;
+        this.expense = expense;
+        this.goals = goals;
+    }
+
     public User() {
     }
 
@@ -186,5 +201,13 @@ public class User {
 
     public void setGoals(List<Goal> goals) {
         this.goals = goals;
+    }
+
+    public List<Expense> getExpense() {
+        return expense;
+    }
+
+    public void setExpense(List<Expense> expense) {
+        this.expense = expense;
     }
 }
