@@ -54,16 +54,14 @@ public class UserController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> allExpenses = expenseDao.findAll();
         List<Expense> expenses = new ArrayList<>();
-        try {
-            for(Expense expense : allExpenses){
-                if(expense.getUser().getId() == currentUser.getId()){
+        for(Expense expense : allExpenses){
+            if(expense.getUser() != null) {
+                if (expense.getUser().getId() == currentUser.getId()) {
                     expenses.add(expense);
                 }
             }
-        } catch (Exception e){
-            e.printStackTrace();
-            return "redirect:/profile";
         }
+
         vModel.addAttribute("expenses", expenses);
         return "expenses/index";
     }
