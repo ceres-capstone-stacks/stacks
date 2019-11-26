@@ -16,3 +16,11 @@ body {
     bottom: 0;
     width: 100%;
 }
+
+.bad-login {
+    color: red;
+}
+
+.good-logout{
+    color: green;
+}

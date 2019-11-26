@@ -19,9 +19,9 @@
     <div class="columns is-centered">
         <div class="column">
             <div class="field">
-                <label class="label">Company Name</label>
+                <label class="label">What was the expense</label>
                 <div class="control has-icons-left">
-                    <input th:field="*{description}" class="input" type="text" placeholder="ex. Target, Best Buy">
+                    <input th:field="*{description}" class="input" type="text">
                     <span class="icon is-small is-left"><i class="fas fa-building"></i></span>
                 </div>
                 <!--                <label class="label">Short Description</label>-->
@@ -31,14 +31,28 @@
                 <!--                </div>-->
                 <label class="label">Amount</label>
                 <div class="control has-icons-left">
-                    <input th:field="*{amount}" class="input" type="text" placeholder="ex. 45.25, 176.97">
+                    <input th:field="*{amount}" class="input" type="number" placeholder="ex. 45.25, 176.97">
                     <span class="icon is-small is-left"><i class="fas fa-dollar-sign"></i></span>
                 </div>
                 <label class="label">Date</label>
                 <div class="control has-icons-left">
-                    <input th:field="*{date}" class="input" type="text" placeholder="ex. 12/11/2019, 12-11-2019">
+                    <input th:field="*{date}" class="input" type="date">
                     <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
                 </div>
+                <label for="type">Type of Expense</label>
+                <div class="control has-icons-left">
+                    <select th:field="*{type}" id="type">
+                        <option value="1">Bills</option>
+                        <option value="2">Groceries</option>
+                        <option value="3">Subscriptions/Memberships</option>
+                        <option value="4">Food & Dining</option>
+                        <option value="5">Leisure & Gifts</option>
+                        <option value="6">Auto/Transportation</option>
+                        <option value="7">Misc</option>
+                    </select>
+                </div>
+                <label for="isRegular">Is this a regular expense?</label>
+                <input type="checkbox" name="isRegular" id="isRegular" value="true">
             </div>
             <div class="field is-grouped">
                 <div class="control">
