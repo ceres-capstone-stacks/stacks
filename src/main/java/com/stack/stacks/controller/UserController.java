@@ -12,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -47,7 +51,20 @@ public class UserController {
 
     @GetMapping("/profile/expenses")
     public String getExpenses(Model vModel) {
-        vModel.addAttribute(expenseDao.getOne(1L));
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Expense> allExpenses = expenseDao.findAll();
+        List<Expense> expenses = new ArrayList<>();
+        try {
+            for(Expense expense : allExpenses){
+                if(expense.getUser().getId() == currentUser.getId()){
+                    expenses.add(expense);
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return "redirect:/profile";
+        }
+        vModel.addAttribute("expenses", expenses);
         return "expenses/index";
     }
 
@@ -60,12 +77,11 @@ public class UserController {
 
 
     @PostMapping("/profile/expenses/create")
-    public String create(@ModelAttribute Expense expenseToBeCreated) {
+    public String create(@ModelAttribute Expense expenseToBeCreated, @RequestParam(defaultValue = "false") boolean isRegular) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         expenseToBeCreated.setUser(currentUser);
+        expenseToBeCreated.setRegular(isRegular);
         expenseDao.save(expenseToBeCreated);
-
-        return "redirect:profile/expenses";
-
+        return "redirect:/profile/expenses";
     }
 }
