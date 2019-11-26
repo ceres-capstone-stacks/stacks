@@ -17,7 +17,7 @@ public class Expense {
     private double amount;
 
     @Column
-    private java.sql.Date date;
+    private String date;
 
     @Column
     private String description;
@@ -35,12 +35,19 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(double amount, Date date, String description, boolean isRegular, User user, int type) {
+    public Expense(double amount, String date, String description, boolean isRegular, User user, int type) {
         this.amount = amount;
         this.date = date;
         this.description = description;
         this.isRegular = isRegular;
         this.user = user;
+        this.type = type;
+    }
+
+    public Expense(double amount, String date, String description, int type) {
+        this.amount = amount;
+        this.date = date;
+        this.description = description;
         this.type = type;
     }
 
@@ -60,11 +67,11 @@ public class Expense {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
