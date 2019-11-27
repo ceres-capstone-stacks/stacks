@@ -61,7 +61,7 @@ public class UserController {
                 }
             }
         }
-
+        vModel.addAttribute("expense", new Expense());
         vModel.addAttribute("expenses", expenses);
         return "expenses/index";
     }
