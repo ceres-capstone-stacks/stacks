@@ -13,4 +13,4 @@ $(document).ready(function () {
     alert(dateText);
     dateText = dateText.substr(6, 9) + "-" + dateText.substr(3, 5) + "-" + dateText.substr(0, 2);
     $(".date-span").text(dateText);
-})
+});
