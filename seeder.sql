@@ -6,3 +6,6 @@ insert into goals (amount, amount_saved, date, description, user_id) values ('10
 insert into goals (amount, amount_saved, date, description, user_id) values ('250.00', '25.55', '2020-11-12','this is for my birthday',1);
 
 TRUNCATE goals;
+
+
+SELECT SUM(expenses.amount) FROM expenses WHERE type = '5';

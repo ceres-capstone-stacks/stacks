@@ -27,6 +27,7 @@
                 <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to go: </strong>$<span
                         th:text="${result}"></span></li>
             </ul>
+            <progress th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
             <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                          class="date-span"></span></p>
 
