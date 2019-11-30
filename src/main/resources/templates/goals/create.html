@@ -11,32 +11,46 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title">Let's create a goal for yourself.</h1>
+            <h1 class="title">Let's set up your goal, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
         </div>
     </div>
 </section>
 <form th:action="${'/goals/create'}" th:method="post" th:object="${goal}">
-    <div class="form-group">
-        <label>Description</label>
-        <input class="form-control" placeholder="Enter goal description" th:field="*{description}">
+    <div class="columns is-mobile is-centered">
+        <div class="column is-half">
+            <div class="field">
+                <label>What is the purpose of this goal?</label>
+                <div class="control">
+                    <input class="input" th:field="*{description}">
+                </div>
+            </div>
+            <div class="field">
+                <label>How much do you want to save?</label>
+                <div class="control has-icons-left">
+                    <input class="input" th:field="*{amount}">
+                    <span class="icon is-left"><i class="fas fa-dollar-sign"></i></span>
+                </div>
+            </div>
+            <div class="field">
+                <label>Do you have any money saved so far?</label>
+                <div class="control has-icons-left">
+                    <input class="input" th:field="*{amountSaved}">
+                    <span class="icon is-left"><i class="fas fa-dollar-sign"></i></span>
+                </div>
+            </div>
+            <div class="field">
+                <label>When do you want to accomplish this goal?</label>
+                <div class="control has-icons-left">
+                    <input class="input" th:field="*{date}" type="date">
+                    <span class="icon is-left"><i class="fas fa-calendar"></i></span>
+                </div>
+            </div>
+            <div class="control">
+                <button class="button is-link">Submit</button>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Amount</label>
-        <input class="form-control" placeholder="Enter the amount you want to save" cols="30" rows="10"
-               th:field="*{amount}">
-    </div>
-    <div class="form-group">
-        <label>Amount Saved</label>
-        <input class="form-control" placeholder="How much have you saved so far?" cols="30" rows="10" th:field="*{amountSaved}">
-    </div>
-    <div class="form-group">
-        <label>Date</label>
-        <input class="form-control" placeholder="Date you want to accomplish goal" cols="30" rows="10" th:field="*{date}" type="date">
-    </div>
-    <button class="btn btn-warning btn-block">Create</button>
 </form>
-
-
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>
