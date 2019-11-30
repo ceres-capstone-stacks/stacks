@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfile(Model vModel){
-//        expenseDao.getSumOfExpenses();
+//        expenseDao.sumOfExpenses();
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         vModel.addAttribute("user", loggedInUser);
         return "users/profile";

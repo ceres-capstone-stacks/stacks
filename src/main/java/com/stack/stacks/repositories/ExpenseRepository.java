@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 //    @Query("SELECT SUM(expenses.amount) FROM expenses")
-//    Expense getSumOfExpenses ();
+//    Expense sumOfExpenses ();
 }
