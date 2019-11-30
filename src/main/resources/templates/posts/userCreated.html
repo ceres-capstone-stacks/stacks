@@ -11,7 +11,7 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container" sec:authorize="isAuthenticated()">
-        <h1 class="title">These are posts created by you, <span th:text="${#authentication.principal.firstName}"></span></h1>
+        <h1 class="title">These are your posts, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
         </div>
     </div>
 </section>

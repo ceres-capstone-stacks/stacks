@@ -16,12 +16,13 @@
         </div>
     </div>
 </section>
-<a href="/posts/create">Create a post</a>
-<br>
-<a href="/posts/favorites">Favorite posts</a>
-<br>
-<a href="/posts/myposts">Personal posts</a>
-
+<div sec:authorize="isAuthenticated()">
+    <a href="/posts/create">Create a post</a>
+    <br>
+    <a href="/posts/myposts">Personal posts</a>
+    <br>
+    <a href="/posts/favorites">Favorite posts</a>
+</div>
 <div class="card" th:each="post : ${posts}">
     <h1 th:text="${post.title}"></h1>
     <div th:if="${post.content.length() > 30}">

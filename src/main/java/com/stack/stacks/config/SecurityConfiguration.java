@@ -54,10 +54,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/goals/create", // only authenticated users can create ads
                         "/goals/{id}/edit", // only authenticated users can edit ads
-                        "/profile/expenses",// only authenticated users can see their expenses
+                        "/profile/expenses", // only authenticated users can see their expenses
+                        "/profile/expenses/create", // only authenticated users can create an expense
                         "/posts/favorites", // only authenticated users can view favored posts
+                        "/posts/create", // only authenticated users can create a post
                         "/posts/myposts", //only authenticated users can view their posts
-                        "/profile/expenses/create",
                         "/profile"
                 )
                 .authenticated()

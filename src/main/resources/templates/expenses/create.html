@@ -19,7 +19,7 @@
     <div class="columns is-centered">
         <div class="column">
             <div class="field">
-                <label class="label">What was the expense</label>
+                <label class="label">Where was this purchase made?</label>
                 <div class="control has-icons-left">
                     <input th:field="*{description}" class="input" type="text">
                     <span class="icon is-small is-left"><i class="fas fa-building"></i></span>
@@ -29,17 +29,17 @@
                 <!--                    <input th:field="*{description}" class="input" type="text" placeholder="ex. Living Room Decoration, Computer Monitor">-->
                 <!--                    <span class="icon is-small is-left"><i class="fas fa-comment-dots"></i></span>-->
                 <!--                </div>-->
-                <label class="label">Amount</label>
+                <label class="label">How much was this purchase?</label>
                 <div class="control has-icons-left">
-                    <input th:field="*{amount}" class="input" type="number" step=".01" placeholder="ex. 45.25, 176.97">
+                    <input th:field="*{amount}" class="input" type="number" step="0.01" placeholder="ex. 45.25, 176.97">
                     <span class="icon is-small is-left"><i class="fas fa-dollar-sign"></i></span>
                 </div>
-                <label class="label">Date</label>
+                <label class="label">When did this purchase occur?</label>
                 <div class="control has-icons-left">
                     <input th:field="*{date}" class="input" type="date">
-                    <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
+                    <span class="icon is-small is-left"><i class="fas fa-calendar"></i></span>
                 </div>
-                <label for="type">Type of Expense</label>
+                <label for="type">Select the appropriate category for this purchase.</label>
                 <div class="control has-icons-left">
                     <select th:field="*{type}" id="type">
                         <option value="1">Bills</option>
@@ -51,7 +51,7 @@
                         <option value="7">Misc</option>
                     </select>
                 </div>
-                <label for="isRegular">Is this a regular expense?</label>
+                <label for="isRegular">This is a reoccurring expense.</label>
                 <input type="checkbox" name="isRegular" id="isRegular" value="true">
             </div>
             <div class="field is-grouped">
