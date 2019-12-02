@@ -16,21 +16,11 @@
     </div>
 </section>
 <div>
-    <div th:each="post : ${posts}">
+    <div th:each="post : ${post}">
         <div style="height: 400px; width: 300px">
-            <img th:each="postImage : ${post.images}"
-                 th:src="${postImage.url}"/>
             <div>
                 <h4 th:text="${post.title}"></h4>
-                <div th:if="${post.content.length() > 30}">
-                    <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
-                </div>
-                <div th:if="${post.content.length() < 30}">
-                    <p>• <span th:text="${post.content}"></span></p>
-                </div>
-                <div>
-                    <a th:href="@{'posts/' + ${post.id}}">View Post</a>
-                </div>
+                <p th:text="${post.content}"></p>
             </div>
         </div>
     </div>
