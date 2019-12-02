@@ -38,6 +38,7 @@
                 <label for="type">Select the appropriate category for this purchase.</label>
                 <div class="control has-icons-left">
                     <select th:field="*{type}" id="type">
+                        <option value="0" disabled selected>--Select One--</option>
                         <option value="1">Bills</option>
                         <option value="2">Groceries</option>
                         <option value="3">Subscriptions/Memberships</option>
@@ -101,7 +102,6 @@
             <td>$<span th:text="${expense.amount}"></span></td>
         </tbody>
     </table>
-    </tr>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
