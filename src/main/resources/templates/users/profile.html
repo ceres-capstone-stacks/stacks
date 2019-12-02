@@ -113,8 +113,8 @@
                     <p class="panel-heading">
                         My Current Goals
                     </p>
-                    <div class="goal-container" th:each="goal : ${goal}">
-                        <div style="height: 250px; width: 400px">
+                    <div class="profile-goal" th:each="goal : ${goal}">
+                        <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
                             <h2 th:text="${goal.description}"></h2>
                             <div>
                                 <ul>
