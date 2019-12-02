@@ -78,7 +78,7 @@
         </thead>
         <tbody>
         <tr th:each="expense : ${expenses}">
-            <td th:text="${expense.date}"></td>
+            <td th:text="${expense.date }"></td>
             <td th:text="${expense.description}"></td>
             <th:block th:switch="${expense.type}">
                 <div th:case="1">

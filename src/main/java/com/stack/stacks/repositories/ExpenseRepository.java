@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
-//    @Query("SELECT SUM(expenses.amount) FROM expenses")
-//    List<Expense> sumOfExpenses ();
+    @Query(value = "SELECT sum(amount) FROM expenses", nativeQuery = true)
+    public Long sumOfExpenses();
 }

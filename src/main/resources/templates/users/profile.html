@@ -90,20 +90,24 @@
                     </p>
                     <div class="panel-block">
                         <figure class="image is-16x9">
-                            <ul>
-                                <li>(Most spent category)•You spent $231.52 on <strong><i>Entertainment</i></strong>
-                                    this week. That's
-                                    $21.42 more than last week!
-                                </li>
-                                <li>•To reach your <i>savings goal</i> of $500 by the end of this month, you will need
-                                    to save $200
-                                    more.
-                                </li>
-                                <li>•You have spent a total of $435.52 so far this month, that's $40.87 less than last.
-                                    Keep it up!
-                                </li>
-                                <li>•Learn more on how to save money by visiting our <i>steals & deals</i> section.</li>
-                            </ul>
+<!--                            <div th:each="expense : ${expenses}">-->
+                             <p>   You have spent $<span th:text="${sum}"> so far this week!</span></p>
+<!--                                <p th:text="${sum}"></p>-->
+                            </div>
+<!--                            <ul>-->
+<!--                                <li>(Most spent category)•You spent $231.52 on <strong><i>Entertainment</i></strong>-->
+<!--                                    this week. That's-->
+<!--                                    $21.42 more than last week!-->
+<!--                                </li>-->
+<!--                                <li>•To reach your <i>savings goal</i> of $500 by the end of this month, you will need-->
+<!--                                    to save $200-->
+<!--                                    more.-->
+<!--                                </li>-->
+<!--                                <li>•You have spent a total of $435.52 so far this month, that's $40.87 less than last.-->
+<!--                                    Keep it up!-->
+<!--                                </li>-->
+<!--                                <li>•Learn more on how to save money by visiting our <i>steals & deals</i> section.</li>-->
+<!--                            </ul>-->
                         </figure>
                     </div>
                 </div>
