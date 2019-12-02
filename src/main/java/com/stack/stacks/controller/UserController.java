@@ -45,6 +45,18 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(Model vModel){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Expense> allExpenses = expenseDao.findAll();
+//        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
+        List<Expense> expenses = new ArrayList<>();
+        for(Expense expense : allExpenses){
+            if(expense.getUser() != null) {
+                if (expense.getUser().getId() == loggedInUser.getId()) {
+                    expenses.add(expense);
+                }
+            }
+        }
+        vModel.addAttribute("expense", new Expense());
+        vModel.addAttribute("expenses", expenses);
         vModel.addAttribute("user", loggedInUser);
         return "users/profile";
     }
@@ -53,7 +65,7 @@ public class UserController {
     public String getExpenses(Model vModel) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> allExpenses = expenseDao.findAll();
-        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
+//        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
         List<Expense> expenses = new ArrayList<>();
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {

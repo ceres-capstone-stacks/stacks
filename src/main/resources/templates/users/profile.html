@@ -50,31 +50,58 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tbody>
-                                    <tr>
-                                        <td>This</td>
-                                        <td>Is</td>
-                                        <td>Just</td>
-                                        <td>To</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Show</td>
-                                        <td>What</td>
-                                        <td>This</td>
-                                        <td>Would</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Look</td>
-                                        <td>Like</td>
-                                        <td> </td>
-                                        <td> </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Figure</td>
-                                        <td>Out</td>
-                                        <td>For</td>
-                                        <td>Loop</td>
-                                    </tr>
+                                        <tr th:each="expense : ${expenses}">
+                                            <td th:text="${expense.date}"></td>
+                                            <td th:text="${expense.description}"></td>
+                                            <th:block th:switch="${expense.type}">
+                                                <div th:case="1">
+                                                    <td>Bills</td>
+                                                </div>
+                                                <div th:case="2">
+                                                    <td>Groceries</td>
+                                                </div>
+                                                <div th:case="3">
+                                                    <td>Subscriptions & Memberships</td>
+                                                </div>
+                                                <div th:case="4">
+                                                    <td>Food & Dining</td>
+                                                </div>
+                                                <div th:case="5">
+                                                    <td>Leisure & Gifts</td>
+                                                </div>
+                                                <div th:case="6">
+                                                    <td>Auto & Transportation</td>
+                                                </div>
+                                                <div th:case="7">
+                                                    <td>Misc.</td>
+                                                </div>
+                                            </th:block>
+                                            <td>$<span th:text="${expense.amount}"></span></td>
+                                        </tbody>
+<!--                                    <tr>-->
+<!--                                        <td>This</td>-->
+<!--                                        <td>Is</td>-->
+<!--                                        <td>Just</td>-->
+<!--                                        <td>To</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>Show</td>-->
+<!--                                        <td>What</td>-->
+<!--                                        <td>This</td>-->
+<!--                                        <td>Would</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>Look</td>-->
+<!--                                        <td>Like</td>-->
+<!--                                        <td> </td>-->
+<!--                                        <td> </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>Figure</td>-->
+<!--                                        <td>Out</td>-->
+<!--                                        <td>For</td>-->
+<!--                                        <td>Loop</td>-->
+<!--                                    </tr>-->
 <!--                                        <tr th:each="expense : ${expenses}">-->
 <!--                                            <td th:text="${expense.date}"></td>-->
 <!--                                            <td th:text="${expense.description}"></td>-->
@@ -103,7 +130,6 @@
 <!--                                            </th:block>-->
 <!--                                            <td>$<span th:text="${expense.amount}"></span></td>-->
 <!--                                        </tr>-->
-                                        </tbody>
                                     </table>
 <!--                                </div>-->
 <!--                                    <h3 class="list-heading">Shopping</h3>-->
