@@ -44,7 +44,6 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfile(Model vModel){
-//        expenseDao.sumOfExpenses();
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         vModel.addAttribute("user", loggedInUser);
         return "users/profile";
@@ -54,6 +53,7 @@ public class UserController {
     public String getExpenses(Model vModel) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> allExpenses = expenseDao.findAll();
+        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
         List<Expense> expenses = new ArrayList<>();
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {
