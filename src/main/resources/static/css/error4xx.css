@@ -75,14 +75,14 @@ body {
     color: #fff;
     text-transform: uppercase;
     padding: 13px 23px;
-    background: #ff6300;
+    background: #18AC7D;
     font-size: 18px;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
 }
 
 .notfound a:hover {
-    color: #ff6300;
+    color: #18AC7D;
     background: #211b19;
 }
 
