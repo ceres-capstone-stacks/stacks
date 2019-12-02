@@ -22,7 +22,12 @@ public class Post {
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "posts")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "posts_tags",
+            joinColumns = {@JoinColumn(name="post_id")},
+            inverseJoinColumns = {@JoinColumn(name="tag_id")}
+    )
     private List<Tag> tags;
 
     public Post () {
