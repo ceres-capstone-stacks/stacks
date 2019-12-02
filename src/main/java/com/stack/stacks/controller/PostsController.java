@@ -2,6 +2,7 @@ package com.stack.stacks.controller;
 
 import com.stack.stacks.models.Post;
 import com.stack.stacks.models.User;
+import com.stack.stacks.repositories.GoalRepository;
 import com.stack.stacks.repositories.PostRepository;
 import com.stack.stacks.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostsController {
@@ -40,15 +44,22 @@ public class PostsController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeCreated.setUser(currentUser);
         postDao.save(postToBeCreated);
-
-
         return "redirect:/posts";
-
-
     }
 
     @GetMapping("/posts/myposts")
-    public String usersPosts(){
+    public String usersPosts(Model vModel){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Post> allPosts = postDao.findAll();
+        List<Post> posts = new ArrayList<>();
+        for(Post post : allPosts){
+            if(post.getUser() !=null) {
+                if (post.getUser().getId() == currentUser.getId()) {
+                    posts.add(post);
+                }
+            }
+        }
+        vModel.addAttribute("post",allPosts);
         return "posts/userCreated";
     }
 
@@ -56,5 +67,4 @@ public class PostsController {
     public String showFavorites(){
         return "posts/favorites";
     }
-
 }
