@@ -1,9 +1,11 @@
 package com.stack.stacks.controller;
 
 import com.stack.stacks.models.Expense;
+import com.stack.stacks.models.Goal;
 import com.stack.stacks.models.Post;
 import com.stack.stacks.models.User;
 import com.stack.stacks.repositories.ExpenseRepository;
+import com.stack.stacks.repositories.GoalRepository;
 import com.stack.stacks.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -22,11 +25,13 @@ public class UserController {
     private UserRepository userDao;
     private ExpenseRepository expenseDao;
     private PasswordEncoder passwordEncoder;
+    private GoalRepository goalDao;
 
-    public UserController(UserRepository userDao,ExpenseRepository expenseDao,PasswordEncoder passwordEncoder){
+    public UserController(UserRepository userDao,ExpenseRepository expenseDao,PasswordEncoder passwordEncoder, GoalRepository goalDao){
         this.userDao = userDao;
         this.expenseDao = expenseDao;
         this.passwordEncoder = passwordEncoder;
+        this.goalDao = goalDao;
     }
 
     @GetMapping("/register")
@@ -55,6 +60,18 @@ public class UserController {
                 }
             }
         }
+        List<Goal> allGoals = goalDao.findAll();
+        List<Goal> goals = new ArrayList<>();
+        HashMap<Long, String> dates = new HashMap<>();
+        //Loop to find goals specific to user
+        for(Goal goal : allGoals){
+            if(goal.getUser() != null) {
+                if (goal.getUser().getId() == loggedInUser.getId()) {
+                    goals.add(goal);
+                }
+            }
+        }
+        vModel.addAttribute("goal", goals);
         vModel.addAttribute("expense", new Expense());
         vModel.addAttribute("expenses", expenses);
         vModel.addAttribute("user", loggedInUser);
