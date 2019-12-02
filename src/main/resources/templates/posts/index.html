@@ -24,6 +24,7 @@
     <a href="/posts/favorites">Favorite posts</a>
 </div>
 <div class="card" th:each="post : ${posts}">
+    <h1>By: <span th:text="${post.getUser()}"></span> | <span th:text="${post.get}"></span></h1>
     <h1 th:text="${post.title}"></h1>
     <div th:if="${post.content.length() > 30}">
         <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
