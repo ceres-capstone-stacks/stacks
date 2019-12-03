@@ -11,10 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +90,29 @@ public class PostsController {
     @GetMapping("/posts/favorites")
     public String showFavorites(){
         return "posts/favorites";
+    }
+
+    // to get the right post you want to edit
+    @GetMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("posts", postDao.getOne(id));
+        return "posts/editPost";
+    }
+
+    // to post the changes made to post
+    @PostMapping("/posts/{id}/edit")
+    public String update(@PathVariable long id, @RequestParam String title, @RequestParam String content) {
+        Post oldPost = postDao.getOne(id);
+        oldPost.setTitle(title);
+        oldPost.setContent(content);
+        postDao.save(oldPost);
+        return "redirect:/posts/myposts";
+    }
+
+    // to delete
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        postDao.deleteById(id);
+        return "redirect:/posts/myposts";
     }
 }

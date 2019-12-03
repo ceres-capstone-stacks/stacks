@@ -19,6 +19,10 @@
             text-align: center;
             position: relative;
         }
+
+        .profile-container {
+            margin: 1em 3em;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +34,7 @@
         </div>
     </div>
 </section>
+<div class="profile-container">
 <div class="columns">
     <div class="column">
         <div class="columns is-multiline is-half-mobile">
@@ -116,7 +121,7 @@
                                           <title>Document</title>
                              </head>
                              <body>
-                             
+
                              </body>
                              </html></span></p>
 <!--                                <p th:text="${sum}"></p>-->
@@ -173,6 +178,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <th:block th:replace="fragments/footer.html :: pie-footer"/>
 <th:block th:replace="fragments/footer.html :: main-footer"/>

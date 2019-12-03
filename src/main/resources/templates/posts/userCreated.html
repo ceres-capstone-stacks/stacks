@@ -22,6 +22,14 @@
                 <h4 th:text="${post.title}"></h4>
                 <p th:text="${post.content}"></p>
             </div>
+            <div sec:authorize="isAuthenticated()">
+                <th:block th:if="${post.user.id == #authentication.principal.id}">
+                    <a th:href="@{'/posts/' + ${post.id} + '/edit'}"><button class="btn btn-light btn-block">Edit Post</button></a>
+                    <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
+                        <button class="btn btn-danger btn-block">Delete</button>
+                    </form>
+                </th:block>
+            </div>
         </div>
     </div>
 </div>
