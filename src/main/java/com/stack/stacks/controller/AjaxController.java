@@ -23,7 +23,7 @@ public class AjaxController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         double amount = Double.parseDouble((String) expense.get("amount"));
         String date = (String) expense.get("date");
-        boolean isRegular = (boolean) expense.get("isRegular");
+        boolean isRegular = Boolean.parseBoolean ((String) expense.get("isRegular"));
         int type = Integer.parseInt((String) expense.get("type"));
         String description = (String) expense.get("description");
         Expense newExpense = new Expense();
@@ -34,8 +34,6 @@ public class AjaxController {
         newExpense.setDescription(description);
         newExpense.setUser(currentUser);
         expenseDao.save(newExpense);
-        System.out.println("expense.get(\"amount\").getClass() = " + expense.get("amount").getClass());
-        System.out.println("expense.get(\"amount\").getClass() = " + expense.get("isRegular").getClass());
         return "Yay";
     }
 
