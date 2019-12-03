@@ -15,6 +15,13 @@
         </div>
     </div>
 </section>
+<input type="hidden" th:value="${amounts[0]}" id="bills-amount">
+<input type="hidden" th:value="${amounts[1]}" id="groceries-amount">
+<input type="hidden" th:value="${amounts[2]}" id="membership-amount">
+<input type="hidden" th:value="${amounts[3]}" id="food-amount">
+<input type="hidden" th:value="${amounts[4]}" id="gifts-amount">
+<input type="hidden" th:value="${amounts[5]}" id="auto-amount">
+<input type="hidden" th:value="${amounts[6]}" id="misc-amount">
 <div class="columns">
     <div class="column">
         <div class="columns is-multiline is-half-mobile">
@@ -151,15 +158,8 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <th:block th:replace="fragments/footer.html :: pie-footer"/>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
-<script>
-    let request = $.ajax({'url': '/expenses.json'});
-    request.done(function (expenses) {
-        expenses.forEach(function(expense) {
-            console.log(expense.amount);
-        });
-    });
-</script>
 </body>
 </html>
