@@ -11,38 +11,36 @@
 <div class="container is-fluid">
 
     <form th:action="@{/login}" method="post">
-        <div class="columns is-mobile is-centered">
+        <div class="columns is-full-mobile is-centered">
             <div class="column is-half">
-                <div class="card">
-                    <div class="card-content login">
-                        <p class="title">Already a member?</p>
-                        <p class="subtitle">Sign in to Stacks to continue.</p>
-                        <div class="field">
-                            <label class="label">Username</label>
-                            <div class="control has-icons-left">
-                                <input class="input" type="text" name="username" placeholder="Username">
-                                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <div class="control has-icons-left">
-                                <input class="input" type="password" name="password" placeholder="Password">
-                                <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                            </div>
-                        </div>
-                        <div th:if="${param.error}" class="bad-login">
-                            Invalid Username or Password.
-                        </div>
-                        <div th:if="${param.logout}" class="good-logout">
-                            You have been logged out.
+                <div class="card-content login">
+                    <p class="title">Already a member?</p>
+                    <p class="subtitle">Sign in to Stacks to continue.</p>
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="text" name="username" placeholder="Username">
+                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
                         </div>
                     </div>
                     <div class="field">
-                        <p class="control">
-                            <button class="button is-success">Login</button>
-                        </p>
+                        <label class="label">Password</label>
+                        <div class="control has-icons-left">
+                            <input class="input" type="password" name="password" placeholder="Password">
+                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                        </div>
                     </div>
+                    <div th:if="${param.error}" class="bad-login">
+                        Invalid Username or Password.
+                    </div>
+                    <div th:if="${param.logout}" class="good-logout">
+                        You have been logged out.
+                    </div>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button is-success">Login</button>
+                    </p>
                 </div>
             </div>
         </div>
