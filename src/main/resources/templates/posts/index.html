@@ -23,16 +23,22 @@
     <br>
     <a href="/posts/favorites">Favorite posts</a>
 </div>
-<div class="card" th:each="post : ${posts}">
-    <h1 th:text="${post.title}"></h1>
-    <div th:if="${post.content.length() > 30}">
-        <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
-    </div>
-    <div th:if="${post.content.length() < 30}">
-        <p>• <span th:text="${post.content}"></span></p>
-    </div>
-    <input type="hidden" name="id" th:value="${post.id}">
-</div>
+*** THIS TABLE EXTENDS PAST THE WIDTH OF PAGE ***
+<table class="table is-striped">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Posted By</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <td><strong><u th:text="${post.title}"></u></strong></td>
+        <td th:text="${post.content}"></td>
+        <td><i><span th:text="${post.user.getUsername()}"></span></i></td>
+    </tbody>
+</table>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>
