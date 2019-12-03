@@ -21,18 +21,18 @@
     <div class="column is-half">
         <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
             <div class="field">
-                    <h2 th:text="${goals.description}"></h2>
-                    <h2>Amount: $<span th:text="${goals.amount}"></span></h2>
+                    <h1 class="title" th:text="${goals.description}"></h1>
+                    <h5 class="subtitle">Amount: $<span th:text="${goals.amount}"></span></h5>
+            </div>
                 <label class="label" for="title">Amount Saved</label>
                 <div class="control">
-                    <input class="form-control" id="title" type="text" th:value="${goals.amountSaved}"
+                    <input class="input" id="title" type="text" th:value="${goals.amountSaved}"
                            name="amountSaved">
                 </div>
-            </div>
             <div class="field">
-                <label for="date">Date</label>
+                <label class="label" for="date">Date</label>
                 <div class="control">
-                    <input class="form-control" id="date" th:value="${goals.date}" name="date">
+                    <input class="input" id="date" th:value="${goals.date}" name="date">
                 </div>
             </div>
             <button class="button is-link is-rounded">Update</button>
