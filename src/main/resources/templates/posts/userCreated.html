@@ -11,17 +11,23 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container" sec:authorize="isAuthenticated()">
-        <h1 class="title">These are your posts, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
-            <a class="button is-success" href="/posts/create">Create a Post</a>
+            <h1 class="title">These are your posts, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
         </div>
     </div>
 </section>
-<div>
-    <div th:each="post : ${post}">
-        <div style="height: 400px; width: 300px">
-            <div>
-                <h4 th:text="${post.title}"></h4>
-                <p th:text="${post.content}"></p>
+<div class="columns is-multiline is-half-mobile is-centered" style="word-wrap: break-word">
+    <div class="column is-10 has-text-centered">
+        <a class="button is-link is-rounded" href="/posts/create">Create a Post</a>
+    </div>
+    <div class="column is-10" th:each="post : ${post}">
+        <div class="panel">
+            <div class="panel-heading">
+                <strong th:text="${post.title}"></strong>
+            </div>
+            <div class="panel-block" style="overflow-wrap: break-word">
+                <figure>
+                    <h3 th:text="${post.content}"></h3>
+                </figure>
             </div>
         </div>
     </div>

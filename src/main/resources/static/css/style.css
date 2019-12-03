@@ -36,3 +36,7 @@ body {
     width: 18rem;
     text-align: center;
 }
+
+.hero {
+    margin-bottom: 1.5em;
+}

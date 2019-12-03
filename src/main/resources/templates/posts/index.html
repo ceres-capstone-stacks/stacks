@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Posts | Stacks</title>
-    <style>
-        #test-style{
-            border: 3px solid black;
-        }
-    </style>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
@@ -21,40 +16,34 @@
         </div>
     </div>
 </section>
-<div sec:authorize="isAuthenticated()">
-    <a href="/posts/create">Create a post</a>
-    <br>
-<!--    <a href="/posts/myposts">Personal posts</a>-->
-    <br>
-</div>
-    <div class="columns is-multiline is-half-mobile" style="word-wrap: break-word">
-        <div class="column is-4" th:each="post : ${posts}">
-            <div class="panel">
-                <p class="panel-heading" th:text="${post.title}"></p>
-                <div class="panel-block">
-                    <figure class="image is-16x9">
-                        <p style="overflow-wrap: break-word" th:text="${post.content}"></p>
-                        <small>Posted By: <i><span th:text="${post.user.getUsername()}"></span></i></small>
-                    </figure>
-                </div>
+<div class="columns is-multiline is-half-mobile is-centered" style="word-wrap: break-word">
+    <div sec:authorize="isAuthenticated()">
+        <div class="column">
+            <div class="buttons">
+                <a class="button is-info is-rounded" href="/posts/create">Create a post</a>
+                <a class="button is-link is-rounded" href="/posts/myposts">Personal posts</a>
             </div>
         </div>
     </div>
-<div class="box" >
-    <article class="media" >
-        <div class="media-left">
-        </div>
-        <div class="media-content" >
-            <div class="content" id="test-style"th:each="post : ${posts}">
-                <p>
-                    <strong th:text="${post.user.getFirstName()}">John Smith</strong> <strong th:text="${post.user.getLastName()}"></strong> @<small th:text="${post.user.getUsername()}">johnsmith</small> <small></small>
-                    <br>
-                    <h2 th:text="${post.title}"></h2>
-                    <p th:text="${post.content}">
-                </p>
+    <div class="column is-10" th:each="post : ${posts}">
+        <div class="panel">
+            <div class="panel-heading">
+                <strong th:text="${post.title}"></strong>
+            </div>
+            <div class="panel-block" style="overflow-wrap: break-word">
+                <figure>
+                    <h3 th:text="${post.content}"></h3>
+                    -<small th:text="${post.user.getFirstName()}"></small> <small
+                        th:text="${post.user.getLastName()}"></small> @<small
+                        th:text="${post.user.getUsername()}"></small>
+                </figure>
             </div>
         </div>
-    </article>
+    </div>
+    <div class="column is-10 has-text-centered">
+        <a href=""></a>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    </div>
 </div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>

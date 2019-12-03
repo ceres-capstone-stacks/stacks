@@ -30,36 +30,18 @@
         </div>
     </div>
 </section>
-<<<<<<< HEAD
-<div class="columns is-multiline is-half-mobile">
-    <div class="column is-half">
+<div class="columns is-multiline is-half-mobile is-centered">
+    <div class="column is-6">
         <div class="panel">
             <p class="panel-heading">Spending Habits</p>
             <div class="panel-block">
                 <figure class="image is-16x9">
                     <canvas id="myChart"></canvas>
                 </figure>
-=======
-<div class="columns">
-    <div class="column">
-        <div class="columns is-multiline is-half-mobile">
-            <div class="column is-half">
-                <div class="panel">
-                    <p class="panel-heading">
-                        Spending Habits
-                    </p>
-                    <div class="panel-block">
-                        <figure class="image is-16x9">
-                            <canvas id="myChart"></canvas>
-                        </figure>
-                    </div>
-
-                </div>
->>>>>>> a0aacf7a0ab279f83d90f42ba81f815644af798c
             </div>
         </div>
     </div>
-    <div class="column is-half">
+    <div class="column is-6">
         <div class="panel">
             <p class="panel-heading">My Recent Transactions</p>
             <div class="panel-block">
@@ -110,33 +92,17 @@
             </div>
         </div>
     </div>
-    <div class="column is-half">
+    <div class="column is-6">
         <div class="panel">
             <p class="panel-heading">Detailed Spending</p>
             <div class="panel-block">
                 <figure class="image is-16x9">
-                    <!--                            <div th:each="expense : ${expenses}">-->
                     <p> You have spent $<span th:text="${sum}"> so far this week<!doctype html></span></p>
-                    <!--                                <p th:text="${sum}"></p>-->
-                    <!--                            <ul>-->
-                    <!--                                <li>(Most spent category)•You spent $231.52 on <strong><i>Entertainment</i></strong>-->
-                    <!--                                    this week. That's-->
-                    <!--                                    $21.42 more than last week!-->
-                    <!--                                </li>-->
-                    <!--                                <li>•To reach your <i>savings goal</i> of $500 by the end of this month, you will need-->
-                    <!--                                    to save $200-->
-                    <!--                                    more.-->
-                    <!--                                </li>-->
-                    <!--                                <li>•You have spent a total of $435.52 so far this month, that's $40.87 less than last.-->
-                    <!--                                    Keep it up!-->
-                    <!--                                </li>-->
-                    <!--                                <li>•Learn more on how to save money by visiting our <i>steals & deals</i> section.</li>-->
-                    <!--                            </ul>-->
                 </figure>
             </div>
         </div>
     </div>
-    <div class="column is-half">
+    <div class="column is-6">
         <div class="panel">
             <p class="panel-heading">My Current Goals</p>
             <div class="profile-goal" th:each="goal : ${goal}">
@@ -158,7 +124,8 @@
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
                         <div class="buttons">
-                            <a class="button is-warning is-rounded" th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a>
+                            <a class="button is-warning is-rounded"
+                               th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a>
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
                                 <a class="button is-danger is-rounded">Delete</a>
                             </form>
