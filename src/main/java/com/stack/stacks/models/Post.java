@@ -1,5 +1,7 @@
 package com.stack.stacks.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Post {
     private String content;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name="user_id")
     private User user;
 

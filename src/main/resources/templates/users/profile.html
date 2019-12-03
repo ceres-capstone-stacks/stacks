@@ -153,5 +153,13 @@
 </div>
 <th:block th:replace="fragments/footer.html :: pie-footer"/>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script>
+    let request = $.ajax({'url': '/expenses.json'});
+    request.done(function (expenses) {
+        expenses.forEach(function(expense) {
+            console.log(expense.amount);
+        });
+    });
+</script>
 </body>
 </html>

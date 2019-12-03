@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,6 +36,12 @@ public class AjaxController {
         newExpense.setUser(currentUser);
         expenseDao.save(newExpense);
         return "Yay";
+    }
+
+    @GetMapping("/expenses.json")
+    @ResponseBody
+    public List<Expense> viewAllExpensesInJSONFormat() {
+        return expenseDao.findAll();
     }
 
 }
