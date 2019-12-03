@@ -23,22 +23,19 @@
     <br>
     <a href="/posts/favorites">Favorite posts</a>
 </div>
-*** THIS TABLE EXTENDS PAST THE WIDTH OF PAGE ***
-<table class="table is-striped">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Posted By</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="post : ${posts}">
-        <td><strong><u th:text="${post.title}"></u></strong></td>
-        <td th:text="${post.content}"></td>
-        <td><i><span th:text="${post.user.getUsername()}"></span></i></td>
-    </tbody>
-</table>
+    <div class="columns is-multiline is-half-mobile" style="word-wrap: break-word">
+        <div class="column is-4" th:each="post : ${posts}">
+            <div class="panel">
+                <p class="panel-heading" th:text="${post.title}"></p>
+                <div class="panel-block">
+                    <figure class="image is-16x9">
+                        <p style="overflow-wrap: break-word" th:text="${post.content}"></p>
+                        <small>Posted By: <i><span th:text="${post.user.getUsername()}"></span></i></small>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>

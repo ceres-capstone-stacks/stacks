@@ -11,8 +11,8 @@
             position: absolute;
             left: 0;
             right: 0;
-            top:0;
-            line-height:1em;
+            top: 0;
+            line-height: 1em;
         }
 
         .progress-container {
@@ -30,146 +30,128 @@
         </div>
     </div>
 </section>
-<div class="columns">
-    <div class="column">
-        <div class="columns is-multiline is-half-mobile">
-            <div class="column is-half">
-                <div class="panel">
-                    <p class="panel-heading">
-                        Spending Habits
-                    </p>
-                    <div class="panel-block">
-                        <figure class="image is-16x9">
-                            <canvas id="myChart"></canvas>
-                        </figure>
-                    </div>
-                </div>
+<div class="columns is-multiline is-half-mobile">
+    <div class="column is-half">
+        <div class="panel">
+            <p class="panel-heading">Spending Habits</p>
+            <div class="panel-block">
+                <figure class="image is-16x9">
+                    <canvas id="myChart"></canvas>
+                </figure>
             </div>
-            <div class="column is-half">
-                <div class="panel">
-                    <p class="panel-heading">
-                        My Recent Transactions
-                    </p>
-                    <div class="panel-block">
-                        <div class="table-container">
-                                    <table class="table is-fullwidth is-bordered is-striped is-hoverable">
-                                        <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Category</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="expense : ${expenses}">
-                                            <td th:text="${expense.date}"></td>
-                                            <td th:text="${expense.description}"></td>
-                                            <th:block th:switch="${expense.type}">
-                                                <div th:case="1">
-                                                    <td>Bills</td>
-                                                </div>
-                                                <div th:case="2">
-                                                    <td>Groceries</td>
-                                                </div>
-                                                <div th:case="3">
-                                                    <td>Subscriptions & Memberships</td>
-                                                </div>
-                                                <div th:case="4">
-                                                    <td>Food & Dining</td>
-                                                </div>
-                                                <div th:case="5">
-                                                    <td>Leisure & Gifts</td>
-                                                </div>
-                                                <div th:case="6">
-                                                    <td>Auto & Transportation</td>
-                                                </div>
-                                                <div th:case="7">
-                                                    <td>Misc.</td>
-                                                </div>
-                                            </th:block>
-                                            <td>$<span th:text="${expense.amount}"></span></td>
-                                        </tbody>
-                                    </table>
-                            <a href="/profile/expenses/create">Recently made a purchase?</a>
-                            <br>
-                            <a href="profile/expenses">View more transactions...</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-half">
-                <div class="panel">
-                    <p class="panel-heading">
-                        Detailed Spending
-                    </p>
-                    <div class="panel-block">
-                        <figure class="image is-16x9">
-<!--                            <div th:each="expense : ${expenses}">-->
-                             <p>   You have spent $<span th:text="${sum}"> so far this week<!doctype html>
-                             <html lang="en">
-                             <head>
-                             <meta charset="UTF-8">
-                                          <meta name="viewport"
-                                                content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                                                      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                                          <title>Document</title>
-                             </head>
-                             <body>
-                             
-                             </body>
-                             </html></span></p>
-<!--                                <p th:text="${sum}"></p>-->
-<!--                            <ul>-->
-<!--                                <li>(Most spent category)•You spent $231.52 on <strong><i>Entertainment</i></strong>-->
-<!--                                    this week. That's-->
-<!--                                    $21.42 more than last week!-->
-<!--                                </li>-->
-<!--                                <li>•To reach your <i>savings goal</i> of $500 by the end of this month, you will need-->
-<!--                                    to save $200-->
-<!--                                    more.-->
-<!--                                </li>-->
-<!--                                <li>•You have spent a total of $435.52 so far this month, that's $40.87 less than last.-->
-<!--                                    Keep it up!-->
-<!--                                </li>-->
-<!--                                <li>•Learn more on how to save money by visiting our <i>steals & deals</i> section.</li>-->
-<!--                            </ul>-->
-                        </figure>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-half">
-                <div class="panel">
-                    <p class="panel-heading">
-                        My Current Goals
-                    </p>
-                    <div class="profile-goal" th:each="goal : ${goal}">
-                        <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
-                            <h2 th:text="${goal.description}"></h2>
-                            <div>
-                                <ul>
-                                    <li><strong>Need to save: </strong>$<span th:text="${goal.amount}"></span></li>
-                                    <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
-                                    <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to go: </strong>$<span
-                                            th:text="${result}"></span></li>
-                                </ul>
-                                <div class="progress-container" th:data-text="${goal.amount - goal.amountSaved}">
-                                <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
+        </div>
+    </div>
+    <div class="column is-half">
+        <div class="panel">
+            <p class="panel-heading">My Recent Transactions</p>
+            <div class="panel-block">
+                <div class="table-container">
+                    <table class="table is-fullwidth is-bordered is-striped is-hoverable">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="expense : ${expenses}">
+                            <td th:text="${expense.date}"></td>
+                            <td th:text="${expense.description}"></td>
+                            <th:block th:switch="${expense.type}">
+                                <div th:case="1">
+                                    <td>Bills</td>
                                 </div>
-                                <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}" class="date-span"></span></p>
-                                <button class="btn btn-light btn-block"><a th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a></button>
-                                <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-                                    <button class="btn btn-danger btn-block">Delete</button>
-                                </form>
-                            </div>
+                                <div th:case="2">
+                                    <td>Groceries</td>
+                                </div>
+                                <div th:case="3">
+                                    <td>Subscriptions & Memberships</td>
+                                </div>
+                                <div th:case="4">
+                                    <td>Food & Dining</td>
+                                </div>
+                                <div th:case="5">
+                                    <td>Leisure & Gifts</td>
+                                </div>
+                                <div th:case="6">
+                                    <td>Auto & Transportation</td>
+                                </div>
+                                <div th:case="7">
+                                    <td>Misc.</td>
+                                </div>
+                            </th:block>
+                            <td>$<span th:text="${expense.amount}"></span></td>
+                        </tbody>
+                    </table>
+                    <a href="/profile/expenses/create">Recently made a purchase?</a>
+                    <br>
+                    <a href="profile/expenses">View more transactions...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-half">
+        <div class="panel">
+            <p class="panel-heading">Detailed Spending</p>
+            <div class="panel-block">
+                <figure class="image is-16x9">
+                    <!--                            <div th:each="expense : ${expenses}">-->
+                    <p> You have spent $<span th:text="${sum}"> so far this week<!doctype html></span></p>
+                    <!--                                <p th:text="${sum}"></p>-->
+                    <!--                            <ul>-->
+                    <!--                                <li>(Most spent category)•You spent $231.52 on <strong><i>Entertainment</i></strong>-->
+                    <!--                                    this week. That's-->
+                    <!--                                    $21.42 more than last week!-->
+                    <!--                                </li>-->
+                    <!--                                <li>•To reach your <i>savings goal</i> of $500 by the end of this month, you will need-->
+                    <!--                                    to save $200-->
+                    <!--                                    more.-->
+                    <!--                                </li>-->
+                    <!--                                <li>•You have spent a total of $435.52 so far this month, that's $40.87 less than last.-->
+                    <!--                                    Keep it up!-->
+                    <!--                                </li>-->
+                    <!--                                <li>•Learn more on how to save money by visiting our <i>steals & deals</i> section.</li>-->
+                    <!--                            </ul>-->
+                </figure>
+            </div>
+        </div>
+    </div>
+    <div class="column is-half">
+        <div class="panel">
+            <p class="panel-heading">My Current Goals</p>
+            <div class="profile-goal" th:each="goal : ${goal}">
+                <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
+                    <h2 th:text="${goal.description}"></h2>
+                    <div>
+                        <ul>
+                            <li><strong>Need to save: </strong>$<span th:text="${goal.amount}"></span></li>
+                            <li><strong>How much you've saved so far: </strong>$<span
+                                    th:text="${goal.amountSaved}"></span></li>
+                            <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to
+                                go: </strong>$<span
+                                    th:text="${result}"></span></li>
+                        </ul>
+                        <div class="progress-container" th:data-text="${goal.amount - goal.amountSaved}">
+                            <progress class="progress is-success" th:max="${goal.amount}"
+                                      th:value="${goal.amountSaved}"></progress>
+                        </div>
+                        <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
+                                                                                     class="date-span"></span></p>
+                        <div class="buttons">
+                            <a class="button is-warning is-rounded" th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a>
+                            <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
+                                <a class="button is-danger is-rounded">Delete</a>
+                            </form>
                         </div>
                     </div>
-                    <div class="panel-block">
-                        <figure class="image is-16x9">
-                            <a class="button is-success is-rounded" href="/goals">Set a goal</a>
-                        </figure>
-                    </div>
                 </div>
+            </div>
+            <div class="panel-block">
+                <figure class="image is-16x9">
+                    <a class="button is-success is-rounded" href="/goals">Set a goal</a>
+                </figure>
             </div>
         </div>
     </div>
