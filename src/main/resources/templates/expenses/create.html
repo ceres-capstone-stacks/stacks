@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Expense - Stacks</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
@@ -66,5 +68,40 @@
     </div>
 </form>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script>
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    let testData = {
+        amount: "100",
+        date:  "2019-10-10",
+        description: "Ajax test",
+        isRegular: true,
+        type: "1"
+    };
+
+    $(document).ajaxSend(function(e,xhr) {
+        xhr.setRequestHeader(header, token);
+    });
+
+    $.ajax({
+        type: "POST",
+        dataType : 'json',
+        url: "/expenses.json",
+        data: JSON.stringify(testData),
+        headers: {
+            'content-type': 'application/json'
+        },
+
+        success: function(data, textStatus, jqXHR) {
+            alert(data);
+        },
+        error: function(request, status, error) {
+            alert(error);
+        },
+        always: function () {
+            alert("this ran")
+        }
+    });
+</script>
 </body>
 </html>
