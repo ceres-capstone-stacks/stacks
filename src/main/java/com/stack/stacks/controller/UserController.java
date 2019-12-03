@@ -80,23 +80,23 @@ public class UserController {
 
 
 
-//    @GetMapping("/profile/expenses")
-//    public String getExpenses(Model vModel) {
-//        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        List<Expense> allExpenses = expenseDao.findAll();
-////        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
-//        List<Expense> expenses = new ArrayList<>();
-//        for(Expense expense : allExpenses){
-//            if(expense.getUser() != null) {
-//                if (expense.getUser().getId() == currentUser.getId()) {
-//                    expenses.add(expense);
-//                }
-//            }
-//        }
-//        vModel.addAttribute("expense", new Expense());
-//        vModel.addAttribute("expenses", expenses);
-//        return "expenses/index";
-//    }
+    @GetMapping("/profile/expenses")
+    public String getExpenses(Model vModel) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Expense> allExpenses = expenseDao.findAll();
+//        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
+        List<Expense> expenses = new ArrayList<>();
+        for(Expense expense : allExpenses){
+            if(expense.getUser() != null) {
+                if (expense.getUser().getId() == currentUser.getId()) {
+                    expenses.add(expense);
+                }
+            }
+        }
+        vModel.addAttribute("expense", new Expense());
+        vModel.addAttribute("expenses", expenses);
+        return "expenses/index";
+    }
 
     @GetMapping("/profile/expenses/create")
     public String showCreateForm(Model model) {
