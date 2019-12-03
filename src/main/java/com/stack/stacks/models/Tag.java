@@ -13,12 +13,7 @@ public class Tag {
     @Column(length = 50)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "post_tag",
-            joinColumns = {@JoinColumn(name="tag_id")},
-            inverseJoinColumns = {@JoinColumn(name="post_id")}
-    )
+    @ManyToMany(mappedBy = "tags")
     private List<Post> posts;
 
     public Tag(){}

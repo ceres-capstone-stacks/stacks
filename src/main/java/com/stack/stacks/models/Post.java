@@ -22,7 +22,12 @@ public class Post {
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "posts")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "posts_tags",
+            joinColumns = {@JoinColumn(name="post_id")},
+            inverseJoinColumns = {@JoinColumn(name="tag_id")}
+    )
     private List<Tag> tags;
 
     public Post () {
@@ -32,6 +37,13 @@ public class Post {
         this.title = title;
         this.content = content;
         this.user = user;
+    }
+
+    public Post(String title, String content, User user, List<Tag> tags) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.tags = tags;
     }
 
     public long getId() {
@@ -64,5 +76,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
