@@ -3,25 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Goal</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-<div class="container">
-    <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
-        <h1>This is your current goal....</h1>
-        <div class="form-group">
-            <h2 th:text="${goals.description}"></h2>
-            <h2>Amount: $<span th:text="${goals.amount}"></span></h2>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Edit Goal</h1>
+            <h2 class="subtitle">Make necessary changes to your goal.</h2>
         </div>
-        <div class="form-group">
-            <label for="title">Amount saved so far</label>
-            <input class="form-control" id="title" type="text" th:value="${goals.amountSaved}" name="amountSaved">
-        </div>
-        <div class="form-group">
-            <label for="date">Date</label>
-            <input class="form-control" id="date" th:value="${goals.date}" name="date">
-        </div>
-        <a class="button is-link is-rounded">Update</a>
-    </form>
+    </div>
+</section>
+
+
+<div class="columns is-centered is-full-mobile">
+    <div class="column is-half">
+        <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
+            <div class="field">
+                    <h2 th:text="${goals.description}"></h2>
+                    <h2>Amount: $<span th:text="${goals.amount}"></span></h2>
+                <label class="label" for="title">Amount Saved</label>
+                <div class="control">
+                    <input class="form-control" id="title" type="text" th:value="${goals.amountSaved}"
+                           name="amountSaved">
+                </div>
+            </div>
+            <div class="field">
+                <label for="date">Date</label>
+                <div class="control">
+                    <input class="form-control" id="date" th:value="${goals.date}" name="date">
+                </div>
+            </div>
+            <button class="button is-link is-rounded">Update</button>
+        </form>
+    </div>
 </div>
+
+<!--<div class="container">-->
+<!--    <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">-->
+<!--        <h1>This is your current goal....</h1>-->
+<!--        <div class="form-group">-->
+<!--            <h2 th:text="${goals.description}"></h2>-->
+<!--            <h2>Amount: $<span th:text="${goals.amount}"></span></h2>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="title">Amount saved so far</label>-->
+<!--            <input class="form-control" id="title" type="text" th:value="${goals.amountSaved}" name="amountSaved">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label for="date">Date</label>-->
+<!--            <input class="form-control" id="date" th:value="${goals.date}" name="date">-->
+<!--        </div>-->
+<!--        <a class="button is-link is-rounded">Update</a>-->
+<!--    </form>-->
+<!--</div>-->
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>
