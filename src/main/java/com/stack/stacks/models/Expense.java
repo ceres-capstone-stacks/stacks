@@ -1,5 +1,7 @@
 package com.stack.stacks.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -26,6 +28,7 @@ public class Expense {
     private boolean isRegular;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
 

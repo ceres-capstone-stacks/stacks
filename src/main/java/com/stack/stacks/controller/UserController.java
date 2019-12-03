@@ -7,15 +7,23 @@ import com.stack.stacks.models.User;
 import com.stack.stacks.repositories.ExpenseRepository;
 import com.stack.stacks.repositories.GoalRepository;
 import com.stack.stacks.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -112,4 +120,5 @@ public class UserController {
         expenseDao.save(expenseToBeCreated);
         return "redirect:/profile/expenses";
     }
+
 }
