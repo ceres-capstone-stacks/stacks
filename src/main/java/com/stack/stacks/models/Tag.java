@@ -6,10 +6,12 @@ import java.util.List;
 @Entity
 @Table(name="tags")
 public class Tag {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private long id;
+
     @Column(length = 50)
     private String name;
 
