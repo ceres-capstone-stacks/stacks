@@ -7,6 +7,14 @@
 </head>
 <body>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Edit your post</h1>
+            <h3 class="subtitle">Make necessary changes to your post.</h3>
+        </div>
+    </div>
+</section>
 <div class="columns is-centered is-full-mobile">
     <div class="column is-half">
         <form th:action="'/posts/' + ${posts.id} + '/edit'" th:method="post">
