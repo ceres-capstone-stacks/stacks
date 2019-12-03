@@ -24,3 +24,15 @@ body {
 .good-logout{
     color: green;
 }
+
+.headShots {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    display: inline-grid;
+    justify-items: center;
+    width: 18rem;
+    text-align: center;
+}
