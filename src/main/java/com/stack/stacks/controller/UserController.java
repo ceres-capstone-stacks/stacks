@@ -112,4 +112,27 @@ public class UserController {
         return "redirect:/profile/expenses";
     }
 
+    @GetMapping("/profile/expenses/{id}/edit")
+    public String editExpense(@PathVariable long id, Model vModel){
+        vModel.addAttribute("expenses", expenseDao.getOne(id));
+        return "expenses/editExpense";
+    }
+
+    @PostMapping("/profile/expenses/{id}/edit")
+    public String updateExpense(@PathVariable long id, @RequestParam String Date, @RequestParam String description, @RequestParam int type, @RequestParam double amount) {
+        Expense oldExpense = expenseDao.getOne(id);
+        oldExpense.setDate(Date);
+        oldExpense.setDescription(description);
+        oldExpense.setType(type);
+        oldExpense.setAmount(amount);
+        expenseDao.save(oldExpense);
+        return "redirect:/profile/expenses";
+    }
+
+    // to delete
+    @PostMapping("/profile/expenses/{id}/delete")
+    public String deleteExpense(@PathVariable long id) {
+        expenseDao.deleteById(id);
+        return "redirect:/profile/expenses";
+    }
 }

@@ -101,7 +101,11 @@
                 </div>
             </th:block>
             <td>$<span th:text="${expense.amount}"></span></td>
-            <td><button class="button is-warning is-rounded">Edit</button><button class="button is-danger is-rounded">Delete</button></td>
+            <td><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
+            <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
+                <button class="button is-danger is-rounded">Delete</button>
+            </form>
+            </td>
         </tbody>
     </table>
 </div>
