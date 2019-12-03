@@ -305,21 +305,10 @@ target.classList.add('is-active');
 target.querySelector('.modal-close').addEventListener('click',   function() {
 target.classList.remove('is-active');
 });
-});2
+});
 });
 
 
-document.querySelectorAll('.mod2').forEach(function(el) {
-    el.addEventListener('click', function() {
-        var target = document.querySelector(el.getAttribute('data-target2'));
-
-        target.classList.add('is-active');
-
-        target.querySelector('.modal-close').addEventListener('click',   function() {
-            target.classList.remove('is-active');
-        });
-    });
-});
 </script>
 </body>
 </html>
