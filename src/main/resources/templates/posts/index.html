@@ -36,13 +36,19 @@
                     -<small th:text="${post.user.getFirstName()}"></small> <small
                         th:text="${post.user.getLastName()}"></small> @<small
                         th:text="${post.user.getUsername()}"></small>
+                    <div sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
+                        <!--                <th:block th:if="${post.user.id == #authentication.principal.id}">-->
+                        <div class="buttons" style="border: none">
+                            <a class="button is-warning is-rounded" th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</a>
+                            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
+                                <button class="button is-danger">Delete</button>
+                            </form>
+                        </div>
+                        <!--                </th:block>-->
+                    </div>
                 </figure>
             </div>
         </div>
-    </div>
-    <div class="column is-10 has-text-centered">
-        <a href=""></a>
-        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     </div>
 </div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
