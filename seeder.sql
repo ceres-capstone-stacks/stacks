@@ -7,6 +7,7 @@ insert into goals (amount, amount_saved, date, description, user_id) values ('25
 
 TRUNCATE goals;
 TRUNCATE expenses;
+TRUNCATE posts;
 
 
 SELECT SUM(expenses.amount) FROM expenses WHERE type = '5';
