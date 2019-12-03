@@ -129,4 +129,10 @@ public class UserController {
         return "redirect:/profile/expenses";
     }
 
+    // to delete
+    @PostMapping("/profile/expenses/{id}/delete")
+    public String deleteExpense(@PathVariable long id) {
+        expenseDao.deleteById(id);
+        return "redirect:/profile/expenses";
+    }
 }
