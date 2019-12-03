@@ -1,4 +1,7 @@
-html { box-sizing: border-box; }
+html {
+    box-sizing: border-box;
+    overflow: hidden;
+}
 
 *,
 *::before,
@@ -11,7 +14,7 @@ body * {
 
 body {
     font: normal 100%/1.15 "Merriweather", serif;
-    background-color: #7ed0f2;
+    background-color: rgb(57, 63, 65);
     color: #fff;
 }
 
@@ -38,7 +41,7 @@ h1, p:not(:last-of-type) { text-shadow: 0 0 6px #216f79; }
 
 h1 {
     margin: 0 0 1rem 0;
-    font-size: 8em;
+    font-size: 7em;
 }
 
 p {
@@ -49,10 +52,10 @@ p {
 p:first-of-type { margin-top: 4em; }
 
 p > a {
-    border-bottom: 1px dashed #216f79;
+    border-bottom: 1px dashed rgb(110, 196, 124);
     font-style: italic;
     text-decoration: none;
-    color: #216f79;
+    color: rgb(110, 196, 124);
 }
 
 p > a:hover { text-shadow: 0 0 6px #216f79; }
