@@ -27,18 +27,17 @@
             <div class="panel-block" style="overflow-wrap: break-word">
                 <figure>
                     <h3 th:text="${post.content}"></h3>
-                </figure>
-            </div>
             <div sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
 <!--                <th:block th:if="${post.user.id == #authentication.principal.id}">-->
                     <div class="buttons" style="border: none">
                     <a class="button is-warning is-rounded" th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</a>
                     <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
-<!--                        <button class="btn btn-danger btn-block">Delete</button>-->
-                        <a class="button is-danger is-rounded">Delete</a>
+                        <button class="button is-danger">Delete</button>
                     </form>
                     </div>
 <!--                </th:block>-->
+            </div>
+                </figure>
             </div>
         </div>
     </div>

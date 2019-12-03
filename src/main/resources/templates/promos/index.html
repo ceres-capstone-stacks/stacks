@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Retail Coupons | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
-    <style>
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-gap: 0.5em;
-        }
-
-        .card {
-            height: max-content;
-        }
-    </style>
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -29,7 +18,7 @@
         </div>
     </div>
 </section>
-<div class="card-container" id="mon"></div>
+<div class="columns is-multiline is-full-mobile is-centered" id="promos"></div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script
         src="https://code.jquery.com/jquery-2.2.4.js"
@@ -60,19 +49,20 @@
         console.log(result[3].code);
         for (var i = 0; i <= result.length - 1; i++) {
             console.log(result[i].code);
-            newhtml += '<div class="card">';
-            newhtml += '<header class="card-header">';
-            newhtml += '<p class="card-header-title">' + result[i].store_name + '</p>';
-            newhtml += '</header>';
-            newhtml += '<div class="card-content">';
-            newhtml += '<div class="content">';
+            newhtml += '<div class="column is-4">';
+            newhtml += '<div class="panel">';
+            newhtml += '<div class="panel-heading">';
+            newhtml += '<strong>' + result[i].store_name + '</strong>';
+            newhtml += '</div>';
+            newhtml += '<div class="panel-block">';
+            newhtml += '<figure>';
             newhtml += '<p>' + result[i].description + '</p><br>';
             newhtml += '<small><u>Discount code</u>: <i>' + result[i].code + '</i></small>';
             newhtml += '</div>';
             newhtml += '</div>';
             newhtml += '</div>';
         }
-        $('#mon').append(newhtml);
+        $('#promos').append(newhtml);
     })
 </script>
 </body>
