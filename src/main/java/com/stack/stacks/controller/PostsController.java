@@ -3,6 +3,7 @@ package com.stack.stacks.controller;
 import com.stack.stacks.models.Post;
 import com.stack.stacks.models.Tag;
 import com.stack.stacks.models.User;
+import com.stack.stacks.repositories.GoalRepository;
 import com.stack.stacks.repositories.PostRepository;
 import com.stack.stacks.repositories.TagRepository;
 import com.stack.stacks.repositories.UserRepository;
@@ -10,10 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,18 @@ public class PostsController {
     }
 
     @GetMapping("/posts/myposts")
-    public String usersPosts(){
+    public String usersPosts(Model vModel){
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Post> allPosts = postDao.findAll();
+        List<Post> posts = new ArrayList<>();
+        for(Post post : allPosts){
+            if(post.getUser() !=null) {
+                if (post.getUser().getId() == currentUser.getId()) {
+                    posts.add(post);
+                }
+            }
+        }
+        vModel.addAttribute("post",allPosts);
         return "posts/userCreated";
     }
 
@@ -80,4 +92,27 @@ public class PostsController {
         return "posts/favorites";
     }
 
+    // to get the right post you want to edit
+    @GetMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("posts", postDao.getOne(id));
+        return "posts/editPost";
+    }
+
+    // to post the changes made to post
+    @PostMapping("/posts/{id}/edit")
+    public String update(@PathVariable long id, @RequestParam String title, @RequestParam String content) {
+        Post oldPost = postDao.getOne(id);
+        oldPost.setTitle(title);
+        oldPost.setContent(content);
+        postDao.save(oldPost);
+        return "redirect:/posts/myposts";
+    }
+
+    // to delete
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        postDao.deleteById(id);
+        return "redirect:/posts/myposts";
+    }
 }

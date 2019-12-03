@@ -14,7 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,7 +56,7 @@ public class UserController {
     public String showProfile(Model vModel){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> allExpenses = expenseDao.findAll();
-        Long sumOfExpenses = expenseDao.sumOfExpenses();
+        Double sumOfExpenses = expenseDao.sumOfExpenses(loggedInUser.getId());
         List<Expense> expenses = new ArrayList<>();
         System.out.println(sumOfExpenses);
         for(Expense expense : allExpenses){

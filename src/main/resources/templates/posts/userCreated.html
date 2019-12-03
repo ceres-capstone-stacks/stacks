@@ -11,26 +11,31 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container" sec:authorize="isAuthenticated()">
-        <h1 class="title">These are your posts, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
+            <h1 class="title">These are your posts, <span th:text="${#authentication.principal.firstName}"></span>.</h1>
         </div>
     </div>
 </section>
-<div>
-    <div th:each="post : ${posts}">
-        <div style="height: 400px; width: 300px">
-            <img th:each="postImage : ${post.images}"
-                 th:src="${postImage.url}"/>
-            <div>
-                <h4 th:text="${post.title}"></h4>
-                <div th:if="${post.content.length() > 30}">
-                    <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
-                </div>
-                <div th:if="${post.content.length() < 30}">
-                    <p>• <span th:text="${post.content}"></span></p>
-                </div>
-                <div>
-                    <a th:href="@{'posts/' + ${post.id}}">View Post</a>
-                </div>
+<div class="columns is-multiline is-half-mobile is-centered" style="word-wrap: break-word">
+    <div class="column is-10 has-text-centered">
+        <a class="button is-link is-rounded" href="/posts/create">Create a Post</a>
+    </div>
+    <div class="column is-10" th:each="post : ${post}">
+        <div class="panel">
+            <div class="panel-heading">
+                <strong th:text="${post.title}"></strong>
+            </div>
+            <div class="panel-block" style="overflow-wrap: break-word">
+                <figure>
+                    <h3 th:text="${post.content}"></h3>
+                </figure>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <th:block th:if="${post.user.id == #authentication.principal.id}">
+                    <a th:href="@{'/posts/' + ${post.id} + '/edit'}"><button class="btn btn-light btn-block">Edit Post</button></a>
+                    <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
+                        <button class="btn btn-danger btn-block">Delete</button>
+                    </form>
+                </th:block>
             </div>
         </div>
     </div>

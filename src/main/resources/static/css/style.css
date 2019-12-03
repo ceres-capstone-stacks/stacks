@@ -8,6 +8,10 @@ body {
     min-height: 100vh;
 }
 
+.button {
+    margin-bottom: 1em;
+}
+
 .footer {
     background-color: rgb(56, 63, 65);
     height: 150px;
@@ -23,4 +27,20 @@ body {
 
 .good-logout{
     color: green;
+}
+
+.headShots {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    display: inline-grid;
+    justify-items: center;
+    width: 18rem;
+    text-align: center;
+}
+
+.hero {
+    margin-bottom: 1.5em;
 }

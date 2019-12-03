@@ -26,16 +26,15 @@
                 <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to go: </strong>$<span
                         th:text="${result}"></span></li>
             </ul>
-            <progress th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
+            <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
             <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                          class="date-span"></span></p>
-
-            <!--        <button class="button">Edit</button>-->
-            <button class="btn btn-light btn-block"><a th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a></button>
+            <div class="buttons">
+            <a class="button is-warning is-rounded" th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a>
             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-                <button class="btn btn-danger btn-block">Delete</button>
+                <a class="button is-danger is-rounded">Delete</a>
             </form>
-            <!--        <button class="button">Delete</button>-->
+            </div>
         </div>
     </div>
 </div>
@@ -53,6 +52,5 @@
         })
     })
 </script>
-</div>
 </body>
 </html>

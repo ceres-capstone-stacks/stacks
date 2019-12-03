@@ -16,22 +16,34 @@
         </div>
     </div>
 </section>
-<div sec:authorize="isAuthenticated()">
-    <a href="/posts/create">Create a post</a>
-    <br>
-    <a href="/posts/myposts">Personal posts</a>
-    <br>
-    <a href="/posts/favorites">Favorite posts</a>
-</div>
-<div class="card" th:each="post : ${posts}">
-    <h1 th:text="${post.title}"></h1>
-    <div th:if="${post.content.length() > 30}">
-        <p>• <span th:text="${post.content.substring(0,30)}"></span>...</p>
+<div class="columns is-multiline is-half-mobile is-centered" style="word-wrap: break-word">
+    <div sec:authorize="isAuthenticated()">
+        <div class="column">
+            <div class="buttons">
+                <a class="button is-info is-rounded" href="/posts/create">Create a post</a>
+                <a class="button is-link is-rounded" href="/posts/myposts">Personal posts</a>
+            </div>
+        </div>
     </div>
-    <div th:if="${post.content.length() < 30}">
-        <p>• <span th:text="${post.content}"></span></p>
+    <div class="column is-10" th:each="post : ${posts}">
+        <div class="panel">
+            <div class="panel-heading">
+                <strong th:text="${post.title}"></strong>
+            </div>
+            <div class="panel-block" style="overflow-wrap: break-word">
+                <figure>
+                    <h3 th:text="${post.content}"></h3>
+                    -<small th:text="${post.user.getFirstName()}"></small> <small
+                        th:text="${post.user.getLastName()}"></small> @<small
+                        th:text="${post.user.getUsername()}"></small>
+                </figure>
+            </div>
+        </div>
     </div>
-    <input type="hidden" name="id" th:value="${post.id}">
+    <div class="column is-10 has-text-centered">
+        <a href=""></a>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    </div>
 </div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
