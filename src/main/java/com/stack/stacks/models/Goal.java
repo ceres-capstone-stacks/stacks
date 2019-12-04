@@ -1,5 +1,6 @@
 package com.stack.stacks.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,6 +33,7 @@ public class Goal {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonManagedReference
     private User user;
 
     public Goal () {
