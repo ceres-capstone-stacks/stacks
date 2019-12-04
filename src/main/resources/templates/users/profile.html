@@ -96,7 +96,7 @@
                                     <td>Misc.</td>
                                 </div>
                             </th:block>
-                            <td>$<span th:text="${expense.amount}"></span></td>
+                            <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
                         </tbody>
                     </table>
                     <button class="button is-primary modal-button" data-target="#myModal" aria-haspopup="true">Made a
@@ -182,14 +182,14 @@
                     <h2 th:text="${goal.description}"></h2>
                     <div>
                         <ul>
-                            <li><strong>Need to save: </strong>$<span th:text="${goal.amount}"></span></li>
-                            <li><strong>How much you've saved so far: </strong>$<span
-                                    th:text="${goal.amountSaved}"></span></li>
+                            <li><strong>Need to save: </strong><span th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
+                            <li><strong>How much you've saved so far: </strong><span
+                                    th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span></li>
                             <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to
-                                go: </strong>$<span
-                                    th:text="${result}"></span></li>
+                                go: </strong><span
+                                    th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
-                        <div class="progress-container" th:data-text="${goal.amount - goal.amountSaved}">
+                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">
                             <progress class="progress is-success" th:max="${goal.amount}"
                                       th:value="${goal.amountSaved}"></progress>
                         </div>
