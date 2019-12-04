@@ -99,9 +99,10 @@
                             <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
                         </tbody>
                     </table>
-                    <button class="button is-primary modal-button" data-target="#myModal" aria-haspopup="true">Made a
-                        purchase?
-                    </button>
+
+                    <button class="button is-primary modal-button" data-target="#myModal" aria-haspopup="true">Made a purchase?</button>
+
+
                     <div class="modal" id="myModal">
                         <div class="modal-background"></div>
                         <div class="modal-content">
@@ -174,7 +175,9 @@
             </div>
         </div>
     </div>
-    <div class="column is-6 is-offset-8">
+
+    <div class="column is-6 has-text-centered">
+
         <div class="panel">
             <p class="panel-heading">My Current Goals</p>
             <div class="profile-goal" th:each="goal : ${goal}">
@@ -207,9 +210,9 @@
             </div>
             <div class="panel-block">
                 <figure class="image is-16x9">
-                    <button class="button is-primary mod2" data-target2="#myModal2" aria-haspopup="true">Create a
-                        New Goal
-                    </button>
+
+                    <button class="button is-primary mod2" data-target2="#myModal2" aria-haspopup="true">Set a Goal!?</button>
+
                     <div class="modal" id="myModal2">
                         <div class="modal-background"></div>
                         <div class="modal-content">
@@ -236,107 +239,141 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-2.2.4.js"
-        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-<th:block th:replace="fragments/footer.html :: pie-footer"/>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    let billsAmount = $("#bills-amount").val();
+    let groceriesAmount = $("#groceries-amount").val();
+    let membershipAmount = $("#membership-amount").val();
+    let foodAmount = $("#food-amount").val();
+    let giftsAmount = $("#gifts-amount").val();
+    let autoAmount = $("#auto-amount").val();
+    let miscAmount = $("#misc-amount").val();
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Bills', 'Groceries', 'Subscriptions & Memberships', 'Food & Dining', 'Gifts & Leisure', 'Auto & Transportation', 'Misc'],
+            datasets: [{
+                label: 'Spending',
+                data: [billsAmount, groceriesAmount, membershipAmount, foodAmount, giftsAmount, autoAmount, miscAmount],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 206, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)',
+                    'rgb(30, 30, 30)'
+                ]
+            }]
+        }
+    });
+
+    function updateConfigByMutating() {
+        myChart.data.datasets[0].data = [billsAmount, groceriesAmount, membershipAmount, foodAmount, giftsAmount, autoAmount, miscAmount];
+        myChart.update();
+    }
+</script>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script>
-    document.querySelector("#today").valueAsDate = new Date();
-    document.querySelectorAll('.modal-button').forEach(function (el) {
-        el.addEventListener('click', function () {
-            var target = document.querySelector(el.getAttribute('data-target'));
-
-            target.classList.add('is-active');
-
-            target.querySelector('.modal-close').addEventListener('click', function () {
-                target.classList.remove('is-active');
-            });
+document.querySelectorAll('.modal-button').forEach(function(el) {
+el.addEventListener('click', function() {
+    var target = document.querySelector(el.getAttribute('data-target'));
+    target.classList.add('is-active');
+    target.querySelector('.modal-close').addEventListener('click',   function() {
+        target.classList.remove('is-active');
+    });
+});
+});
+document.querySelectorAll('.mod2').forEach(function(el) {
+    el.addEventListener('click', function() {
+        var target = document.querySelector(el.getAttribute('data-target2'));
+        target.classList.add('is-active');
+        target.querySelector('.modal-close').addEventListener('click',   function() {
+            target.classList.remove('is-active');
         });
     });
-
-
-    document.querySelectorAll('.mod2').forEach(function (el) {
-        el.addEventListener('click', function () {
-            var target = document.querySelector(el.getAttribute('data-target2'));
-
-            target.classList.add('is-active');
-
-            target.querySelector('.modal-close').addEventListener('click', function () {
-                target.classList.remove('is-active');
-            });
-        });
-    });
-
-    let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
-
-    $(document).ajaxSend(function (e, xhr) {
-        xhr.setRequestHeader(header, token);
-    });
-
-    $("#expense-form").submit(function (event) {
-        event.preventDefault();
-        let amount = $("#amount").val();
-        $("#amount").val("");
-        let date = $("#date").val();
-        $("#date").val("");
-        let description = $("#description").val();
-        $("#description").val("");
-        let isRegular = $("#isRegular").val();
-        console.log(isRegular);
-        $("#isRegular").val("");
-        let type = $("#type").val();
-
-        switch (type) {
-            case 1:
-                billsAmount += amount;
-                break;
-            case 2:
-                groceriesAmount += amount;
-                break;
-            case 3:
-                membershipAmount += amount;
-                break;
-            case 4:
-                foodAmount += amount;
-                break;
-            case 5:
-                giftsAmount += amount;
-                break;
-            case 6:
-                autoAmount += amount;
-                break;
-            case 7:
-                miscAmount += amount;
-                break;
+});
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
+$(document).ajaxSend(function(e,xhr) {
+    xhr.setRequestHeader(header, token);
+});
+$("#expense-form").submit(function (event) {
+    event.preventDefault();
+    let amount = $("#amount").val();
+    $("#amount").val("");
+    let date = $("#date").val();
+    $("#date").val("");
+    let description = $("#description").val();
+    $("#description").val("");
+    let isRegular = $("#isRegular").val();
+    console.log(isRegular);
+    $("#isRegular").val("");
+    let type = $("#type").val();
+    switch (type){
+        case "1":
+            billsAmount = parseFloat(billsAmount) + parseFloat(amount);
+            billsAmount = billsAmount.toString();
+            updateConfigByMutating();
+            break;
+        case "2":
+            groceriesAmount = parseFloat(groceriesAmount) + parseFloat(amount);
+            groceriesAmount = groceriesAmount.toString();
+            updateConfigByMutating();
+            break;
+        case "3":
+            membershipAmount = parseFloat(membershipAmount) + parseFloat(amount);
+            membershipAmount = membershipAmount.toString();
+            updateConfigByMutating();
+            break;
+        case "4":
+            foodAmount = parseFloat(foodAmount) + parseFloat(amount);
+            foodAmount = foodAmount.toString();
+            updateConfigByMutating();
+            break;
+        case "5":
+            giftsAmount = parseFloat(giftsAmount) + parseFloat(amount);
+            giftsAmount = giftsAmount.toString();
+            updateConfigByMutating();
+            break;
+        case "6":
+            autoAmount = parseFloat(autoAmount) + parseFloat(amount);
+            autoAmount = autoAmount.toString();
+            updateConfigByMutating();
+            break;
+        case "7":
+            miscAmount = parseFloat(miscAmount) + parseFloat(amount);
+            miscAmount = miscAmount.toString();
+            updateConfigByMutating();
+            break;
+    }
+    let newExpense = {
+        amount: amount,
+        date:  date,
+        description: description,
+        isRegular: isRegular,
+        type: type
+    };
+    $.ajax({
+        type: "POST",
+        dataType : 'json',
+        url: "/expenses.json",
+        data: JSON.stringify(newExpense),
+        headers: {
+            'content-type': 'application/json'
+        },
+        success: function(data, textStatus, jqXHR) {
+            $("#myModal").removeClass('is-active');
+            console.log(data);
+        },
+        error: function(request, status, error) {
+            $("#myModal").removeClass('is-active');
+            console.log(error);
         }
 
-        let newExpense = {
-            amount: amount,
-            date: date,
-            description: description,
-            isRegular: isRegular,
-            type: type
-        };
-
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/expenses.json",
-            data: JSON.stringify(newExpense),
-            headers: {
-                'content-type': 'application/json'
-            },
-
-            success: function (data, textStatus, jqXHR) {
-                $("#myModal").removeClass('is-active');
-                console.log(data);
-            },
-            error: function (request, status, error) {
-                $("#myModal").removeClass('is-active');
-                console.log(error);
-            }
-        });
     });
 </script>
 </body>
