@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Dashboard | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
     <style>
@@ -34,15 +36,27 @@
         </div>
     </div>
 </section>
-
-<div class="columns is-multiline is-half-mobile is-centered">
-    <div class="column is-6">
-        <div class="panel">
-            <p class="panel-heading">Spending Habits</p>
-            <div class="panel-block">
-                <figure class="image is-16x9">
-                    <canvas id="myChart"></canvas>
-                </figure>
+<input type="hidden" th:value="${amounts[0]}" id="bills-amount">
+<input type="hidden" th:value="${amounts[1]}" id="groceries-amount">
+<input type="hidden" th:value="${amounts[2]}" id="membership-amount">
+<input type="hidden" th:value="${amounts[3]}" id="food-amount">
+<input type="hidden" th:value="${amounts[4]}" id="gifts-amount">
+<input type="hidden" th:value="${amounts[5]}" id="auto-amount">
+<input type="hidden" th:value="${amounts[6]}" id="misc-amount">
+<div class="columns">
+    <div class="column">
+        <div class="columns is-multiline is-half-mobile">
+            <div class="column is-6">
+                <div class="panel">
+                    <p class="panel-heading">
+                        Spending Habits
+                    </p>
+                    <div class="panel-block">
+                        <figure class="image is-16x9">
+                            <canvas id="myChart"></canvas>
+                        </figure>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -101,22 +115,22 @@
                                         <p class="panel-heading">Create an Expense</p>
                                         <div class="panel-block">
                                             <figure>
-                                                <form th:action="@{/profile/expenses/create}" th:method="post" th:object="${expense}">
+                                                <form th:action="@{/profile/expenses/create}" th:method="post" th:object="${expense}" id="expense-form">
                                                     <div class="field">
                                                         <label class="label">Where was this purchase made?</label>
                                                         <div class="control has-icons-left">
-                                                            <input th:field="*{description}" class="input" type="text">
+                                                            <input th:field="*{description}" class="input" type="text" id="description">
                                                             <span class="icon is-small is-left"><i class="fas fa-building"></i></span>
                                                         </div>
                                                         <label class="label">How much was this purchase?</label>
                                                         <div class="control has-icons-left">
                                                             <input th:field="*{amount}" class="input" type="number" step=".01"
-                                                                   placeholder="ex. 45.25, 176.97">
+                                                                   placeholder="ex. 45.25, 176.97" id="amount">
                                                             <span class="icon is-small is-left"><i class="fas fa-dollar-sign"></i></span>
                                                         </div>
                                                         <label class="label">When was this purchase made?</label>
                                                         <div class="control has-icons-left">
-                                                            <input th:field="*{date}" class="input" type="date">
+                                                            <input th:field="*{date}" class="input" type="date" id="date">
                                                             <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
                                                         </div>
                                                         <label for="type">Select the appropriate category for this purchase.</label>
@@ -287,6 +301,7 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <th:block th:replace="fragments/footer.html :: pie-footer"/>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script>
@@ -312,6 +327,78 @@ document.querySelectorAll('.mod2').forEach(function(el) {
         target.querySelector('.modal-close').addEventListener('click',   function() {
             target.classList.remove('is-active');
         });
+    });
+});
+
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
+
+$(document).ajaxSend(function(e,xhr) {
+    xhr.setRequestHeader(header, token);
+});
+
+$("#expense-form").submit(function (event) {
+    event.preventDefault();
+    let amount = $("#amount").val();
+    $("#amount").val("");
+    let date = $("#date").val();
+    $("#date").val("");
+    let description = $("#description").val();
+    $("#description").val("");
+    let isRegular = $("#isRegular").val();
+    console.log(isRegular);
+    $("#isRegular").val("");
+    let type = $("#type").val();
+
+    switch (type){
+        case 1:
+            billsAmount += amount;
+            break;
+        case 2:
+            groceriesAmount += amount;
+            break;
+        case 3:
+            membershipAmount += amount;
+            break;
+        case 4:
+            foodAmount += amount;
+            break;
+        case 5:
+            giftsAmount += amount;
+            break;
+        case 6:
+            autoAmount += amount;
+            break;
+        case 7:
+            miscAmount += amount;
+            break;
+    }
+
+    let newExpense = {
+        amount: amount,
+        date:  date,
+        description: description,
+        isRegular: isRegular,
+        type: type
+    };
+
+    $.ajax({
+        type: "POST",
+        dataType : 'json',
+        url: "/expenses.json",
+        data: JSON.stringify(newExpense),
+        headers: {
+            'content-type': 'application/json'
+        },
+
+        success: function(data, textStatus, jqXHR) {
+            $("#myModal").removeClass('is-active');
+            console.log(data);
+        },
+        error: function(request, status, error) {
+            $("#myModal").removeClass('is-active');
+            console.log(error);
+        }
     });
 });
 </script>

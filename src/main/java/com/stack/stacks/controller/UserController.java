@@ -57,6 +57,40 @@ public class UserController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> onlyFive = expenseDao.firstFiveExpenses();
         Double sumOfExpenses = expenseDao.sumOfExpenses(loggedInUser.getId());
+        List<Expense> allExpenses = expenseDao.findAll();
+        List<Expense> expenses = new ArrayList<>();
+        Double[] amounts = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        System.out.println(sumOfExpenses);
+        for(Expense expense : allExpenses){
+            if(expense.getUser() != null) {
+                if (expense.getUser().getId() == loggedInUser.getId()) {
+                    switch (expense.getType()){
+                        case 1:
+                            amounts[0] += expense.getAmount();
+                            break;
+                        case 2:
+                            amounts[1] += expense.getAmount();
+                            break;
+                        case 3:
+                            amounts[2] += expense.getAmount();
+                            break;
+                        case 4:
+                            amounts[3] += expense.getAmount();
+                            break;
+                        case 5:
+                            amounts[4] += expense.getAmount();
+                            break;
+                        case 6:
+                            amounts[5] += expense.getAmount();
+                            break;
+                        case 7:
+                            amounts[6] += expense.getAmount();
+                            break;
+                    }
+                    expenses.add(expense);
+                }
+            }
+        }
         List<Goal> allGoals = goalDao.findAll();
         List<Goal> goals = new ArrayList<>();
         HashMap<Long, String> dates = new HashMap<>();
@@ -68,6 +102,7 @@ public class UserController {
                 }
             }
         }
+        vModel.addAttribute("amounts", amounts);
         vModel.addAttribute("goal", goals);
         vModel.addAttribute("expense", new Expense());
         vModel.addAttribute("expenses", onlyFive);
@@ -83,15 +118,39 @@ public class UserController {
     public String getExpenses(Model vModel) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> allExpenses = expenseDao.findAll();
-//        List<Expense> sumOfExpenses = expenseDao.sumOfExpenses();
         List<Expense> expenses = new ArrayList<>();
+        Double[] amounts = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {
                 if (expense.getUser().getId() == currentUser.getId()) {
+                    switch (expense.getType()){
+                        case 1:
+                            amounts[0] += expense.getAmount();
+                            break;
+                        case 2:
+                            amounts[1] += expense.getAmount();
+                            break;
+                        case 3:
+                            amounts[2] += expense.getAmount();
+                            break;
+                        case 4:
+                            amounts[3] += expense.getAmount();
+                            break;
+                        case 5:
+                            amounts[4] += expense.getAmount();
+                            break;
+                        case 6:
+                            amounts[5] += expense.getAmount();
+                            break;
+                        case 7:
+                            amounts[6] += expense.getAmount();
+                            break;
+                    }
                     expenses.add(expense);
                 }
             }
         }
+        vModel.addAttribute("amounts", amounts);
         vModel.addAttribute("expense", new Expense());
         vModel.addAttribute("expenses", expenses);
         return "expenses/index";
