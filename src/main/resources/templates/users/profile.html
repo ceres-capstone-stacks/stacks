@@ -53,9 +53,12 @@
                     </p>
                     <div class="panel-block">
                         <figure class="image is-16x9">
-                            <canvas id="myChart"></canvas>
+                            <div class="chart-container" style="position: relative; height:20vh; width:30vw">
+                             <canvas id="myChart"></canvas>
+                            </div>
                         </figure>
                     </div>
+                    <p>You have spent a total of $<span th:text="${sum}"></span> ,</p>
                 </div>
             </div>
         </div>
@@ -313,13 +316,12 @@ target.classList.add('is-active');
 
 target.querySelector('.modal-close').addEventListener('click',   function() {
 target.classList.remove('is-active');
-});
-});
+        });
+    });
 });
 
 
-<<<<<<< HEAD
-=======
+
 document.querySelectorAll('.mod2').forEach(function(el) {
     el.addEventListener('click', function() {
         var target = document.querySelector(el.getAttribute('data-target2'));
@@ -403,7 +405,7 @@ $("#expense-form").submit(function (event) {
         }
     });
 });
->>>>>>> c914d9e3aae15c306c15f52bb337ae74127f0aa5
+
 </script>
 </body>
 </html>
