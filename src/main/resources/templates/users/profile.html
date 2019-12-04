@@ -100,7 +100,7 @@
                                             <form th:action="@{/profile/expenses/create}" th:method="post"
                                                   th:object="${expense}" id="expense-form">
                                                 <div class="field">
-                                                    <label class="label">Where was this purchase made?</label>
+                                                    <label class="label">What was the expense?</label>
                                                     <div class="control has-icons-left">
                                                         <input th:field="*{description}" class="input" type="text"
                                                                id="description">
@@ -117,9 +117,8 @@
                                                     </div>
                                                     <label class="label">When was this purchase made?</label>
                                                     <div class="control has-icons-left">
-                                                        <input th:field="*{date}" class="input" type="date" id="today">
-                                                        <span class="icon is-small is-left"><i
-                                                                class="fas fa-calendar-alt"></i></span>
+                                                        <input th:field="*{date}" class="input" type="date" id="date">
+                                                        <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
                                                     </div>
                                                     <label for="type">Select the appropriate category for this
                                                         purchase.</label>
@@ -196,29 +195,30 @@
             <div class="panel-block">
                 <figure class="image is-16x9">
 
-                    <button class="button is-link is-outlined is-rounded mod2" data-target2="#myModal2" aria-haspopup="true">Create a
-                        New Goal
-                    </button>
+                    <a href="/goals/create">Set a goal</a>
+<!--                    <button class="button is-link is-outlined is-rounded mod2"  data-target2="#myModal2" aria-haspopup="true">Create a-->
+<!--                        New Goal-->
+<!--                    </button>-->
 
-                    <div class="modal" id="myModal2">
-                        <div class="modal-background"></div>
-                        <div class="modal-content">
-                            <div class="box">
-                                <div class="column is-6 has-text-centered">
-                                    <div class="panel">
-                                        <p class="panel-heading">Create an Expense</p>
-                                        <div class="panel-block">
-                                            <figure>
+<!--                    <div class="modal" id="myModal2">-->
+<!--                        <div class="modal-background"></div>-->
+<!--                        <div class="modal-content">-->
+<!--                            <div class="box">-->
+<!--                                <div class="column is-6 has-text-centered">-->
+<!--                                    <div class="panel">-->
+<!--                                        <p class="panel-heading">Create an Expense</p>-->
+<!--                                        <div class="panel-block">-->
+<!--                                            <figure>-->
 
 
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="modal-close is-large" aria-label="close"></button>
-                    </div>
+<!--                                            </figure>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <button class="modal-close is-large" aria-label="close"></button>-->
+<!--                    </div>-->
                     <br>
                     <a href="goals">View goals....</a>
                 </figure>

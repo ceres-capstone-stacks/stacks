@@ -1,5 +1,6 @@
 package com.stack.stacks.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Post {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonBackReference
     @JoinTable(
             name = "posts_tags",
             joinColumns = {@JoinColumn(name="post_id")},

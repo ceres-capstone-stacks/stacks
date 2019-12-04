@@ -58,9 +58,9 @@ public class UserController {
         List<Expense> onlyFive = expenseDao.firstFiveExpenses();
         Double sumOfExpenses = expenseDao.sumOfExpenses(loggedInUser.getId());
         List<Expense> allExpenses = expenseDao.findAll();
+        List<Goal> allGoals = goalDao.findAll();
         List<Expense> expenses = new ArrayList<>();
         Double[] amounts = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-        System.out.println(sumOfExpenses);
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {
                 if (expense.getUser().getId() == loggedInUser.getId()) {
@@ -91,7 +91,6 @@ public class UserController {
                 }
             }
         }
-        List<Goal> allGoals = goalDao.findAll();
         List<Goal> goals = new ArrayList<>();
         HashMap<Long, String> dates = new HashMap<>();
         //Loop to find goals specific to user
