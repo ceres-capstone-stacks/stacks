@@ -7,21 +7,6 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Dashboard | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
-    <style>
-        .progress-container:before {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            line-height: 1em;
-        }
-
-        .progress-container {
-            text-align: center;
-            position: relative;
-        }
-    </style>
 </head>
 <body>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
@@ -41,8 +26,8 @@
 <input type="hidden" th:value="${amounts[5]}" id="auto-amount">
 <input type="hidden" th:value="${amounts[6]}" id="misc-amount">
 <div class="columns is-multiline is-half-mobile is-centered">
-    <div class="column is-6 is-offset-0">
-        <div class="panel" style="height: 100vh">
+    <div class="column is-12">
+        <div class="panel">
             <p class="panel-heading">
                 Spending Habits
             </p>
@@ -55,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="column is-6 is-offset-8">
+    <div class="column is-6" style="float: right">
         <div class="panel">
             <p class="panel-heading">My Recent Transactions</p>
             <div class="panel-block">
@@ -100,8 +85,9 @@
                         </tbody>
                     </table>
 
-                    <button class="button is-primary modal-button" data-target="#myModal" aria-haspopup="true">Made a purchase?</button>
-
+                    <button class="button is-link is-outlined is-rounded modal-button" data-target="#myModal" aria-haspopup="true">Made a
+                        purchase?
+                    </button>
 
                     <div class="modal" id="myModal">
                         <div class="modal-background"></div>
@@ -176,13 +162,13 @@
         </div>
     </div>
 
-    <div class="column is-6 has-text-centered">
+    <div class="column is-6">
 
         <div class="panel">
             <p class="panel-heading">My Current Goals</p>
             <div class="profile-goal" th:each="goal : ${goal}">
                 <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
-                    <h2 th:text="${goal.description}"></h2>
+                    <u><strong style="text-transform: uppercase" th:text="${goal.description}"></strong></u>
                     <div>
                         <ul>
                             <li><strong>Need to save: </strong><span th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
@@ -192,10 +178,10 @@
                                 go: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
-                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">
+<!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
                             <progress class="progress is-success" th:max="${goal.amount}"
                                       th:value="${goal.amountSaved}"></progress>
-                        </div>
+<!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
                         <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i class="far fa-edit"></i></a>
@@ -209,7 +195,9 @@
             <div class="panel-block">
                 <figure class="image is-16x9">
 
-                    <button class="button is-primary mod2" data-target2="#myModal2" aria-haspopup="true">Set a Goal!?</button>
+                    <button class="button is-link is-outlined is-rounded mod2" data-target2="#myModal2" aria-haspopup="true">Create a
+                        New Goal
+                    </button>
 
                     <div class="modal" id="myModal2">
                         <div class="modal-background"></div>

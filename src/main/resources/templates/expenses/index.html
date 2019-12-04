@@ -18,6 +18,7 @@
 </section>
 <div class="columns is-full-mobile is-centered">
 <div class="column is-three-quarters">
+    <a class="button is-link is-rounded is-outlined" href="expenses/create">Create a new expense</a>
     <table class="table is-striped is-bordered" style="width: 100%">
         <thead>
         <tr>
@@ -57,7 +58,8 @@
             </th:block>
             <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
 
-            <td><div class="buttons"><a style="border-style: none" class="button" th:href="@{/profile}"><i class="far fa-edit"></i></a><!-- need to map the edit icon to the edit expense modal -->
+            <td><div class="buttons"><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
+
             <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
             </form>
