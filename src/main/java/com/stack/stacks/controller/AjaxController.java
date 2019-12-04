@@ -1,8 +1,10 @@
 package com.stack.stacks.controller;
 
 import com.stack.stacks.models.Expense;
+import com.stack.stacks.models.Tag;
 import com.stack.stacks.models.User;
 import com.stack.stacks.repositories.ExpenseRepository;
+import com.stack.stacks.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ import java.util.Map;
 public class AjaxController {
     @Autowired
     private ExpenseRepository expenseDao;
+
+    @Autowired
+    private TagRepository tagDao;
 
     @PostMapping("/expenses.json")
     @ResponseBody
@@ -42,6 +47,18 @@ public class AjaxController {
     @ResponseBody
     public List<Expense> viewAllExpensesInJSONFormat() {
         return expenseDao.findAll();
+    }
+
+    @PostMapping("/tags.json")
+    @ResponseBody
+    public String createTagWithAjax(@Valid
+                                        @RequestBody (required = false) Map<String, Object> tag
+    ) {
+        String name = (String) tag.get("name");
+        Tag newTag = new Tag();
+        newTag.setName(name);
+        tagDao.save(newTag);
+        return "Yay";
     }
 
 }
