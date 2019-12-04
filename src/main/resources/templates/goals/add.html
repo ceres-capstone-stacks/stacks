@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Goal</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
+</head>
+<body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Add to your Goal</h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+</section>
+
+
+<div class="columns is-centered is-full-mobile">
+    <div class="column is-half">
+        <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
+            <div class="field">
+                <h1 class="title" th:text="${goals.description}"></h1>
+                <h5 class="subtitle is-6">Goal Amount: <span th:text="${#numbers.formatCurrency(goals.amount)}"></span></h5>
+            </div>
+            <label class="label" for="title">How much do you want to add?</label>
+            <div class="control">
+                <input class="input" id="title" type="text" th:value="${#numbers.formatCurrency(goals.amountSaved)}"
+                       name="amountSaved">
+            </div>
+
+            <button class="button is-link is-rounded">Update</button>
+        </form>
+    </div>
+</div>
+
+
+<th:block th:replace="fragments/footer.html :: main-footer"/>
+</body>
+</html>

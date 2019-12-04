@@ -64,6 +64,12 @@ public class GoalController {
         return "goals/editGoal";
     }
 
+    @GetMapping("/goals/{id}/add")
+    public String addToGoal(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("goals",goalDao.getOne(id));
+        return "goals/add";
+    }
+
     @PostMapping("/goals/{id}/edit")
     public String updateGoal (@PathVariable long id, @RequestParam double amountSaved, @RequestParam String date) {
         Goal oldGoal = goalDao.getOne(id);

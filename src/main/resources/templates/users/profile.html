@@ -85,7 +85,7 @@
                         </tbody>
                     </table>
 
-                    <button class="button is-link is-outlined is-rounded modal-button" data-target="#myModal" aria-haspopup="true">Made a
+                    <button class="button is-link is-outlined is-rounded modal-button" href="/expense/create" aria-haspopup="true">Made a
                         purchase?
                     </button>
 
@@ -144,7 +144,7 @@
                                                     </div>
                                                     <div class="control">
                                                         <a class="button is-link is-rounded is-outlined"
-                                                           href="/profile/expenses">Cancel</a>
+                                                           href="/profile">Cancel</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -188,6 +188,7 @@
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
+                                <button th:class="button"><a style="border-style: none" class="button" th:href="@{'/goals/' + ${goal.id} + '/add'}"><i class="fas fa-dollar-sign"></i></button>
                         </div>
                     </div>
                 </div>
