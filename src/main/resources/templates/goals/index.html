@@ -29,11 +29,10 @@
             <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
             <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                          class="date-span"></span></p>
-            <div class="buttons">
-            <a class="button is-warning is-rounded" th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a>
-            <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-                <button class="button is-danger is-rounded">Delete</button>
-            </form>
+            <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i class="far fa-edit"></i></a>
+                <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
+                    <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
+                </form>
             </div>
         </div>
     </div>
