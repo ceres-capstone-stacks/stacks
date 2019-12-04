@@ -356,9 +356,18 @@ $("#expense-form").submit(function (event) {
             break;
     }
 
+    function dateFormatter(oldDate){
+        let partOne = oldDate.substr(5, 2);
+        let partTwo = oldDate.substr(8, 2);
+        let partThree = oldDate.substr(0, 4);
+        return (partOne + "-" + partTwo + "-" + partThree);
+    }
+
+    let formattedDate = dateFormatter(date);
+
 
     let html = "<tr class=\"expense-item\">\n" +
-        "                            <td><span class=\"new-date-span\">" + date + "</span></td>\n" +
+        "                            <td><span class=\"new-date-span\">" + formattedDate + "</span></td>\n" +
         "                            <td>" + description + "</td>\n" +
         "                                <div>\n" +
         "                                    <td>" + typeString + "</td>\n" +
@@ -367,15 +376,6 @@ $("#expense-form").submit(function (event) {
 
     $(".expense-item").last().remove();
     $("#expense-table").prepend(html);
-
-    $(".new-date-span").each(function () {
-        let dateText = $(this).text();
-        let partOne = dateText.substr(5, 2);
-        let partTwo = dateText.substr(8, 2);
-        let partThree = dateText.substr(0, 4);
-        let formatDate = (partOne + "-" + partTwo + "-" + partThree);
-        $(this).text(formatDate);
-    })
 
     let newExpense = {
         amount: amount,
