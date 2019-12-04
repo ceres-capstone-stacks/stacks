@@ -22,7 +22,7 @@
         <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
             <div class="field">
                     <h1 class="title" th:text="${goals.description}"></h1>
-                    <h5 class="subtitle is-6">Goal Amount: $<span th:text="${#numbers.formatCurrency(goals.amount)}"></span></h5>
+                    <h5 class="subtitle is-6">Goal Amount: <span th:text="${#numbers.formatCurrency(goals.amount)}"></span></h5>
             </div>
                 <label class="label" for="title">Amount Saved</label>
                 <div class="control">
