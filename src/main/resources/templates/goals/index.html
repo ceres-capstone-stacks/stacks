@@ -21,8 +21,8 @@
         <div>
             <ul>
                 <li><strong th:text="${goal.description}"></strong></li>
-                <li>You need to save $<span th:text="${goal.amount}"></span>.</li>
-                <li>You have saved $<span th:text="${goal.amountSaved}"></span> so far.</li>
+                <li>You need to save <span th:text="${#numbers.formatCurrency(goal.amount)}"></span>.</li>
+                <li>You have saved <span th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span> so far.</li>
                 <li th:with="result=${goal.amount - goal.amountSaved}">You're short $<span
                         th:text="${result}"></span> to reach your goal!</li>
             </ul>

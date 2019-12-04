@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 @Table(name = "expenses")
@@ -65,6 +67,7 @@ public class Expense {
     }
 
     public double getAmount() {
+
         return amount;
     }
 
@@ -111,4 +114,11 @@ public class Expense {
     public void setType(int type) {
         this.type = type;
     }
+
+//    public static String displayCurrency (double amount) {
+//        Locale locale = new Locale("en", "US");
+//        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+//        System.out.println(currencyFormatter.format(amount));
+//        return currencyFormatter.format(amount);
+//    }
 }
