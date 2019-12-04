@@ -10,7 +10,6 @@
         </div>
     </footer>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script>
@@ -23,36 +22,35 @@
     </script>
 </th:block>
 
-<th:block th:fragment="pie-footer">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script>
-        let billsAmount = $("#bills-amount").val();
-        let groceriesAmount = $("#groceries-amount").val();
-        let membershipAmount = $("#membership-amount").val();
-        let foodAmount = $("#food-amount").val();
-        let giftsAmount = $("#gifts-amount").val();
-        let autoAmount = $("#auto-amount").val();
-        let miscAmount = $("#misc-amount").val();
-
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Bills', 'Groceries', 'Subscriptions & Memberships', 'Food & Dining', 'Gifts & Leisure', 'Auto & Transportation', 'Misc'],
-                datasets: [{
-                    label: 'Spending',
-                    data: [billsAmount, groceriesAmount, membershipAmount, foodAmount, giftsAmount, autoAmount, miscAmount],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 206, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(153, 102, 255)',
-                        'rgb(255, 159, 64)',
-                        'rgb(30, 30, 30)'
-                    ]
-                }]
-            }
-        });
-    </script>
-</th:block>
+<!--<th:block th:fragment="pie-footer">-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>-->
+<!--    <script>-->
+<!--        let billsAmount = $("#bills-amount").val();-->
+<!--        let groceriesAmount = $("#groceries-amount").val();-->
+<!--        let membershipAmount = $("#membership-amount").val();-->
+<!--        let foodAmount = $("#food-amount").val();-->
+<!--        let giftsAmount = $("#gifts-amount").val();-->
+<!--        let autoAmount = $("#auto-amount").val();-->
+<!--        let miscAmount = $("#misc-amount").val();-->
+<!--        var ctx = document.getElementById('myChart');-->
+<!--        var myChart = new Chart(ctx, {-->
+<!--            type: 'pie',-->
+<!--            data: {-->
+<!--                labels: ['Bills', 'Groceries', 'Subscriptions & Memberships', 'Food & Dining', 'Gifts & Leisure', 'Auto & Transportation', 'Misc'],-->
+<!--                datasets: [{-->
+<!--                    label: 'Spending',-->
+<!--                    data: [billsAmount, groceriesAmount, membershipAmount, foodAmount, giftsAmount, autoAmount, miscAmount],-->
+<!--                    backgroundColor: [-->
+<!--                        'rgb(255, 99, 132)',-->
+<!--                        'rgb(54, 162, 235)',-->
+<!--                        'rgb(255, 206, 86)',-->
+<!--                        'rgb(75, 192, 192)',-->
+<!--                        'rgb(153, 102, 255)',-->
+<!--                        'rgb(255, 159, 64)',-->
+<!--                        'rgb(30, 30, 30)'-->
+<!--                    ]-->
+<!--                }]-->
+<!--            }-->
+<!--        });-->
+<!--        </script>-->
+<!--</th:block>-->
