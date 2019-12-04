@@ -11,59 +11,14 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container" sec:authorize="isAuthenticated()">
-            <h1 class="title">Here are your expenses, <span th:text="${#authentication.principal.firstName}"></span>.
+            <h1 class="title">Here are your transactions, <span th:text="${#authentication.principal.firstName}"></span>.
             </h1>
         </div>
     </div>
 </section>
-<form th:action="@{/profile/expenses/create}" th:method="post" th:object="${expense}">
-    <div class="columns is-centered is-mobile">
-        <div class="column is-one-quarter">
-            <div class="field">
-                <label class="label">Where was this purchase made?</label>
-                <div class="control has-icons-left">
-                    <input th:field="*{description}" class="input" type="text">
-                    <span class="icon is-small is-left"><i class="fas fa-building"></i></span>
-                </div>
-                <label class="label">How much was this purchase?</label>
-                <div class="control has-icons-left">
-                    <input th:field="*{amount}" class="input" type="number" step=".01" placeholder="ex. 45.25, 176.97">
-                    <span class="icon is-small is-left"><i class="fas fa-dollar-sign"></i></span>
-                </div>
-                <label class="label">When was this purchase made?</label>
-                <div class="control has-icons-left">
-                    <input th:field="*{date}" class="input" type="date">
-                    <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
-                </div>
-                <label for="type">Select the appropriate category for this purchase.</label>
-                <div class="control has-icons-left">
-                    <select th:field="*{type}" id="type">
-                        <option value="0" disabled selected>--Select One--</option>
-                        <option value="1">Bills</option>
-                        <option value="2">Groceries</option>
-                        <option value="3">Subscriptions/Memberships</option>
-                        <option value="4">Food & Dining</option>
-                        <option value="5">Leisure & Gifts</option>
-                        <option value="6">Auto/Transportation</option>
-                        <option value="7">Misc</option>
-                    </select>
-                </div>
-                <label for="isRegular">This is a reoccurring purchase.</label>
-                <input type="checkbox" name="isRegular" id="isRegular" value="true">
-            </div>
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="button is-link is-rounded">Submit</button>
-                </div>
-                <div class="control">
-                    <a class="button is-link is-rounded is-outlined" href="/profile/expenses">Cancel</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+<div class="columns is-full-mobile is-centered">
 <div class="column is-three-quarters">
-    <table class="table is-striped is-hoverable is-bordered" style="width: 100%">
+    <table class="table is-striped is-bordered" style="width: 100%">
         <thead>
         <tr>
             <th>Date</th>
@@ -101,13 +56,14 @@
                 </div>
             </th:block>
             <td>$<span th:text="${expense.amount}"></span></td>
-            <td><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
+            <td><div class="buttons"><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
             <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
                 <button class="button is-danger is-rounded">Delete</button>
-            </form>
+            </form></div>
             </td>
         </tbody>
     </table>
+</div>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
