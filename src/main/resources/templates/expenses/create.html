@@ -17,11 +17,9 @@
         </div>
     </div>
 </section>
-
 <form th:action="@{/profile/expenses/create}" th:method="post" th:object="${expense}" id="expense-form">
-    <div class="columns is-centered">
-        <div class="column">
-
+    <div class="columns is-centered is-full-mobile">
+        <div class="column is-6">
             <div class="field">
                 <label class="label">Where was this purchase made?</label>
                 <div class="control has-icons-left">

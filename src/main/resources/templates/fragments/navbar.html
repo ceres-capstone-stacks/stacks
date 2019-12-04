@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="main-nav">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="/"><img th:src="@{/css/Stacks-logo.png}"></a>
+            <a class="navbar-item" style="padding: 0 12px" href="/"><img th:src="@{/css/imageedit_1_6422483971.png}" style="height: 56px; width: 56px;"></a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
                data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
@@ -29,17 +29,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post">
-                        <button class="button is-rounded is-success is-outlined" href="/" type="submit">Log Out</button>
-                    </form>
-                </div>
-                <div class="buttons" sec:authorize="isAnonymous()">
-                    <a class="button is-rounded is-success is-outlined" href="/login"><strong>Log In</strong></a>
-                    <a class="button is-rounded is-success" href="/register">Get Started</a>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" th:method="post">
+                            <button class="button is-rounded is-success is-outlined" href="/" type="submit">Log Out
+                            </button>
+                        </form>
+                    </div>
+                    <div class="buttons" sec:authorize="isAnonymous()">
+                        <a class="button is-rounded is-success is-outlined" href="/login"><strong>Log In</strong></a>
+                        <a class="button is-rounded is-success" href="/register">Get Started</a>
+                    </div>
                 </div>
             </div>
         </div>
