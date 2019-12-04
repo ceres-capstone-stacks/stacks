@@ -74,8 +74,8 @@
                             <th>Amount</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr th:each="expense : ${expenses}">
+                        <tbody id="expense-table">
+                        <tr th:each="expense : ${expenses}" class="expense-item">
                             <td><span class="date-span" th:text="${expense.date}"></span></td>
                             <td th:text="${expense.description}"></td>
                             <th:block th:switch="${expense.type}">
@@ -255,7 +255,7 @@
             let formatDate = (partOne + "-" + partTwo + "-" + partThree);
             $(this).text(formatDate);
         })
-    })
+    });
 
     let billsAmount = $("#bills-amount").val();
     let groceriesAmount = $("#groceries-amount").val();
@@ -327,43 +327,73 @@ $("#expense-form").submit(function (event) {
     console.log(isRegular);
     $("#isRegular").val("");
     let type = $("#type").val();
+    let typeString = "";
     switch (type){
         case "1":
             billsAmount = parseFloat(billsAmount) + parseFloat(amount);
             billsAmount = billsAmount.toString();
+            typeString = "Bills";
             updateConfigByMutating();
             break;
         case "2":
             groceriesAmount = parseFloat(groceriesAmount) + parseFloat(amount);
             groceriesAmount = groceriesAmount.toString();
+            typeString = "Groceries";
             updateConfigByMutating();
             break;
         case "3":
             membershipAmount = parseFloat(membershipAmount) + parseFloat(amount);
             membershipAmount = membershipAmount.toString();
+            typeString = "Subscriptions & Memberships";
             updateConfigByMutating();
             break;
         case "4":
             foodAmount = parseFloat(foodAmount) + parseFloat(amount);
             foodAmount = foodAmount.toString();
+            typeString = "Food & Dining";
             updateConfigByMutating();
             break;
         case "5":
             giftsAmount = parseFloat(giftsAmount) + parseFloat(amount);
             giftsAmount = giftsAmount.toString();
+            typeString = "Gifts & Leisure";
             updateConfigByMutating();
             break;
         case "6":
             autoAmount = parseFloat(autoAmount) + parseFloat(amount);
             autoAmount = autoAmount.toString();
+            typeString = "Auto & Transportation";
             updateConfigByMutating();
             break;
         case "7":
             miscAmount = parseFloat(miscAmount) + parseFloat(amount);
             miscAmount = miscAmount.toString();
+            typeString = "Misc";
             updateConfigByMutating();
             break;
     }
+
+
+    let html = "<tr class=\"expense-item\">\n" +
+        "                            <td><span class=\"new-date-span\">" + date + "</span></td>\n" +
+        "                            <td>" + description + "</td>\n" +
+        "                                <div>\n" +
+        "                                    <td>" + typeString + "</td>\n" +
+        "                                </div>\n" +
+        "                            <td>$" + amount + "</td>";
+
+    $(".expense-item").last().remove();
+    $("#expense-table").prepend(html);
+
+    $(".new-date-span").each(function () {
+        let dateText = $(this).text();
+        let partOne = dateText.substr(5, 2);
+        let partTwo = dateText.substr(8, 2);
+        let partThree = dateText.substr(0, 4);
+        let formatDate = (partOne + "-" + partTwo + "-" + partThree);
+        $(this).text(formatDate);
+    })
+
     let newExpense = {
         amount: amount,
         date:  date,
@@ -389,6 +419,7 @@ $("#expense-form").submit(function (event) {
         }
     });
 });
+
 </script>
 </body>
 </html>
