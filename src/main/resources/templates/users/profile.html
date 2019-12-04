@@ -76,7 +76,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="expense : ${expenses}">
-                            <td th:text="${expense.date}"></td>
+                            <td><span class="date-span" th:text="${expense.date}"></span></td>
                             <td th:text="${expense.description}"></td>
                             <th:block th:switch="${expense.type}">
                                 <div th:case="1">
@@ -246,6 +246,17 @@
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
+    $(document).ready(function () {
+        $(".date-span").each(function () {
+            let dateText = $(this).text();
+            let partOne = dateText.substr(5, 2);
+            let partTwo = dateText.substr(8, 2);
+            let partThree = dateText.substr(0, 4);
+            let formatDate = (partOne + "-" + partTwo + "-" + partThree);
+            $(this).text(formatDate);
+        })
+    })
+
     let billsAmount = $("#bills-amount").val();
     let groceriesAmount = $("#groceries-amount").val();
     let membershipAmount = $("#membership-amount").val();
