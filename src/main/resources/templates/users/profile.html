@@ -364,6 +364,7 @@ $("#expense-form").submit(function (event) {
     }
 
     let formattedDate = dateFormatter(date);
+    let formattedAmount = Number.parseFloat(amount).toFixed(2);
 
 
     let html = "<tr class=\"expense-item\">\n" +
@@ -372,7 +373,7 @@ $("#expense-form").submit(function (event) {
         "                                <div>\n" +
         "                                    <td>" + typeString + "</td>\n" +
         "                                </div>\n" +
-        "                            <td>$" + amount + "</td>";
+        "                            <td>$" + formattedAmount + "</td>";
 
     $(".expense-item").last().remove();
     $("#expense-table").prepend(html);
