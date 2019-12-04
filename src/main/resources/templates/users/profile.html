@@ -375,7 +375,9 @@ $("#expense-form").submit(function (event) {
         "                                </div>\n" +
         "                            <td>$" + formattedAmount + "</td>";
 
-    $(".expense-item").last().remove();
+    if($(".expense-item").length >= 5){
+        $(".expense-item").last().remove();
+    }
     $("#expense-table").prepend(html);
 
     let newExpense = {

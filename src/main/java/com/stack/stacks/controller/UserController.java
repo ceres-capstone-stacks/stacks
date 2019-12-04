@@ -87,7 +87,9 @@ public class UserController {
                             amounts[6] += expense.getAmount();
                             break;
                     }
-                    expenses.add(expense);
+                    if(expenses.size() < 5){
+                        expenses.add(expense);
+                    }
                 }
             }
         }
@@ -104,7 +106,7 @@ public class UserController {
         vModel.addAttribute("amounts", amounts);
         vModel.addAttribute("goal", goals);
         vModel.addAttribute("expense", new Expense());
-        vModel.addAttribute("expenses", onlyFive);
+        vModel.addAttribute("expenses", expenses);
         vModel.addAttribute("user", loggedInUser);
         vModel.addAttribute("sum",sumOfExpenses);
         return "users/profile";
