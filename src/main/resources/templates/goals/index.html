@@ -20,11 +20,11 @@
     <div style="height: 400px; width: 300px">
         <div>
             <ul>
-                <li><strong>Goal Description: </strong><span th:text="${goal.description}"></span></li>
-                <li><strong>Need to save: </strong>$<span th:text="${goal.amount}"></span></li>
-                <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
-                <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to go: </strong>$<span
-                        th:text="${result}"></span></li>
+                <li><strong th:text="${goal.description}"></strong></li>
+                <li>You need to save <span th:text="${#numbers.formatCurrency(goal.amount)}"></span>.</li>
+                <li>You have saved <span th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span> so far.</li>
+                <li th:with="result=${goal.amount - goal.amountSaved}">You're short $<span
+                        th:text="${result}"></span> to reach your goal!</li>
             </ul>
             <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
             <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"

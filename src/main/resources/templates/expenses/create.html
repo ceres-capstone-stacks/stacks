@@ -35,7 +35,7 @@
                 </div>
                 <label class="label">When did this purchase occur?</label>
                 <div class="control has-icons-left">
-                    <input th:field="*{date}" class="input" type="date" id="date">
+                    <input th:field="*{date}" class="input" type="date" id="today">
                     <span class="icon is-small is-left"><i class="fas fa-calendar"></i></span>
                 </div>
                 <label for="type">Select the appropriate category for this purchase.</label>
@@ -67,6 +67,7 @@
 </form>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script>
+    document.querySelector("#today").valueAsDate = new Date();
     let token = $("meta[name='_csrf']").attr("content");
     let header = $("meta[name='_csrf_header']").attr("content");
 
