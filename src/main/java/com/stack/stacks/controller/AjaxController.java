@@ -61,4 +61,9 @@ public class AjaxController {
         return "Yay";
     }
 
+    @GetMapping("/findtags.json")
+    public @ResponseBody List<Tag> viewAllAdsInJSONFormat() {
+        return tagDao.findAll();
+    }
+
 }

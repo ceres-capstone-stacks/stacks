@@ -30,10 +30,12 @@
                     <textarea id="content" class="textarea" th:field="*{content}"></textarea>
                 </div>
             </div>
+            <div id="tags-div">
                 <div th:each="tag : ${tags}">
                     <label th:for="${tag.id}"><span th:text="${tag.name}"></span></label>
                     <input type="checkbox" name="tagged" th:value="${tag.id}">
                 </div>
+            </div>
             <div class="control">
                 <button class="button is-link">Submit</button>
             </div>
@@ -53,6 +55,19 @@
         xhr.setRequestHeader(header, token);
     });
 
+    function getTags(newTagName) {
+        let request = $.ajax({'url': '/findtags.json'});
+        request.done(function (tags) {
+            tags.forEach(function(tag) {
+                if(tag.name === newTagName){
+                    let html = "<label for=\"" + tag.id + "\">" + tag.name + "</label>" +
+                        "                    <input type=\"checkbox\" name=\"tagged\" value=\"" + tag.id +  "\">";
+                    $("#tags-div").append(html);
+                }
+            });
+        });
+    }
+
     $("#tag-submit").click(function (event) {
         event.preventDefault();
 
@@ -71,13 +86,16 @@
                 'content-type': 'application/json'
             },
             success: function(data, textStatus, jqXHR) {
+                getTags(name);
                 console.log(data);
             },
             error: function(request, status, error) {
+                getTags(name);
                 console.log(error);
             }
         });
-    })
+    });
+
 </script>
 </body>
 </html>
