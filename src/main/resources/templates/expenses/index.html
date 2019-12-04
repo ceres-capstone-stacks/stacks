@@ -11,11 +11,12 @@
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container" sec:authorize="isAuthenticated()">
-            <h1 class="title">Here are your expenses, <span th:text="${#authentication.principal.firstName}"></span>.
+            <h1 class="title">Here are your transactions, <span th:text="${#authentication.principal.firstName}"></span>.
             </h1>
         </div>
     </div>
 </section>
+<<<<<<< HEAD
 <!--<form th:action="@{/profile/expenses/create}" th:method="post" th:object="${expense}">-->
 <!--    <div class="columns is-centered is-mobile">-->
 <!--        <div class="column is-one-quarter">-->
@@ -62,8 +63,11 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</form>-->
+=======
+<div class="columns is-full-mobile is-centered">
+>>>>>>> 57b0b4f6644e950bc9f8b434d0bd203da2f45b09
 <div class="column is-three-quarters">
-    <table class="table is-striped is-hoverable is-bordered" style="width: 100%">
+    <table class="table is-striped is-bordered" style="width: 100%">
         <thead>
         <tr>
             <th>Date</th>
@@ -100,14 +104,18 @@
                     <td>Misc.</td>
                 </div>
             </th:block>
-            <td>$<span th:text="${expense.amount}"></span></td>
+  <td><div class="buttons"><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
+
+            <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
             <td><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
+
             <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
                 <button class="button is-danger is-rounded">Delete</button>
-            </form>
+            </form></div>
             </td>
         </tbody>
     </table>
+</div>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
