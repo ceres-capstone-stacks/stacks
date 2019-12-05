@@ -100,7 +100,7 @@
                                             <form th:action="@{/profile/expenses/create}" th:method="post"
                                                   th:object="${expense}" id="expense-form">
                                                 <div class="field">
-                                                    <label class="label">Where was this purchase made?</label>
+                                                    <label class="label">What was the expense?</label>
                                                     <div class="control has-icons-left">
                                                         <input th:field="*{description}" class="input" type="text"
                                                                id="description">
@@ -117,9 +117,8 @@
                                                     </div>
                                                     <label class="label">When was this purchase made?</label>
                                                     <div class="control has-icons-left">
-                                                        <input th:field="*{date}" class="input" type="date" id="today">
-                                                        <span class="icon is-small is-left"><i
-                                                                class="fas fa-calendar-alt"></i></span>
+                                                        <input th:field="*{date}" class="input" type="date" id="date">
+                                                        <span class="icon is-small is-left"><i class="fas fa-calendar-alt"></i></span>
                                                     </div>
                                                     <label for="type">Select the appropriate category for this
                                                         purchase.</label>
@@ -197,10 +196,10 @@
             <div class="panel-block">
                 <figure class="image is-16x9">
 
-<!--                    <button class="button is-link is-outlined is-rounded mod2" data-target2="#myModal2" aria-haspopup="true">Create a-->
+                    <a href="/goals/create">Set a goal</a>
+<!--                    <button class="button is-link is-outlined is-rounded mod2"  data-target2="#myModal2" aria-haspopup="true">Create a-->
 <!--                        New Goal-->
 <!--                    </button>-->
-
                     <div class="modal" id="myModal2">
                         <div class="modal-background"></div>
                         <div class="modal-content">
@@ -352,26 +351,29 @@ $("#expense-form").submit(function (event) {
             break;
     }
 
+    function dateFormatter(oldDate){
+        let partOne = oldDate.substr(5, 2);
+        let partTwo = oldDate.substr(8, 2);
+        let partThree = oldDate.substr(0, 4);
+        return (partOne + "-" + partTwo + "-" + partThree);
+    }
+
+    let formattedDate = dateFormatter(date);
+    let formattedAmount = Number.parseFloat(amount).toFixed(2);
+
 
     let html = "<tr class=\"expense-item\">\n" +
-        "                            <td><span class=\"new-date-span\">" + date + "</span></td>\n" +
+        "                            <td><span class=\"new-date-span\">" + formattedDate + "</span></td>\n" +
         "                            <td>" + description + "</td>\n" +
         "                                <div>\n" +
         "                                    <td>" + typeString + "</td>\n" +
         "                                </div>\n" +
-        "                            <td>$" + amount + "</td>";
+        "                            <td>$" + formattedAmount + "</td>";
 
-    $(".expense-item").last().remove();
+    if($(".expense-item").length >= 5){
+        $(".expense-item").last().remove();
+    }
     $("#expense-table").prepend(html);
-
-    $(".new-date-span").each(function () {
-        let dateText = $(this).text();
-        let partOne = dateText.substr(5, 2);
-        let partTwo = dateText.substr(8, 2);
-        let partThree = dateText.substr(0, 4);
-        let formatDate = (partOne + "-" + partTwo + "-" + partThree);
-        $(this).text(formatDate);
-    })
 
     let newExpense = {
         amount: amount,

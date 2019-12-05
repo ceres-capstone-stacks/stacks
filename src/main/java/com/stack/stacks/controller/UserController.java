@@ -55,12 +55,10 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(Model vModel){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Expense> onlyFive = expenseDao.firstFiveExpenses();
-        Double sumOfExpenses = expenseDao.sumOfExpenses(loggedInUser.getId());
         List<Expense> allExpenses = expenseDao.findAll();
+        List<Goal> allGoals = goalDao.findAll();
         List<Expense> expenses = new ArrayList<>();
         Double[] amounts = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-        System.out.println(sumOfExpenses);
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {
                 if (expense.getUser().getId() == loggedInUser.getId()) {
@@ -87,14 +85,14 @@ public class UserController {
                             amounts[6] += expense.getAmount();
                             break;
                     }
-                    expenses.add(expense);
+                    if(expenses.size() < 5){
+                        expenses.add(expense);
+                    }
                 }
             }
         }
-        List<Goal> allGoals = goalDao.findAll();
         List<Goal> goals = new ArrayList<>();
         HashMap<Long, String> dates = new HashMap<>();
-        //Loop to find goals specific to user
         for(Goal goal : allGoals){
             if(goal.getUser() != null) {
                 if (goal.getUser().getId() == loggedInUser.getId()) {
@@ -105,9 +103,8 @@ public class UserController {
         vModel.addAttribute("amounts", amounts);
         vModel.addAttribute("goal", goals);
         vModel.addAttribute("expense", new Expense());
-        vModel.addAttribute("expenses", onlyFive);
+        vModel.addAttribute("expenses", expenses);
         vModel.addAttribute("user", loggedInUser);
-        vModel.addAttribute("sum",sumOfExpenses);
         return "users/profile";
     }
 
