@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Expense | Stacks</title>
+    <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
-<div class="container">
-    <form th:action="'/profile/expenses/' + ${expenses.id} + '/edit'" th:method="post" th:object="${expenses}">
-        <h1>Edit this expense....</h1>
-        <div class="form-group">
-            <label for="date">Date</label>
-            <input class="form-control" id="date" th:value="${expenses.date}" name="date" type="date">
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Edit Expense</h1>
+            <h2 class="subtitle">Make necessary changes to your expense.</h2>
+        </div>
+    </div>
+</section>
+<div class="columns is-centered is-full-mobile">
+    <div class="column is-half">
+        <form th:action="'/profile/expenses/' + ${expenses.id} + '/edit'" th:method="post" th:object="${expenses}">
+            <label class="label" for="date">Date</label>
+            <input class="input" id="date" th:value="${expenses.date}" name="date" type="date">
             <br>
-            <label for="description">Where did you purchase?</label>
-            <input id="description" class="form-control" th:value="${expenses.description}" name="description">
-            <br>
-            <label for="expense-amount">How much did you spend?</label>
-            <input id="expense-amount" name="amount" th:value="${expenses.amount}">
+            <div class="field">
+                <label class="label" for="description">Where was this purchase made?</label>
+                <div class="control">
+                    <input id="description" class="input" th:value="${expenses.description}" name="description">
+                <br>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="expense-amount">How much was this purchase?</label>
+                <div class="control">
+                    <input class="input" id="expense-amount" name="amount" th:value="${expenses.amount}">
+                </div>
+            </div>
             <div class="control has-icons-left">
                 <select th:field="*{type}" id="type">
                     <option value="0" disabled selected>--Select One--</option>
@@ -29,9 +46,11 @@
                     <option value="7">Misc</option>
                 </select>
             </div>
-        </div>
-        <button><a class="button is-link is-rounded">Update</a></button>
-    </form>
+<!--            <button class="button is-link is-rounded">Update</button>-->
+            <button style="border-style: none"><a class="button is-link is-rounded">Update</a></button>
+        </form>
+    </div>
 </div>
+<th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
 </html>
