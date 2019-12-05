@@ -187,7 +187,7 @@
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
-                            <button th:class="button"><a style="border-style: none" class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}"><i class="fas fa-dollar-sign"></i></a></button>
+                                <button th:class="button"><a style="border-style: none" class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}"><i class="fas fa-dollar-sign"></i></button>
                         </div>
                     </div>
                 </div>
@@ -209,19 +209,7 @@
                                         <p class="panel-heading">ADD TO YOUR GOALe</p>
                                         <div class="panel-block">
                                             <figure>
-                                                <form th:action="'/goals/' + ${goals.id} + '/add'" th:method="post">
-                                                    <div class="field">
-                                                        <h1 class="title" th:text="${goals.description}"></h1>
-                                                        <h5 class="subtitle is-6">Goal Amount: <span th:text="${#numbers.formatCurrency(goals.amount)}"></span></h5>
-                                                    </div>
-                                                    <label class="label" for="title">How much do you want to add?</label>
-                                                    <div class="control">
-                                                        <input class="input" id="title" type="text" th:value="${#numbers.formatCurrency(goals.amountSaved)}"
-                                                               name="amountSaved">
-                                                    </div>
-
-                                                    <button class="button is-link is-rounded">Update</button>
-                                                </form>
+.
 
                                             </figure>
                                         </div>
