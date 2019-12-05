@@ -187,7 +187,10 @@
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
-                                <button th:class="button"><a style="border-style: none" class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}"><i class="fas fa-dollar-sign"></i></button>
+
+                            <br>
+                            <button th:class="button" style="border-style: hidden"><a class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}">Add to goal</a></button>
+
                         </div>
                     </div>
                 </div>
@@ -200,19 +203,16 @@
 <!--                        New Goal-->
 <!--                    </button>-->
 
+
                     <div class="modal" id="myModal2">
                         <div class="modal-background"></div>
                         <div class="modal-content">
                             <div class="box">
                                 <div class="column is-6 has-text-centered">
                                     <div class="panel">
-                                        <p class="panel-heading">ADD TO YOUR GOALe</p>
-                                        <div class="panel-block">
-                                            <figure>
-.
 
-                                            </figure>
-                                        </div>
+                                        <p class="panel-heading">Create an Expense</p>
+
                                     </div>
                                 </div>
                             </div>

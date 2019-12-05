@@ -90,4 +90,5 @@ public class GoalController {
         goalDao.save(oldGoal);
         return "redirect:/profile";
     }
+
 }

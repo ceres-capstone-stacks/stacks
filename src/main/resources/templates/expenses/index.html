@@ -60,16 +60,16 @@
             <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
 
 
-                <td><div class="buttons"><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
+            <td><div class="buttons"><a style="border-style: none" class="button" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}"><i class="far fa-edit"></i></a>
+            <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
+                <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
+            </form>
+            </div>
+            </td>
+        </tbody>
+    </table>
+</div>
 
-                    <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
-                        <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
-                    </form>
-                </div>
-                </td>
-            </tbody>
-        </table>
-    </div>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
 <script>
