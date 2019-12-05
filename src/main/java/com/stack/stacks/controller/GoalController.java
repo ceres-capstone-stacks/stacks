@@ -64,11 +64,7 @@ public class GoalController {
         return "goals/editGoal";
     }
 
-    @GetMapping("/goals/{id}/add")
-    public String addToGoal(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("goals",goalDao.getOne(id));
-        return "goals/add";
-    }
+
 
     @PostMapping("/goals/{id}/edit")
     public String updateGoal (@PathVariable long id, @RequestParam double amountSaved, @RequestParam String date) {
@@ -77,5 +73,21 @@ public class GoalController {
         oldGoal.setDate(date);
         goalDao.save(oldGoal);
         return "redirect:/goals";
+    }
+
+    @GetMapping("/goals/{id}/add")
+    public String addToGoal(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("goals",goalDao.getOne(id));
+        return "goals/add";
+    }
+
+    @PostMapping("/goals/{id}/add")
+    public String updateAmountGoal (@PathVariable long id, @RequestParam double amountSaved) {
+        Goal oldGoal = goalDao.getOne(id);
+        System.out.println(oldGoal.getAmountSaved());
+        oldGoal.setAmountSaved(amountSaved + oldGoal.getAmountSaved());
+//        oldGoal.setDate(date);
+        goalDao.save(oldGoal);
+        return "redirect:/profile";
     }
 }

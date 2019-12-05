@@ -19,7 +19,7 @@
 
 <div class="columns is-centered is-full-mobile">
     <div class="column is-half">
-        <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
+        <form th:action="'/goals/' + ${goals.id} + '/add'" th:method="post">
             <div class="field">
                 <h1 class="title" th:text="${goals.description}"></h1>
                 <h5 class="subtitle is-6">Goal Amount: <span th:text="${#numbers.formatCurrency(goals.amount)}"></span></h5>
