@@ -187,6 +187,8 @@
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
+                            <br>
+                            <button th:class="button" style="border-style: hidden"><a class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}">Add to goal</a></button>
                         </div>
                     </div>
                 </div>
