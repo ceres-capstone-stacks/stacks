@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stacks - Let us help your wallet grow.</title>
+    <link rel="stylesheet" href="bulma-carousel.min.css">
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
@@ -17,17 +18,19 @@
     </div>
 </section>
 <div class="columns is-mobile is-multiline">
-    <div class="column is-half is-offset-0">
+    <div class="column is-6 is-offset-0">
         <h3>We can help you <i>save</i> money by keeping track of your expenses.</h3>
     </div>
-    <div class="column is-half is-offset-8">
+    <div class="column is-4 is-offset-8 is-vcentered">
         <h3>Let's work towards reaching your <i>savings goals</i>.</h3>
     </div>
-    <div class="column is-half is-offset-0">
-        <h3>Learn about <i>saving</i> by finding out tricks & tips from others.</h3>
+    <div class="column is-8 is-offset-0">
+        <figure class="image" style="height: 75%; width: 75%">
+            <img th:src="@{/css/Goals.png}" alt="goals">
+        </figure>
     </div>
-    <div class="column is-half is-offset-8">
-        <h3><i>Save</i> by learning about upcoming or ongoing promotions.</h3>
+    <div class="column is-6 is-offset-0">
+        <h3>Learn about <i>saving</i> by finding out tricks & tips from others.</h3>
     </div>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
