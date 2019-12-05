@@ -17,46 +17,48 @@
     </div>
 </section>
 <div class="columns is-full-mobile is-centered">
-    <div class="column is-three-quarters">
-        <a class="button is-link is-rounded is-outlined" href="expenses/create">Create a new expense</a>
-        <table class="table is-striped is-bordered" style="width: 100%">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Amount</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="expense : ${expenses}">
-                <td th:text="${expense.date }"></td>
-                <td th:text="${expense.description}"></td>
-                <th:block th:switch="${expense.type}">
-                    <div th:case="1">
-                        <td>Bills</td>
-                    </div>
-                    <div th:case="2">
-                        <td>Groceries</td>
-                    </div>
-                    <div th:case="3">
-                        <td>Subscriptions & Memberships</td>
-                    </div>
-                    <div th:case="4">
-                        <td>Food & Dining</td>
-                    </div>
-                    <div th:case="5">
-                        <td>Leisure & Gifts</td>
-                    </div>
-                    <div th:case="6">
-                        <td>Auto & Transportation</td>
-                    </div>
-                    <div th:case="7">
-                        <td>Misc.</td>
-                    </div>
-                </th:block>
-                <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
+
+<div class="column is-three-quarters">
+    <a class="button is-link is-rounded is-outlined" href="expenses/create">Create a new expense</a>
+    <table class="table is-striped is-bordered" style="width: 100%">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="expense : ${expenses}">
+            <td><span th:text="${expense.date }" class="date-span"></span></td>
+            <td th:text="${expense.description}"></td>
+            <th:block th:switch="${expense.type}">
+                <div th:case="1">
+                    <td>Bills</td>
+                </div>
+                <div th:case="2">
+                    <td>Groceries</td>
+                </div>
+                <div th:case="3">
+                    <td>Subscriptions & Memberships</td>
+                </div>
+                <div th:case="4">
+                    <td>Food & Dining</td>
+                </div>
+                <div th:case="5">
+                    <td>Leisure & Gifts</td>
+                </div>
+                <div th:case="6">
+                    <td>Auto & Transportation</td>
+                </div>
+                <div th:case="7">
+                    <td>Misc.</td>
+                </div>
+            </th:block>
+            <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
+
 
                 <td><div class="buttons"><a class="button is-warning is-rounded" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}">Edit</a>
 
@@ -70,5 +72,17 @@
     </div>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
+<script>
+    $(document).ready(function () {
+        $(".date-span").each(function () {
+            let dateText = $(this).text();
+            let partOne = dateText.substr(5, 2);
+            let partTwo = dateText.substr(8, 2);
+            let partThree = dateText.substr(0, 4);
+            let formatDate = (partOne + "-" + partTwo + "-" + partThree);
+            $(this).text(formatDate);
+        })
+    })
+</script>
 </body>
 </html>
