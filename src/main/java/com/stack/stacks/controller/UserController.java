@@ -171,16 +171,16 @@ public class UserController {
         return "redirect:/profile/expenses";
     }
 
-    @GetMapping("/expenses/{id}/edit")
+    @GetMapping("/profile/expenses/{id}/edit")
     public String editExpense(@PathVariable long id, Model vModel){
         vModel.addAttribute("expenses", expenseDao.getOne(id));
-        return "expenses/index";
+        return "expenses/editExpense";
     }
 
-    @PostMapping("/expenses/{id}/edit")
-    public String updateExpense(@PathVariable long id, @RequestParam String Date, @RequestParam String description, @RequestParam int type, @RequestParam double amount) {
+    @PostMapping("/profile/expenses/{id}/edit")
+    public String updateExpense(@PathVariable long id, @RequestParam String date, @RequestParam String description, @RequestParam int type, @RequestParam double amount) {
         Expense oldExpense = expenseDao.getOne(id);
-        oldExpense.setDate(Date);
+        oldExpense.setDate(date);
         oldExpense.setDescription(description);
         oldExpense.setType(type);
         oldExpense.setAmount(amount);

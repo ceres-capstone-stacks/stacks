@@ -58,7 +58,7 @@
             </th:block>
             <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
 
-            <td><div class="buttons"><a style="border-style: none" class="button" data-target="#myModal" aria-haspopup="true"><i class="far fa-edit"></i></a><!-- need to map the edit icon to the edit expense modal -->
+            <td><div class="buttons"><a style="border-style: none" class="button" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}"><i class="far fa-edit"></i></a>
             <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
             </form>
@@ -68,52 +68,6 @@
     </table>
 </div>
 </div>
-<div class="modal" id="myModal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-        <div class="box">
-            <div class="panel">
-                <p class="panel-heading">Edit this Expense</p>
-                <div class="panel-block">
-                    <figure>
-                        <form th:action="'profile/expenses/' + ${expense.id} + '/edit'" th:method="post">
-                            <div class="field">
-                                <h1 th:text="${expense.description}"></h1>
-                                <h5 class="subtitle is-6">Goal Amount: <span th:text="${#numbers.formatCurrency(expense.amount)}"></span></h5>
-                            </div>
-                            <div class="field">
-                                <label class="label" for="date">Date</label>
-                                <div class="control">
-                                    <input class="input" id="date" th:value="${expense.date}" name="date" type="date">
-                                </div>
-                            </div>
-                            <button id="save" class="button is-link is-rounded">Update</button>
-                        </form>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="modal-close is-large" aria-label="close"></button>
-</div>
-
 <th:block th:replace="fragments/footer :: main-footer"/>
-<script>
-    "use strict";
-    $(document).ready(function() {
-        document.querySelectorAll('.button').forEach(function (el) {
-            el.addEventListener('click', function () {
-
-                let target = document.querySelector(el.getAttribute('data-target'));
-                target.classList.add('is-active');
-                target.querySelector('.modal-close').addEventListener('click', function () {
-                    target.classList.remove('is-active');
-                });
-            });
-        });
-
-
-    });
-</script>
 </body>
 </html>
