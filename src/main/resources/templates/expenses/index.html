@@ -19,9 +19,12 @@
 <div class="columns is-full-mobile is-centered">
 <div class="column is-three-quarters">
     <a class="button is-link is-rounded is-outlined" href="expenses/create">Create a new expense</a>
+    <br>
+    <input id="myInput" type="text" placeholder="Search..">
+
     <table class="table is-striped is-bordered" style="width: 100%">
         <thead>
-        <tr>
+        <tr class="header">
             <th>Date</th>
             <th>Description</th>
             <th>Category</th>
@@ -29,7 +32,7 @@
             <th>Action</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="myTable">
         <tr th:each="expense : ${expenses}">
             <td><span th:text="${expense.date }" class="date-span"></span></td>
             <td th:text="${expense.description}"></td>
@@ -78,7 +81,14 @@
             let partThree = dateText.substr(0, 4);
             let formatDate = (partOne + "-" + partTwo + "-" + partThree);
             $(this).text(formatDate);
-        })
+        });
+
+        $("#myInput").on("keyup", function() {
+            let value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     })
 </script>
 </body>
