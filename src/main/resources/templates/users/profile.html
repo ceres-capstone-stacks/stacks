@@ -141,7 +141,7 @@
                                                         <button class="button is-link is-rounded">Submit</button>
                                                     </div>
                                                     <div class="control">
-                                                        <a class="button is-link is-rounded is-outlined">Cancel</a>
+                                                        <a class="button is-link is-rounded is-outlined" id="close-modal">Cancel</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -392,6 +392,11 @@ $("#expense-form").submit(function (event) {
 
     });
 
+});
+
+$("#close-modal").click(function (e) {
+    e.preventDefault();
+    $("#myModal").removeClass('is-active');
 });
 
 $(".add-to-goal").click(function (event) {
