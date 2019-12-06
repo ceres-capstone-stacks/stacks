@@ -15,8 +15,6 @@
         </div>
     </div>
 </section>
-
-
 <div class="columns is-centered is-full-mobile">
     <div class="column is-half">
         <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">
@@ -32,7 +30,7 @@
             <div class="field">
                 <label class="label" for="date">Date</label>
                 <div class="control">
-                    <input class="input" id="date" th:value="${goals.date}" name="date">
+                    <input class="input" id="date" th:value="${goals.date}" name="date" type="date">
                 </div>
             </div>
             <button class="button is-link is-rounded">Update</button>

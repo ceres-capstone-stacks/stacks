@@ -177,8 +177,10 @@
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
 <!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
+
                             <progress class="progress is-success" th:max="${goal.amount}"
                                       th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
+
 <!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
@@ -197,7 +199,6 @@
                 <figure class="image is-16x9">
 
                     <a href="/goals/create">Set a goal</a>
-
                     <br>
                     <a href="goals">View goals....</a>
                 </figure>

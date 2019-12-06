@@ -175,9 +175,9 @@ public class UserController {
     }
 
     @PostMapping("/profile/expenses/{id}/edit")
-    public String updateExpense(@PathVariable long id, @RequestParam String Date, @RequestParam String description, @RequestParam int type, @RequestParam double amount) {
+    public String updateExpense(@PathVariable long id, @RequestParam String date, @RequestParam String description, @RequestParam int type, @RequestParam double amount) {
         Expense oldExpense = expenseDao.getOne(id);
-        oldExpense.setDate(Date);
+        oldExpense.setDate(date);
         oldExpense.setDescription(description);
         oldExpense.setType(type);
         oldExpense.setAmount(amount);
