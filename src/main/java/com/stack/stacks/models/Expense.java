@@ -1,8 +1,13 @@
 package com.stack.stacks.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 @Table(name = "expenses")
@@ -17,7 +22,7 @@ public class Expense {
     private double amount;
 
     @Column
-    private java.sql.Date date;
+    private String date;
 
     @Column
     private String description;
@@ -26,22 +31,31 @@ public class Expense {
     private boolean isRegular;
 
     @ManyToOne
+    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
-    private List<Type> types;
+    @Column
+    private int type;
 
     public Expense() {
     }
 
-    public Expense(double amount, Date date, String description, boolean isRegular, User user, List<Type> types) {
+    public Expense(double amount, String date, String description, boolean isRegular, User user, int type) {
         this.amount = amount;
         this.date = date;
         this.description = description;
         this.isRegular = isRegular;
         this.user = user;
-        this.types = types;
+        this.type = type;
+    }
+
+    public Expense(double amount, String date, String description, int type) {
+        this.amount = amount;
+        this.date = date;
+        this.description = description;
+        this.type = type;
     }
 
     public long getId() {
@@ -53,6 +67,7 @@ public class Expense {
     }
 
     public double getAmount() {
+
         return amount;
     }
 
@@ -60,11 +75,11 @@ public class Expense {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -92,11 +107,18 @@ public class Expense {
         this.user = user;
     }
 
-    public List<Type> getTypes() {
-        return types;
+    public int getType() {
+        return type;
     }
 
-    public void setTypes(List<Type> types) {
-        this.types = types;
+    public void setType(int type) {
+        this.type = type;
     }
+
+//    public static String displayCurrency (double amount) {
+//        Locale locale = new Locale("en", "US");
+//        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+//        System.out.println(currencyFormatter.format(amount));
+//        return currencyFormatter.format(amount);
+//    }
 }

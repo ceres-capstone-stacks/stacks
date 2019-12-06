@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,27 +16,36 @@
     </div>
 </section>
 
-<div class="container" th:each="goal : ${goal}">
-    <div style="height: 400px; width: 300px">
-        <h2 th:text="${goal.description}"></h2>
-        <div>
-            <ul>
-<!--                <li><strong>Goal Description: </strong><span th:text="${goal.description}"></span></li>-->
-                <li><strong>Need to save: </strong>$<span th:text="${goal.amount}"></span></li>
-                <li><strong>How much you've saved so far: </strong>$<span th:text="${goal.amountSaved}"></span></li>
-                <li><strong>What you have left to go: </strong>$<span th:text="${goal.amount} - ${goal.amountSaved}"></span></li>
-            </ul>
-            <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}" class="date-span"></span></p>
-
-<!--        <button class="button">Edit</button>-->
-        <button class="btn btn-light btn-block"><a th:href="@{'/goals/' + ${goal.id} + '/edit'}">Edit</a></button>
-        <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-            <button class="btn btn-danger btn-block">Delete</button>
-        </form>
-<!--        <button class="button">Delete</button>-->
+<div class="columns is-centered has-text-centered is-full-mobile">
+    <div class="column is-half">
+        <a class="button is-success is-rounded" href="/goals/create">Create a goal</a>
     </div>
 </div>
-<a class="button is-success is-rounded" href="/goals/create">Create a goal</a>
+<div class="columns is-centered is-multiline is-full-mobile">
+    <div class="column is-4 has-text-centered" th:each="goal : ${goal}">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title" th:text="${goal.description}"></p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <p>You need to save <span th:text="${#numbers.formatCurrency(goal.amount)}"></span>.</p>
+                    <p>You have saved <span th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span> so far.
+                    </p>
+                    <p th:with="result=${#numbers.formatCurrency(goal.amount - goal.amountSaved)}">You're short <span th:text="${result}"></span> to reach your goal!</p>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a style="border-style: none" class="card-footer-item"
+                   th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i
+                        class="far fa-edit"></i></a>
+                <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
+                    <button class="card-footer-item" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
+                </form>
+            </footer>
+        </div>
+    </div>
+</div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script>
     $(document).ready(function () {

@@ -31,3 +31,6 @@ build/
 .vscode/
 
 src/main/resources/application.properties
+*/keys.js
+src/main/resources/static.css/js/keys.js
+

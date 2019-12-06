@@ -1,41 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Steals & Deals | Stacks</title>
+    <title>Retail Coupons | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title">Steals & Deals</h1>
-            <h2 class="subtitle">This page is dedicated to finding you some of the best steals & deals around you!</h2>
+            <h1 class="title">In Store & Online Discounts</h1>
+            <h2 class="subtitle">This page is dedicated to finding you some of the best deals around you!</h2>
         </div>
     </div>
 </section>
-
-<table class="table is-bordered" >
-    <thead>
-<tr>
-    <th>Store</th>
-    <th>Code</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody id="mon">
-
-    </tbody>
-</table>
+<div class="columns is-multiline is-full-mobile is-centered" id="promos"></div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script
         src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
-
-
 <script>
     var settings = {
         "async": true,
@@ -46,35 +34,36 @@
             "x-rapidapi-host": "kuponiko.p.rapidapi.com",
             "x-rapidapi-key": "bdecd33faamsh57590d18918e026p1ba8bajsn8488dfca75c1"
         }
-
     };
-
     $.ajax(settings).done(function (respone) {
         var data = respone;
         var result = [];
         var newhtml = "";
-
-
         data.forEach(function (item) {
-            if(item.description != ""){
+            if (item.description != "") {
                 result.push(item)
             }
             return result;
         });
         console.log(result);
         console.log(result[3].code);
-        for(var i = 0; i <= result.length - 1; i++){
+        for (var i = 0; i <= result.length - 1; i++) {
             console.log(result[i].code);
-        newhtml +=        '<tr>';
-        newhtml +=        '<th>'+ result[i].store_name + '</th>';
-        newhtml +=        '<th>' + result[i].code + '</th>';
-        newhtml +=        '<th>' + result[i].description + '</th>';
-        newhtml +=        '</tr>';
+            newhtml += '<div class="column is-4">';
+            newhtml += '<div class="panel" style="border-style: dashed">';
+            newhtml += '<div class="panel-heading">';
+            newhtml += '<strong>' + result[i].store_name + '</strong>';
+            newhtml += '</div>';
+            newhtml += '<div class="panel-block">';
+            newhtml += '<figure>';
+            newhtml += '<p>' + result[i].description + '</p><br>';
+            newhtml += '<small><u>Discount code</u>: <i>' + result[i].code + '</i></small>';
+            newhtml += '</div>';
+            newhtml += '</div>';
+            newhtml += '</div>';
         }
-        $('#mon').append(newhtml);
+        $('#promos').append(newhtml);
     })
-
-
 </script>
 </body>
 </html>

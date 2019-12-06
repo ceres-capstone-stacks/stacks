@@ -1,24 +1,101 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>New Post | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
+<th:block th:replace="fragments/navbar.html :: main-nav"/>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
         <h1 class="title">Create a post</h1>
     </div>
 </section>
 <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-    Title:<input th:field="*{title}"/>
-    <br>
-    Description:<input th:field="*{content}"/>
-    <br>
-    <input type="submit"/>
+    <div class="columns is-mobile is-centered">
+        <div class="column is-half">
+            <div class="field">
+                <label for="title">Post Title</label>
+                <div class="control">
+                    <input id="title" class="input" th:field="*{title}"/>
+                </div>
+            </div>
+            <div class="field">
+                <label for="content">Post Description</label>
+                <div class="control">
+                    <textarea id="content" class="textarea" th:field="*{content}"></textarea>
+                </div>
+            </div>
+            <div id="tags-div">
+                <div th:each="tag : ${tags}">
+                    <label th:for="${tag.id}"><span th:text="${tag.name}"></span></label>
+                    <input type="checkbox" name="tagged" th:value="${tag.id}">
+                </div>
+            </div>
+            <div class="control">
+                <button class="button is-link">Submit</button>
+            </div>
+        </div>
+    </div>
 </form>
+<label for="new-tag">Add your own tag.</label>
+<input type="text" id="new-tag">
+<br>
+<button id="tag-submit">New Tag</button>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script>
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e,xhr) {
+        xhr.setRequestHeader(header, token);
+    });
+
+    function getTags(newTagName) {
+        let request = $.ajax({'url': '/findtags.json'});
+        request.done(function (tags) {
+            tags.forEach(function(tag) {
+                if(tag.name === newTagName){
+                    let html = "<label for=\"" + tag.id + "\">" + tag.name + "</label>" +
+                        "                    <input type=\"checkbox\" name=\"tagged\" value=\"" + tag.id +  "\">";
+                    $("#tags-div").append(html);
+                }
+            });
+        });
+    }
+
+    $("#tag-submit").click(function (event) {
+        event.preventDefault();
+
+        let name = $("#new-tag").val();
+        $("#new-tag").val("");
+
+        let newTag = {
+            name: name
+        };
+        $.ajax({
+            type: "POST",
+            dataType : 'json',
+            url: "/tags.json",
+            data: JSON.stringify(newTag),
+            headers: {
+                'content-type': 'application/json'
+            },
+            success: function(data, textStatus, jqXHR) {
+                getTags(name);
+                console.log(data);
+            },
+            error: function(request, status, error) {
+                getTags(name);
+                console.log(error);
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

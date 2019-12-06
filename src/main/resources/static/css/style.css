@@ -8,6 +8,10 @@ body {
     min-height: 100vh;
 }
 
+.button {
+    margin-bottom: 1em;
+}
+
 .footer {
     background-color: rgb(56, 63, 65);
     height: 150px;
@@ -15,4 +19,44 @@ body {
     /*position: absolute;*/
     bottom: 0;
     width: 100%;
+}
+
+.bad-login {
+    color: red;
+}
+
+.good-logout{
+    color: green;
+}
+
+.headShots {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    display: inline-grid;
+    justify-items: center;
+    width: 18rem;
+    text-align: center;
+}
+
+.hero {
+    margin-bottom: 1.5em;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
