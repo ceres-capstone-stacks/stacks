@@ -142,8 +142,7 @@
                                                         <button class="button is-link is-rounded">Submit</button>
                                                     </div>
                                                     <div class="control">
-                                                        <a class="button is-link is-rounded is-outlined"
-                                                           href="/profile/expenses">Cancel</a>
+                                                        <a class="button is-link is-rounded is-outlined">Cancel</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -171,14 +170,17 @@
                     <div>
                         <ul>
                             <li><strong>Need to save: </strong><span th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
-                            <li><strong>How much you've saved so far: </strong><span
+                            <li th:id="'amount-' + ${goal.id}"><strong>How much you've saved so far: </strong><span
                                     th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span></li>
                             <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to
                                 go: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
 <!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
-                            <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
+
+                            <progress class="progress is-success" th:max="${goal.amount}"
+                                      th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
+
 <!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
@@ -186,8 +188,9 @@
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
-                            <br>
-                            <button th:class="button" style="border-style: hidden"><a class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}">Add to goal</a></button>
+                            <button class="add-to-goal" th:id="${goal.id}" th:amount="${goal.amount}" th:amountSaved="${goal.amountSaved}" th:date="${goal.date}" th:description="${goal.description}" th:goTime="yes">
+                                Add to Goal
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -196,22 +199,6 @@
                 <figure class="image is-16x9">
 
                     <a href="/goals/create">Set a goal</a>
-<!--                    <button class="button is-link is-outlined is-rounded mod2"  data-target2="#myModal2" aria-haspopup="true">Create a-->
-<!--                        New Goal-->
-<!--                    </button>-->
-                    <div class="modal" id="myModal2">
-                        <div class="modal-background"></div>
-                        <div class="modal-content">
-                            <div class="box">
-                                <div class="column is-6 has-text-centered">
-                                    <div class="panel">
-                                        <p class="panel-heading">Create an Expense</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="modal-close is-large" aria-label="close"></button>
-                    </div>
                     <br>
                     <a href="goals">View goals....</a>
                 </figure>
@@ -401,6 +388,78 @@ $("#expense-form").submit(function (event) {
     });
 
 });
+
+$(".add-to-goal").click(function (event) {
+    event.preventDefault();
+
+    if($(this).attr("goTime") === "no"){
+        return;
+    } else {
+
+        $(".add-to-goal").attr("goTime", "no");
+
+        let goalId = $(this).attr("id");
+        let amount = $(this).attr("amount");
+        let amountSaved = $(this).attr("amountSaved");
+        let description = $(this).attr("description");
+        let date = $(this).attr("date");
+
+        $(this).parent().append("<input type='number' placeholder='How much are you saving?' id='now-adds'></input>");
+        $(this).parent().append("<button id='addition-btn'>Add</button>");
+
+        $("#addition-btn").click(function () {
+            let newSavings = $("#now-adds").val();
+            newSavings = parseFloat(newSavings);
+            amountSaved = parseFloat(amountSaved);
+            amountSaved += newSavings;
+            $(this).prev().prev().attr("amountSaved", amountSaved);
+            amount = parseFloat(amount);
+            let difference = amount - amountSaved;
+            let progressBar = "#progress-" + goalId;
+            amount = amount.toString();
+            amountSaved = amountSaved.toString();
+
+            let updatedGoal = {
+                id: goalId,
+                date:  date,
+                description: description,
+                amount: amount,
+                amountSaved: amountSaved
+            };
+            $.ajax({
+                type: "POST",
+                dataType : 'json',
+                url: "/goals.json",
+                data: JSON.stringify(updatedGoal),
+                headers: {
+                    'content-type': 'application/json'
+                },
+                success: function(data, textStatus, jqXHR) {
+                    $("#now-adds").remove();
+                    $("#addition-btn").remove();
+                    $(".add-to-goal").attr("goTime", "yes");
+                    console.log(data);
+                },
+                error: function(request, status, error) {
+                    $("#now-adds").remove();
+                    $("#addition-btn").remove();
+                    $(".add-to-goal").attr("goTime", "yes");
+                    let liId = "#amount-" + goalId;
+                    let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
+                        "                                go: </strong><span\n" +
+                        "                                    >" + difference.toFixed(2) + "</span></li>";
+                    $(liId).html(html);
+                    $(liId).next("li").remove();
+                    $(progressBar).val(amountSaved);
+                    console.log(error);
+                }
+
+            });
+        })
+
+    }
+
+})
 
 
 </script>
