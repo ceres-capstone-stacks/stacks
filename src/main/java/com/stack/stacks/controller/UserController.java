@@ -48,6 +48,12 @@ public class UserController {
     public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        String firstName = user.getFirstName();
+        firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
+        user.setFirstName(firstName);
+        String lastName = user.getLastName();
+        lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
+        user.setLastName(lastName);
         userDao.save(user);
         return "redirect:/login";
     }
