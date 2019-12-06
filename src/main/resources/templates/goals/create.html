@@ -27,14 +27,14 @@
             <div class="field">
                 <label>How much do you want to save?</label>
                 <div class="control has-icons-left">
-                    <input class="input" th:field="*{amount}">
+                    <input class="input money-input" th:field="*{amount}">
                     <span class="icon is-left"><i class="fas fa-dollar-sign"></i></span>
                 </div>
             </div>
             <div class="field">
                 <label>Do you have any money saved so far?</label>
                 <div class="control has-icons-left">
-                    <input class="input" th:field="*{amountSaved}">
+                    <input class="input money-input" th:field="*{amountSaved}">
                     <span class="icon is-left"><i class="fas fa-dollar-sign"></i></span>
                 </div>
             </div>
@@ -52,5 +52,14 @@
     </div>
 </form>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script>
+    $(".money-input").on("input", function() {
+        this.value = this.value
+            .replace(/[^\d.]/g, '')
+            .replace(/(^[\d]{6})[\d]/g, '$1')
+            .replace(/(\..*)\./g, '.')
+            .replace(/(\.[\d]{2})./g, '$1');
+    });
+</script>
 </body>
 </html>

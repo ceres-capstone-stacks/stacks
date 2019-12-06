@@ -109,8 +109,7 @@
                                                     </div>
                                                     <label class="label">How much was this purchase?</label>
                                                     <div class="control has-icons-left">
-                                                        <input th:field="*{amount}" class="input" type="number"
-                                                               step=".01"
+                                                        <input th:field="*{amount}" class="input" type="text"
                                                                placeholder="ex. 45.25, 176.97" id="amount">
                                                         <span class="icon is-small is-left"><i
                                                                 class="fas fa-dollar-sign"></i></span>
@@ -221,13 +220,13 @@
         })
     });
 
-    let billsAmount = $("#bills-amount").val();
-    let groceriesAmount = $("#groceries-amount").val();
-    let membershipAmount = $("#membership-amount").val();
-    let foodAmount = $("#food-amount").val();
-    let giftsAmount = $("#gifts-amount").val();
-    let autoAmount = $("#auto-amount").val();
-    let miscAmount = $("#misc-amount").val();
+    let billsAmount = parseFloat($("#bills-amount").val()).toFixed(2);
+    let groceriesAmount = parseFloat($("#groceries-amount").val()).toFixed(2);
+    let membershipAmount = parseFloat($("#membership-amount").val()).toFixed(2);
+    let foodAmount = parseFloat($("#food-amount").val()).toFixed(2);
+    let giftsAmount = parseFloat($("#gifts-amount").val()).toFixed(2);
+    let autoAmount = parseFloat($("#auto-amount").val()).toFixed(2);
+    let miscAmount = parseFloat($("#misc-amount").val()).toFixed(2);
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'pie',
@@ -260,6 +259,13 @@ document.querySelectorAll('.modal-button').forEach(function(el) {
 el.addEventListener('click', function() {
     var target = document.querySelector(el.getAttribute('data-target'));
     target.classList.add('is-active');
+    $("#amount").on("input", function() {
+        this.value = this.value
+            .replace(/[^\d.]/g, '')
+            .replace(/(^[\d]{6})[\d]/g, '$1')
+            .replace(/(\..*)\./g, '.')
+            .replace(/(\.[\d]{2})./g, '$1');
+    });
     target.querySelector('.modal-close').addEventListener('click',   function() {
         target.classList.remove('is-active');
     });
@@ -274,6 +280,7 @@ document.querySelectorAll('.mod2').forEach(function(el) {
         });
     });
 });
+
 let token = $("meta[name='_csrf']").attr("content");
 let header = $("meta[name='_csrf_header']").attr("content");
 $(document).ajaxSend(function(e,xhr) {
@@ -402,8 +409,15 @@ $(".add-to-goal").click(function (event) {
         let description = $(this).attr("description");
         let date = $(this).attr("date");
 
-        $(this).parent().append("<input type='number' placeholder='How much are you saving?' id='now-adds'></input>");
+        $(this).parent().append("<input type='text' placeholder='How much are you saving?' id='now-adds'></input>");
         $(this).parent().append("<button id='addition-btn'>Add</button>");
+        $("#now-adds").on("input", function() {
+            this.value = this.value
+                .replace(/[^\d.]/g, '')
+                .replace(/(^[\d]{6})[\d]/g, '$1')
+                .replace(/(\..*)\./g, '.')
+                .replace(/(\.[\d]{2})./g, '$1');
+        });
 
         $("#addition-btn").click(function () {
             let newSavings = $("#now-adds").val();
