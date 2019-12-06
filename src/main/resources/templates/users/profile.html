@@ -28,7 +28,7 @@
 <div class="columns is-multiline is-half-mobile is-centered">
     <div class="column is-12">
         <div class="panel">
-            <p class="panel-heading">
+            <p class="panel-heading hero is-primary is-bold">
                 Spending Habits
             </p>
             <div class="panel-block">
@@ -42,10 +42,10 @@
     </div>
     <div class="column is-6" style="float: right">
         <div class="panel">
-            <p class="panel-heading">My Recent Transactions</p>
+            <p class="panel-heading hero is-primary is-bold">My Recent Transactions</p>
             <div class="panel-block">
                 <div class="table-container">
-                    <table class="table is-fullwidth is-bordered is-striped">
+                    <table class="table is-fullwidth is-striped">
                         <thead>
                         <tr>
                             <th>Date</th>
@@ -94,7 +94,7 @@
                         <div class="modal-content">
                             <div class="box">
                                 <div class="panel">
-                                    <p class="panel-heading">Create an Expense</p>
+                                    <p class="panel-heading hero is-primary is-bold">Create an Expense</p>
                                     <div class="panel-block">
                                         <figure>
                                             <form th:action="@{/profile/expenses/create}" th:method="post"
@@ -164,7 +164,7 @@
     <div class="column is-6">
 
         <div class="panel">
-            <p class="panel-heading">My Current Goals</p>
+            <p class="panel-heading hero is-primary is-bold">My Current Goals</p>
             <div class="profile-goal" th:each="goal : ${goal}">
                 <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
                     <u><strong style="text-transform: uppercase" th:text="${goal.description}"></strong></u>
