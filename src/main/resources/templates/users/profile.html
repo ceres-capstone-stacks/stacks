@@ -170,7 +170,7 @@
                     <div>
                         <ul>
                             <li><strong>Need to save: </strong><span th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
-                            <li th:id="amount-${goal.id}"><strong>How much you've saved so far: </strong><span
+                            <li th:id="'amount-' + ${goal.id}"><strong>How much you've saved so far: </strong><span
                                     th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span></li>
                             <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to
                                 go: </strong><span
@@ -178,7 +178,7 @@
                         </ul>
 <!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
                             <progress class="progress is-success" th:max="${goal.amount}"
-                                      th:value="${goal.amountSaved}"></progress>
+                                      th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
 <!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
@@ -411,6 +411,11 @@ $(".add-to-goal").click(function (event) {
             newSavings = parseFloat(newSavings);
             amountSaved = parseFloat(amountSaved);
             amountSaved += newSavings;
+            $(this).prev().prev().attr("amountSaved", amountSaved);
+            amount = parseFloat(amount);
+            let difference = amount - amountSaved;
+            let progressBar = "#progress-" + goalId;
+            amount = amount.toString();
             amountSaved = amountSaved.toString();
 
             let updatedGoal = {
@@ -431,15 +436,20 @@ $(".add-to-goal").click(function (event) {
                 success: function(data, textStatus, jqXHR) {
                     $("#now-adds").remove();
                     $("#addition-btn").remove();
-                    $(".add-to-goal").attr("goTime", "no");
-                    let liId = "#amount-" + goalId;
-                    $(liId).html("<strong>Oh Boy</strong>");
+                    $(".add-to-goal").attr("goTime", "yes");
                     console.log(data);
                 },
                 error: function(request, status, error) {
                     $("#now-adds").remove();
                     $("#addition-btn").remove();
-                    $(".add-to-goal").attr("goTime", "no");
+                    $(".add-to-goal").attr("goTime", "yes");
+                    let liId = "#amount-" + goalId;
+                    let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
+                        "                                go: </strong><span\n" +
+                        "                                    >" + difference.toFixed(2) + "</span></li>";
+                    $(liId).html(html);
+                    $(liId).next("li").remove();
+                    $(progressBar).val(amountSaved);
                     console.log(error);
                 }
 
