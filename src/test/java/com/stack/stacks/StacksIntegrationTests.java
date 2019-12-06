@@ -94,4 +94,40 @@ public class StacksIntegrationTests {
                 .andExpect(status().is3xxRedirection());
     }
 
+    @Test
+    public void testShowPost() throws Exception {
+        Post existingPost = postDao.findAll().get(2);
+
+        this.mvc.perform(get("/posts"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(existingPost.getContent())));
+    }
+
+    @Test
+    public void testPostsIndex() throws Exception {
+        Post existingPost = postDao.findAll().get(2);
+
+        this.mvc.perform(get("/posts"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("User Posts")))
+                .andExpect(content().string(containsString(existingPost.getTitle())));
+    }
+
+    @Test
+    public void testEditPost() throws Exception {
+        Post existingPost = postDao.findAll().get(2);
+
+        this.mvc.perform(
+            post("/posts/" + existingPost.getId() + "/edit").with(csrf())
+                .session((MockHttpSession) httpSession)
+                .param("title","edited title")
+                .param("description", "edited description"))
+            .andExpect(status().is3xxRedirection());
+
+        this.mvc.perform(get("/posts/myposts"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("edited title")))
+                .andExpect(content().string(containsString("edited description")));
+    }
+
 }
