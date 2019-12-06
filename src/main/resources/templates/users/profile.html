@@ -378,11 +378,9 @@ $("#expense-form").submit(function (event) {
         },
         success: function(data, textStatus, jqXHR) {
             $("#myModal").removeClass('is-active');
-            console.log(data);
         },
         error: function(request, status, error) {
             $("#myModal").removeClass('is-active');
-            console.log(error);
         }
 
     });
@@ -438,7 +436,6 @@ $(".add-to-goal").click(function (event) {
                     $("#now-adds").remove();
                     $("#addition-btn").remove();
                     $(".add-to-goal").attr("goTime", "yes");
-                    console.log(data);
                 },
                 error: function(request, status, error) {
                     $("#now-adds").remove();
@@ -451,7 +448,6 @@ $(".add-to-goal").click(function (event) {
                     $(liId).html(html);
                     $(liId).next("li").remove();
                     $(progressBar).val(amountSaved);
-                    console.log(error);
                 }
 
             });
