@@ -84,11 +84,9 @@
                             <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
                         </tbody>
                     </table>
-
                     <button class="button is-link is-outlined is-rounded modal-button" data-target="#myModal" aria-haspopup="true">Made a
                         purchase?
                     </button>
-
                     <div class="modal" id="myModal">
                         <div class="modal-background"></div>
                         <div class="modal-content">
@@ -175,12 +173,8 @@
                                 go: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
-<!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
-
                             <progress class="progress is-success" th:max="${goal.amount}"
                                       th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
-
-<!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
                         <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i class="far fa-edit"></i></a>
@@ -205,7 +199,6 @@
         </div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
@@ -468,15 +461,10 @@ $(".add-to-goal").click(function (event) {
                     $(liId).next("li").remove();
                     $(progressBar).val(amountSaved);
                 }
-
             });
         })
-
     }
-
 })
-
-
 </script>
 </body>
 </html>

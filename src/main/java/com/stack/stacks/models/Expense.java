@@ -115,10 +115,9 @@ public class Expense {
         this.type = type;
     }
 
-//    public static String displayCurrency (double amount) {
-//        Locale locale = new Locale("en", "US");
-//        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
-//        System.out.println(currencyFormatter.format(amount));
-//        return currencyFormatter.format(amount);
-//    }
+    public int getDateAsInt(){
+        String noDashes = this.date.substring(0, 4) + this.date.substring(5, 7) + this.date.substring(8, 10);
+        return Integer.parseInt(noDashes);
+    }
+
 }

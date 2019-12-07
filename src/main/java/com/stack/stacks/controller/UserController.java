@@ -20,9 +20,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 
 @Controller
@@ -64,6 +66,12 @@ public class UserController {
         List<Expense> allExpenses = expenseDao.findAll();
         List<Goal> allGoals = goalDao.findAll();
         List<Expense> expenses = new ArrayList<>();
+        allExpenses.sort(new Comparator<Expense>() {
+            @Override
+            public int compare(Expense o1, Expense o2) {
+                return -(o1.getDateAsInt() - o2.getDateAsInt());
+            }
+        });
         Double[] amounts = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {
