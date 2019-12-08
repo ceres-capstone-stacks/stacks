@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Posts | Stacks</title>
+    <style>
+        .panel{
+            height: 40vh;
+        }
+    </style>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
 <body>
@@ -27,12 +32,12 @@
     </div>
     <div class="column is-10" th:each="post : ${posts}">
         <div class="panel">
-            <div class="panel-heading">
+            <div class="panel-heading is-primary">
                 <strong th:text="${post.title}"></strong>
             </div>
-            <div class="panel-block" style="overflow-wrap: break-word">
+            <div class="panel-block " style="overflow-wrap: break-word">
                 <figure>
-                    <h3 th:text="${post.content}"></h3>
+                    <h3 class="has-text-centered title" th:text="${post.content}"></h3>
                     -<small th:text="${post.user.getFirstName()}"></small> <small
                         th:text="${post.user.getLastName()}"></small> @<small
                         th:text="${post.user.getUsername()}"></small>

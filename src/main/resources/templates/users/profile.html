@@ -26,15 +26,15 @@
 <input type="hidden" th:value="${amounts[5]}" id="auto-amount">
 <input type="hidden" th:value="${amounts[6]}" id="misc-amount">
 <div class="columns is-multiline is-half-mobile is-centered">
-    <div class="column is-12">
+    <div class="column is-6">
         <div class="panel">
             <p class="panel-heading">
                 Spending Habits
             </p>
             <div class="panel-block">
                 <figure class="image is-16x9">
-                    <div class="chart-container" style="position: relative; height:20vh; width:30vw">
-                        <canvas id="myChart"></canvas>
+                    <div class="canvas-holder" style="width:50vw">
+                        <canvas id="myChart" style="display: block; height: 130px; width: 193" ></canvas>
                     </div>
                 </figure>
             </div>
@@ -142,8 +142,7 @@
                                                         <button class="button is-link is-rounded">Submit</button>
                                                     </div>
                                                     <div class="control">
-                                                        <a class="button is-link is-rounded is-outlined"
-                                                           href="/profile/expenses">Cancel</a>
+                                                        <a class="button is-link is-rounded is-outlined">Cancel</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -161,7 +160,7 @@
         </div>
     </div>
 
-    <div class="column is-6">
+    <div class="column is-16">
 
         <div class="panel">
             <p class="panel-heading">My Current Goals</p>
@@ -171,16 +170,19 @@
                     <div>
                         <ul>
                             <li><strong>Need to save: </strong><span th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
-                            <li><strong>How much you've saved so far: </strong><span
+                            <li th:id="'amount-' + ${goal.id}"><strong>How much you've saved so far: </strong><span
                                     th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span></li>
                             <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to
                                 go: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
-                        <!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
-                        <progress class="progress is-success" th:max="${goal.amount}"
-                                  th:value="${goal.amountSaved}"></progress>
-                        <!--                        </div>-->
+
+<!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
+
+                            <progress class="progress is-success" th:max="${goal.amount}"
+                                      th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
+
+<!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
                         <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i class="far fa-edit"></i></a>
@@ -188,9 +190,9 @@
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
 
-                            <br>
-                            <button th:class="button" style="border-style: hidden"><a class="button"  data-target2="#myModal2" aria-haspopup="true" th:href="@{'/goals/' + ${goal.id} + '/add'}">Add to goal</a></button>
-
+                            <button class="add-to-goal" th:id="${goal.id}" th:amount="${goal.amount}" th:amountSaved="${goal.amountSaved}" th:date="${goal.date}" th:description="${goal.description}" th:goTime="yes">
+                                Add to Goal
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -225,6 +227,10 @@
             </div>
         </div>
     </div>
+</div>
+<div class="column-is-6">
+
+
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
@@ -398,6 +404,68 @@
             }
         });
     });
+    $(".add-to-goal").click(function (event) {
+        event.preventDefault();
+        if($(this).attr("goTime") === "no"){
+            return;
+        } else {
+            $(".add-to-goal").attr("goTime", "no");
+            let goalId = $(this).attr("id");
+            let amount = $(this).attr("amount");
+            let amountSaved = $(this).attr("amountSaved");
+            let description = $(this).attr("description");
+            let date = $(this).attr("date");
+            $(this).parent().append("<input type='number' placeholder='How much are you saving?' id='now-adds'></input>");
+            $(this).parent().append("<button id='addition-btn'>Add</button>");
+            $("#addition-btn").click(function () {
+                let newSavings = $("#now-adds").val();
+                newSavings = parseFloat(newSavings);
+                amountSaved = parseFloat(amountSaved);
+                amountSaved += newSavings;
+                $(this).prev().prev().attr("amountSaved", amountSaved);
+                amount = parseFloat(amount);
+                let difference = amount - amountSaved;
+                let progressBar = "#progress-" + goalId;
+                amount = amount.toString();
+                amountSaved = amountSaved.toString();
+                let updatedGoal = {
+                    id: goalId,
+                    date:  date,
+                    description: description,
+                    amount: amount,
+                    amountSaved: amountSaved
+                };
+                $.ajax({
+                    type: "POST",
+                    dataType : 'json',
+                    url: "/goals.json",
+                    data: JSON.stringify(updatedGoal),
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        $("#now-adds").remove();
+                        $("#addition-btn").remove();
+                        $(".add-to-goal").attr("goTime", "yes");
+                        console.log(data);
+                    },
+                    error: function(request, status, error) {
+                        $("#now-adds").remove();
+                        $("#addition-btn").remove();
+                        $(".add-to-goal").attr("goTime", "yes");
+                        let liId = "#amount-" + goalId;
+                        let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
+                            "                                go: </strong><span\n" +
+                            "                                    >" + difference.toFixed(2) + "</span></li>";
+                        $(liId).html(html);
+                        $(liId).next("li").remove();
+                        $(progressBar).val(amountSaved);
+                        console.log(error);
+                    }
+                });
+            })
+        }
+    })
 </script>
 </body>
 </html>

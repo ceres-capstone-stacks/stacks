@@ -15,6 +15,7 @@
         </div>
     </div>
 </section>
+
 <div class="columns is-centered has-text-centered is-full-mobile">
     <div class="column is-half">
         <a class="button is-success is-rounded" href="/goals/create">Create a goal</a>
@@ -31,8 +32,7 @@
                     <p>You need to save <span th:text="${#numbers.formatCurrency(goal.amount)}"></span>.</p>
                     <p>You have saved <span th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span> so far.
                     </p>
-                    <p th:with="result=${goal.amount - goal.amountSaved}">You're short $<span
-                            th:text="${result}"></span> to reach your goal!</p>
+                    <p th:with="result=${#numbers.formatCurrency(goal.amount - goal.amountSaved)}">You're short <span th:text="${result}"></span> to reach your goal!</p>
                 </div>
             </div>
             <footer class="card-footer">
@@ -40,8 +40,7 @@
                    th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i
                         class="far fa-edit"></i></a>
                 <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-                    <button class="card-footer-item" style="border-style: none"><i class="fas fa-trash-alt"
-                                                                                   style="color: red"></i></button>
+                    <button class="card-footer-item" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                 </form>
             </footer>
         </div>
