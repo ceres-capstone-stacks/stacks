@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Posts | Stacks</title>
     <style>
-        .panel{
-            height: 40vh;
-        }
+        /*.panel{*/
+        /*    height: 40vh;*/
+        /*}*/
     </style>
     <th:block th:replace="fragments/header.html :: main-header"/>
 </head>
@@ -37,13 +37,13 @@
             </div>
             <div class="panel-block " style="overflow-wrap: break-word">
                 <figure>
-                    <h3 class="has-text-centered title" th:text="${post.content}"></h3>
+                    <h4 class="has-text-centered subtitle"><strong><span th:text="${post.content}"></span></strong></h4>
                     <div th:each=" tag : ${post.tags}" >
-                        <h4 style="display: inline-block" th:text="${tag.name}"></h4>
+                        <h4 class="is-4">Tags: <span th:text="${tag.name}"></span></h4>
                     </div>
-                    -<small th:text="${post.user.getFirstName()}"></small> <small
+                    <strong>-<small th:text="${post.user.getFirstName()}"></small> <small
                         th:text="${post.user.getLastName()}"></small> @<small
-                        th:text="${post.user.getUsername()}"></small>
+                            th:text="${post.user.getUsername()}"></small></strong>
                     <div sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
                         <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/posts/' + ${post.id} + '/edit'}"><i class="far fa-edit"></i></a>
                             <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
