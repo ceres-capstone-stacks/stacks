@@ -32,12 +32,13 @@
     </div>
     <div class="column is-10" th:each="post : ${posts}">
         <div class="panel">
-            <div class="panel-heading is-primary">
+            <div class="panel-heading is-primary hero is-primary is-bold">
                 <strong th:text="${post.title}"></strong>
             </div>
             <div class="panel-block " style="overflow-wrap: break-word">
                 <figure>
                     <h3 class="has-text-centered title" th:text="${post.content}"></h3>
+                    <h4 th:text="${tags.name}" ></h4>
                     -<small th:text="${post.user.getFirstName()}"></small> <small
                         th:text="${post.user.getLastName()}"></small> @<small
                         th:text="${post.user.getUsername()}"></small>
