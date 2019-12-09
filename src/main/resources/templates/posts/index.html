@@ -32,8 +32,8 @@
     </div>
     <div class="column is-10" th:each="post : ${posts}">
         <div class="panel">
-            <div class="panel-heading is-primary hero is-primary is-bold">
-                <strong th:text="${post.title}"></strong>
+            <div class="panel-heading is-success hero is-primary is-bold">
+                <strong style="color: white" th:text="${post.title}"></strong>
             </div>
             <div class="panel-block " style="overflow-wrap: break-word">
                 <figure>
@@ -43,19 +43,11 @@
                         th:text="${post.user.getLastName()}"></small> @<small
                         th:text="${post.user.getUsername()}"></small>
                     <div sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
-                        <!--                <th:block th:if="${post.user.id == #authentication.principal.id}">-->
-<!--                        <div class="buttons" style="border: none">-->
-<!--                            <a class="button is-warning is-rounded" th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</a>-->
-<!--                            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">-->
-<!--                                <button class="button is-danger is-rounded">Delete</button>-->
-<!--                            </form>-->
-<!--                        </div>-->
                         <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/posts/' + ${post.id} + '/edit'}"><i class="far fa-edit"></i></a>
                             <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
                             </form>
                         </div>
-                        <!--                </th:block>-->
                     </div>
                 </figure>
             </div>
