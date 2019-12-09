@@ -447,8 +447,8 @@
                 let description = $(this).attr("description");
                 let date = $(this).attr("date");
 
-                $(this).parent().append("<input type='text' placeholder='How much are you saving?' id='now-adds'></input>");
-                $(this).parent().append("<button id='addition-btn'>Add</button>");
+                $(this).parent().append("<input class=\"input is-small\" style='width: 80%' type='text' placeholder='How much are you saving?' id='now-adds'></input>");
+                $(this).parent().append("<button class='button is-small' style='margin-bottom: 0' id='addition-btn'>Add</button>");
                 $("#now-adds").on("input", function () {
                     this.value = this.value
                         .replace(/[^\d.]/g, '')
