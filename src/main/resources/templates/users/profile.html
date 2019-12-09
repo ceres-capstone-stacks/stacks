@@ -459,49 +459,55 @@
 
                 $("#addition-btn").click(function () {
                     let newSavings = $("#now-adds").val();
-                    newSavings = parseFloat(newSavings);
-                    amountSaved = parseFloat(amountSaved);
-                    amountSaved += newSavings;
-                    $(this).prev().prev().attr("amountSaved", amountSaved);
-                    amount = parseFloat(amount);
-                    let difference = amount - amountSaved;
-                    let progressBar = "#progress-" + goalId;
-                    amount = amount.toString();
-                    amountSaved = amountSaved.toString();
+                    if(newSavings === "" || isNaN(newSavings)){
+                        $("#now-adds").remove();
+                        $("#addition-btn").remove();
+                        $(".add-to-goal").attr("goTime", "yes");
+                    }else {
+                        newSavings = parseFloat(newSavings);
+                        amountSaved = parseFloat(amountSaved);
+                        amountSaved += newSavings;
+                        $(this).prev().prev().attr("amountSaved", amountSaved);
+                        amount = parseFloat(amount);
+                        let difference = amount - amountSaved;
+                        let progressBar = "#progress-" + goalId;
+                        amount = amount.toString();
+                        amountSaved = amountSaved.toString();
 
-                    let updatedGoal = {
-                        id: goalId,
-                        date: date,
-                        description: description,
-                        amount: amount,
-                        amountSaved: amountSaved
-                    };
-                    $.ajax({
-                        type: "POST",
-                        dataType: 'json',
-                        url: "/goals.json",
-                        data: JSON.stringify(updatedGoal),
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        success: function (data, textStatus, jqXHR) {
-                            $("#now-adds").remove();
-                            $("#addition-btn").remove();
-                            $(".add-to-goal").attr("goTime", "yes");
-                        },
-                        error: function (request, status, error) {
-                            $("#now-adds").remove();
-                            $("#addition-btn").remove();
-                            $(".add-to-goal").attr("goTime", "yes");
-                            let liId = "#amount-" + goalId;
-                            let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
-                                "                                go: </strong><span\n" +
-                                "                                    >" + difference.toFixed(2) + "</span></li>";
-                            $(liId).html(html);
-                            $(liId).next("li").remove();
-                            $(progressBar).val(amountSaved);
-                        }
-                    });
+                        let updatedGoal = {
+                            id: goalId,
+                            date: date,
+                            description: description,
+                            amount: amount,
+                            amountSaved: amountSaved
+                        };
+                        $.ajax({
+                            type: "POST",
+                            dataType: 'json',
+                            url: "/goals.json",
+                            data: JSON.stringify(updatedGoal),
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            success: function (data, textStatus, jqXHR) {
+                                $("#now-adds").remove();
+                                $("#addition-btn").remove();
+                                $(".add-to-goal").attr("goTime", "yes");
+                            },
+                            error: function (request, status, error) {
+                                $("#now-adds").remove();
+                                $("#addition-btn").remove();
+                                $(".add-to-goal").attr("goTime", "yes");
+                                let liId = "#amount-" + goalId;
+                                let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
+                                    "                                go: </strong><span\n" +
+                                    "                                    >" + difference.toFixed(2) + "</span></li>";
+                                $(liId).html(html);
+                                $(liId).next("li").remove();
+                                $(progressBar).val(amountSaved);
+                            }
+                        });
+                    }
                 })
             }
         })
