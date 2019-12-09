@@ -1,9 +1,11 @@
 package com.stack.stacks.controller;
 
 import com.stack.stacks.models.Expense;
+import com.stack.stacks.models.Goal;
 import com.stack.stacks.models.Tag;
 import com.stack.stacks.models.User;
 import com.stack.stacks.repositories.ExpenseRepository;
+import com.stack.stacks.repositories.GoalRepository;
 import com.stack.stacks.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class AjaxController {
@@ -20,6 +23,15 @@ public class AjaxController {
 
     @Autowired
     private TagRepository tagDao;
+
+    @Autowired
+    private GoalRepository goalDao;
+
+    public AjaxController(ExpenseRepository expenseDao, TagRepository tagDao, GoalRepository goalDao) {
+        this.expenseDao = expenseDao;
+        this.tagDao = tagDao;
+        this.goalDao = goalDao;
+    }
 
     @PostMapping("/expenses.json")
     @ResponseBody
@@ -64,6 +76,18 @@ public class AjaxController {
     @GetMapping("/findtags.json")
     public @ResponseBody List<Tag> viewAllAdsInJSONFormat() {
         return tagDao.findAll();
+    }
+
+    @PostMapping("/goals.json")
+    @ResponseBody
+    public String updateGoalWithAjax(@Valid @RequestBody(required = false) Map<String, Object> goal){
+        long id = Long.parseLong((String) goal.get("id"));
+        Goal thisGoal = goalDao.getOne(id);
+        double amountSaved = Double.parseDouble((String) goal.get("amountSaved"));
+        thisGoal.setAmountSaved(amountSaved);
+        goalDao.save(thisGoal);
+
+        return "Yay";
     }
 
 }

@@ -24,7 +24,7 @@
             </div>
                 <label class="label" for="title">Amount Saved</label>
                 <div class="control">
-                    <input class="input" id="title" type="text" th:value="${#numbers.formatCurrency(goals.amountSaved)}"
+                    <input class="input money-input" id="title" type="text" th:value="${#numbers.formatCurrency(goals.amountSaved)}"
                            name="amountSaved">
                 </div>
             <div class="field">
@@ -37,25 +37,15 @@
         </form>
     </div>
 </div>
-
-<!--<div class="container">-->
-<!--    <form th:action="'/goals/' + ${goals.id} + '/edit'" th:method="post">-->
-<!--        <h1>This is your current goal....</h1>-->
-<!--        <div class="form-group">-->
-<!--            <h2 th:text="${goals.description}"></h2>-->
-<!--            <h2>Amount: $<span th:text="${goals.amount}"></span></h2>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="title">Amount saved so far</label>-->
-<!--            <input class="form-control" id="title" type="text" th:value="${goals.amountSaved}" name="amountSaved">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="date">Date</label>-->
-<!--            <input class="form-control" id="date" th:value="${goals.date}" name="date">-->
-<!--        </div>-->
-<!--        <a class="button is-link is-rounded">Update</a>-->
-<!--    </form>-->
-<!--</div>-->
 <th:block th:replace="fragments/footer.html :: main-footer"/>
+<script>
+    $(".money-input").on("input", function() {
+        this.value = this.value
+            .replace(/[^\d.]/g, '')
+            .replace(/(^[\d]{6})[\d]/g, '$1')
+            .replace(/(\..*)\./g, '.')
+            .replace(/(\.[\d]{2})./g, '$1');
+    });
+</script>
 </body>
 </html>
