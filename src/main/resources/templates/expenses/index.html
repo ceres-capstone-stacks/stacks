@@ -17,60 +17,63 @@
     </div>
 </section>
 <div class="columns is-full-mobile is-centered">
-<div class="column is-three-quarters">
-    <div>
-    <a class="button is-link is-rounded is-outlined is-pulled-left" href="expenses/create">Create a new expense</a>
-    <input class="input is-pulled-right" id="myInput" type="text" placeholder="Search for an expense...">
+    <div class="column is-three-quarters">
+        <div>
+            <a class="button is-link is-rounded is-outlined is-pulled-left" href="expenses/create">Create a new
+                expense</a>
+            <input class="input is-pulled-right" id="myInput" type="text" placeholder="Search for an expense...">
+        </div>
+        <table class="table is-striped" style="width: 100%">
+            <thead>
+            <tr class="header">
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <tr th:each="expense : ${expenses}">
+                <td><span th:text="${expense.date }" class="date-span"></span></td>
+                <td th:text="${expense.description}"></td>
+                <th:block th:switch="${expense.type}">
+                    <div th:case="1">
+                        <td>Bills</td>
+                    </div>
+                    <div th:case="2">
+                        <td>Groceries</td>
+                    </div>
+                    <div th:case="3">
+                        <td>Subscriptions & Memberships</td>
+                    </div>
+                    <div th:case="4">
+                        <td>Food & Dining</td>
+                    </div>
+                    <div th:case="5">
+                        <td>Leisure & Gifts</td>
+                    </div>
+                    <div th:case="6">
+                        <td>Auto & Transportation</td>
+                    </div>
+                    <div th:case="7">
+                        <td>Misc.</td>
+                    </div>
+                </th:block>
+                <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
+                <td>
+                    <div class="buttons"><a style="border-style: none" class="button"
+                                            th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}"><i
+                            class="far fa-edit"></i></a>
+                        <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
+                            <button class="button" style="border-style: none"><i class="fas fa-trash-alt"
+                                                                                 style="color: red"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tbody>
+        </table>
     </div>
-
-    <table class="table is-striped" style="width: 100%">
-        <thead>
-        <tr class="header">
-            <th>Date</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody id="myTable">
-        <tr th:each="expense : ${expenses}">
-            <td><span th:text="${expense.date }" class="date-span"></span></td>
-            <td th:text="${expense.description}"></td>
-            <th:block th:switch="${expense.type}">
-                <div th:case="1">
-                    <td>Bills</td>
-                </div>
-                <div th:case="2">
-                    <td>Groceries</td>
-                </div>
-                <div th:case="3">
-                    <td>Subscriptions & Memberships</td>
-                </div>
-                <div th:case="4">
-                    <td>Food & Dining</td>
-                </div>
-                <div th:case="5">
-                    <td>Leisure & Gifts</td>
-                </div>
-                <div th:case="6">
-                    <td>Auto & Transportation</td>
-                </div>
-                <div th:case="7">
-                    <td>Misc.</td>
-                </div>
-            </th:block>
-            <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
-
-            <td><div class="buttons"><a style="border-style: none" class="button" th:href="@{'/profile/expenses/' + ${expense.id} + '/edit'}"><i class="far fa-edit"></i></a>
-            <form th:action="@{'/profile/expenses/' + ${expense.id} + '/delete'}" method="post">
-                <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
-            </form>
-            </div>
-            </td>
-        </tbody>
-    </table>
-</div>
 </div>
 <th:block th:replace="fragments/footer :: main-footer"/>
 <script>
@@ -84,9 +87,9 @@
             $(this).text(formatDate);
         });
 
-        $("#myInput").on("keyup", function() {
+        $("#myInput").on("keyup", function () {
             let value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
+            $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });

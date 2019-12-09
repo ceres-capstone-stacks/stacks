@@ -64,6 +64,8 @@ public class GoalController {
         return "goals/editGoal";
     }
 
+
+
     @PostMapping("/goals/{id}/edit")
     public String updateGoal (@PathVariable long id, @RequestParam double amountSaved, @RequestParam String date) {
         Goal oldGoal = goalDao.getOne(id);
@@ -88,4 +90,7 @@ public class GoalController {
         goalDao.save(oldGoal);
         return "redirect:/profile";
     }
+
+
 }
+

@@ -26,15 +26,15 @@
 <input type="hidden" th:value="${amounts[5]}" id="auto-amount">
 <input type="hidden" th:value="${amounts[6]}" id="misc-amount">
 <div class="columns is-multiline is-half-mobile is-centered">
-    <div class="column is-12">
+    <div class="column is-6">
         <div class="panel">
-            <p class="panel-heading hero is-primary is-bold">
+            <p class="panel-heading hero is-success is-bold">
                 Spending Habits
             </p>
             <div class="panel-block">
                 <figure class="image is-16x9">
-                    <div class="chart-container" style="position: relative; height:20vh; width:30vw">
-                        <canvas id="myChart"></canvas>
+                    <div class="canvas-holder" style="width:50vw">
+                        <canvas id="myChart" style="display: block; height: 130px; width: 193"></canvas>
                     </div>
                 </figure>
             </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="column is-6" style="float: right">
         <div class="panel">
-            <p class="panel-heading hero is-primary is-bold">My Recent Transactions</p>
+            <p class="panel-heading hero is-success is-bold">My Recent Transactions</p>
             <div class="panel-block">
                 <div class="table-container">
                     <table class="table is-fullwidth is-striped">
@@ -82,6 +82,7 @@
                                 </div>
                             </th:block>
                             <td><span th:text="${#numbers.formatCurrency(expense.amount)}"></span></td>
+                        </tr>
                         </tbody>
                     </table>
                     <div class="buttons">
@@ -96,7 +97,7 @@
                         <div class="modal-content">
                             <div class="box">
                                 <div class="panel">
-                                    <p class="panel-heading hero is-primary is-bold">Create an Expense</p>
+                                    <p class="panel-heading hero is-link is-bold">Create an Expense</p>
                                     <div class="panel-block">
                                         <figure>
                                             <form th:action="@{/profile/expenses/create}" th:method="post"
@@ -141,10 +142,11 @@
                                                 </div>
                                                 <div class="field is-grouped">
                                                     <div class="control">
-                                                        <button class="button is-link is-rounded">Submit</button>
+                                                        <button class="button is-link">Submit</button>
                                                     </div>
                                                     <div class="control">
-                                                        <a class="button is-link is-rounded is-outlined" id="close-modal">Cancel</a>
+                                                        <a class="button is-link is-outlined"
+                                                           id="close-modal">Cancel</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -160,24 +162,25 @@
         </div>
     </div>
 
-    <div class="column is-6">
+    <div class="column is-16">
 
-        <div class="panel">
-            <p class="panel-heading hero is-primary is-bold">My Current Goals</p>
-            <div class="profile-goal" th:each="goal : ${goal}">
+        <div class="panel has-text-centered ">
+            <p class="panel-heading hero is-success is-bold">My Current Goals</p>
+            <div class="profile-goal " th:each="goal : ${goal}">
                 <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
                     <u><strong style="text-transform: uppercase" th:text="${goal.description}"></strong></u>
                     <div>
                         <ul>
-                            <li><strong>Need to save: </strong><span th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
+                            <li><strong>Need to save: </strong><span
+                                    th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
                             <li th:id="'amount-' + ${goal.id}"><strong>How much you've saved so far: </strong><span
                                     th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span></li>
                             <li th:with="result=${goal.amount - goal.amountSaved}"><strong>What you have left to
                                 go: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
-                            <progress class="progress is-success" th:max="${goal.amount}"
-                                      th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
+                        <progress class="progress is-success" th:max="${goal.amount}"
+                                  th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
                         <div class="buttons"><a style="border-style: none" class="button"
@@ -187,7 +190,9 @@
                                 <button class="button" style="border-style: none"><i class="fas fa-trash-alt"
                                                                                      style="color: red"></i></button>
                             </form>
-                            <button class="button is-link is-rounded is-outlined add-to-goal" th:id="${goal.id}" th:amount="${goal.amount}" th:amountSaved="${goal.amountSaved}" th:date="${goal.date}" th:description="${goal.description}" th:goTime="yes">
+                            <button class="button is-link is-rounded is-outlined add-to-goal" th:id="${goal.id}"
+                                    th:amount="${goal.amount}" th:amountSaved="${goal.amountSaved}"
+                                    th:date="${goal.date}" th:description="${goal.description}" th:goTime="yes">
                                 Add to Goal
                             </button>
                         </div>
@@ -196,8 +201,20 @@
             </div>
             <div class="panel-block">
                 <figure class="image is-16x9">
-
                     <a href="/goals/create">Set a goal</a>
+                    <div class="modal" id="myModal2">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box">
+                                <div class="column is-6 has-text-centered">
+                                    <div class="panel">
+                                        <p class="panel-heading">Create an Expense</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="modal-close is-large" aria-label="close"></button>
+                    </div>
                     <br>
                     <a href="goals">View goals....</a>
                 </figure>
@@ -205,7 +222,8 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
     $(document).ready(function () {
@@ -241,7 +259,7 @@
                     'rgb(75, 192, 192)',
                     'rgb(153, 102, 255)',
                     'rgb(255, 159, 64)',
-                    'rgb(30, 30, 30)'
+                    'rgb(197, 33, 132)'
                 ]
             }]
         }
@@ -254,249 +272,239 @@
 </script>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 <script>
-document.querySelectorAll('.modal-button').forEach(function(el) {
-el.addEventListener('click', function() {
-    var target = document.querySelector(el.getAttribute('data-target'));
-    target.classList.add('is-active');
-    $("#amount").on("input", function() {
-        this.value = this.value
-            .replace(/[^\d.]/g, '')
-            .replace(/(^[\d]{6})[\d]/g, '$1')
-            .replace(/(\..*)\./g, '.')
-            .replace(/(\.[\d]{2})./g, '$1');
-    });
-    target.querySelector('.modal-close').addEventListener('click',   function() {
-        target.classList.remove('is-active');
-    });
-    document.querySelectorAll('.mod2').forEach(function (el) {
+    document.querySelectorAll('.modal-button').forEach(function (el) {
         el.addEventListener('click', function () {
-            var target = document.querySelector(el.getAttribute('data-target2'));
+            var target = document.querySelector(el.getAttribute('data-target'));
             target.classList.add('is-active');
+            $("#amount").on("input", function () {
+                this.value = this.value
+                    .replace(/[^\d.]/g, '')
+                    .replace(/(^[\d]{6})[\d]/g, '$1')
+                    .replace(/(\..*)\./g, '.')
+                    .replace(/(\.[\d]{2})./g, '$1');
+            });
             target.querySelector('.modal-close').addEventListener('click', function () {
                 target.classList.remove('is-active');
             });
         });
     });
-});
+                    document.querySelectorAll('.mod2').forEach(function (el) {
+                        el.addEventListener('click', function () {
+                            var target = document.querySelector(el.getAttribute('data-target2'));
+                            target.classList.add('is-active');
+                            target.querySelector('.modal-close').addEventListener('click', function () {
+                                target.classList.remove('is-active');
+                            });
+                        });
+                    });
+                let token = $("meta[name='_csrf']").attr("content");
+                let header = $("meta[name='_csrf_header']").attr("content");
+                $(document).ajaxSend(function (e, xhr) {
+                    xhr.setRequestHeader(header, token);
+                });
+                $("#expense-form").submit(function (event) {
+                    event.preventDefault();
+                    let amount = $("#amount").val();
+                    $("#amount").val("");
+                    let date = $("#date").val();
+                    $("#date").val("");
+                    let description = $("#description").val();
+                    $("#description").val("");
+                    let isRegular = $("#isRegular").val();
+                    console.log(isRegular);
+                    $("#isRegular").val("");
+                    let type = $("#type").val();
+                    let typeString = "";
+                    switch (type) {
+                        case "1":
+                            billsAmount = parseFloat(billsAmount) + parseFloat(amount);
+                            billsAmount = billsAmount.toString();
+                            typeString = "Bills";
+                            updateConfigByMutating();
+                            break;
+                        case "2":
+                            groceriesAmount = parseFloat(groceriesAmount) + parseFloat(amount);
+                            groceriesAmount = groceriesAmount.toString();
+                            typeString = "Groceries";
+                            updateConfigByMutating();
+                            break;
+                        case "3":
+                            membershipAmount = parseFloat(membershipAmount) + parseFloat(amount);
+                            membershipAmount = membershipAmount.toString();
+                            typeString = "Subscriptions & Memberships";
+                            updateConfigByMutating();
+                            break;
+                        case "4":
+                            foodAmount = parseFloat(foodAmount) + parseFloat(amount);
+                            foodAmount = foodAmount.toString();
+                            typeString = "Food & Dining";
+                            updateConfigByMutating();
+                            break;
+                        case "5":
+                            giftsAmount = parseFloat(giftsAmount) + parseFloat(amount);
+                            giftsAmount = giftsAmount.toString();
+                            typeString = "Gifts & Leisure";
+                            updateConfigByMutating();
+                            break;
+                        case "6":
+                            autoAmount = parseFloat(autoAmount) + parseFloat(amount);
+                            autoAmount = autoAmount.toString();
+                            typeString = "Auto & Transportation";
+                            updateConfigByMutating();
+                            break;
+                        case "7":
+                            miscAmount = parseFloat(miscAmount) + parseFloat(amount);
+                            miscAmount = miscAmount.toString();
+                            typeString = "Misc";
+                            updateConfigByMutating();
+                            break;
+                    }
+                            function dateFormatter(oldDate) {
+                                let partOne = oldDate.substr(5, 2);
+                                let partTwo = oldDate.substr(8, 2);
+                                let partThree = oldDate.substr(0, 4);
+                                return (partOne + "-" + partTwo + "-" + partThree);
+                            }
 
-let token = $("meta[name='_csrf']").attr("content");
-let header = $("meta[name='_csrf_header']").attr("content");
-$(document).ajaxSend(function(e,xhr) {
-    xhr.setRequestHeader(header, token);
-});
-$("#expense-form").submit(function (event) {
-    event.preventDefault();
-    let amount = $("#amount").val();
-    $("#amount").val("");
-    let date = $("#date").val();
-    $("#date").val("");
-    let description = $("#description").val();
-    $("#description").val("");
-    let isRegular = $("#isRegular").val();
-    console.log(isRegular);
-    $("#isRegular").val("");
-    let type = $("#type").val();
-    let typeString = "";
-    switch (type){
-        case "1":
-            billsAmount = parseFloat(billsAmount) + parseFloat(amount);
-            billsAmount = billsAmount.toString();
-            typeString = "Bills";
-            updateConfigByMutating();
-            break;
-        case "2":
-            groceriesAmount = parseFloat(groceriesAmount) + parseFloat(amount);
-            groceriesAmount = groceriesAmount.toString();
-            typeString = "Groceries";
-            updateConfigByMutating();
-            break;
-        case "3":
-            membershipAmount = parseFloat(membershipAmount) + parseFloat(amount);
-            membershipAmount = membershipAmount.toString();
-            typeString = "Subscriptions & Memberships";
-            updateConfigByMutating();
-            break;
-        case "4":
-            foodAmount = parseFloat(foodAmount) + parseFloat(amount);
-            foodAmount = foodAmount.toString();
-            typeString = "Food & Dining";
-            updateConfigByMutating();
-            break;
-        case "5":
-            giftsAmount = parseFloat(giftsAmount) + parseFloat(amount);
-            giftsAmount = giftsAmount.toString();
-            typeString = "Gifts & Leisure";
-            updateConfigByMutating();
-            break;
-        case "6":
-            autoAmount = parseFloat(autoAmount) + parseFloat(amount);
-            autoAmount = autoAmount.toString();
-            typeString = "Auto & Transportation";
-            updateConfigByMutating();
-            break;
-        case "7":
-            miscAmount = parseFloat(miscAmount) + parseFloat(amount);
-            miscAmount = miscAmount.toString();
-            typeString = "Misc";
-            updateConfigByMutating();
-            break;
-    }
-
-    function dateFormatter(oldDate){
-        let partOne = oldDate.substr(5, 2);
-        let partTwo = oldDate.substr(8, 2);
-        let partThree = oldDate.substr(0, 4);
-        return (partOne + "-" + partTwo + "-" + partThree);
-    }
-
-        function dateFormatter(oldDate) {
-            let partOne = oldDate.substr(5, 2);
-            let partTwo = oldDate.substr(8, 2);
-            let partThree = oldDate.substr(0, 4);
-            return (partOne + "-" + partTwo + "-" + partThree);
-        }
-
-        let formattedDate = dateFormatter(date);
-        let formattedAmount = Number.parseFloat(amount).toFixed(2);
+                        let formattedDate = dateFormatter(date);
+                        let formattedAmount = Number.parseFloat(amount).toFixed(2);
 
 
-        let html = "<tr class=\"expense-item\">\n" +
-            "                            <td><span class=\"new-date-span\">" + formattedDate + "</span></td>\n" +
-            "                            <td>" + description + "</td>\n" +
-            "                                <div>\n" +
-            "                                    <td>" + typeString + "</td>\n" +
-            "                                </div>\n" +
-            "                            <td>$" + formattedAmount + "</td>";
+                        let html = "<tr class=\"expense-item\">\n" +
+                            "                            <td><span class=\"new-date-span\">" + formattedDate + "</span></td>\n" +
+                            "                            <td>" + description + "</td>\n" +
+                            "                                <div>\n" +
+                            "                                    <td>" + typeString + "</td>\n" +
+                            "                                </div>\n" +
+                            "                            <td>$" + formattedAmount + "</td>";
 
-    let newExpense = {
-        amount: amount,
-        date:  date,
-        description: description,
-        isRegular: isRegular,
-        type: type
-    };
-    $.ajax({
-        type: "POST",
-        dataType : 'json',
-        url: "/expenses.json",
-        data: JSON.stringify(newExpense),
-        headers: {
-            'content-type': 'application/json'
-        },
-        success: function(data, textStatus, jqXHR) {
-            $("#myModal").removeClass('is-active');
-        },
-        error: function(request, status, error) {
-            $("#myModal").removeClass('is-active');
-        }
-        $("#expense-table").prepend(html);
+                        if ($(".expense-item").length >= 5) {
+                            $(".expense-item").last().remove();
+                        }
+                        $("#expense-table").prepend(html);
 
-        let newExpense = {
-            amount: amount,
-            date: date,
-            description: description,
-            isRegular: isRegular,
-            type: type
-        };
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/expenses.json",
-            data: JSON.stringify(newExpense),
-            headers: {
-                'content-type': 'application/json'
-            },
-            success: function (data, textStatus, jqXHR) {
-                $("#myModal").removeClass('is-active');
-                console.log(data);
-            },
-            error: function (request, status, error) {
-                $("#myModal").removeClass('is-active');
-                console.log(error);
-            }
+                        let newExpense = {
+                                amount: amount,
+                        date: date,
+                        description: description,
+                            isRegular
+                    :
+                        isRegular,
+                            type
+                    :
+                        type
+                    }
+                        ;
+                        $.ajax({
+                                type: "POST",
+                            dataType
+                    :
+                        'json',
+                        url: "/expenses.json",
+                            data
+                    :
+                        JSON.stringify(newExpense),
+                            headers
+                    :
+                        {
+                            'content-type'
+                        :
+                            'application/json'
+                        }
+                    ,
+                    success
+            :
 
-        });
+                function (data, textStatus, jqXHR) {
+                    $("#myModal").removeClass('is-active');
+                }
 
-    });
-
-$("#close-modal").click(function (e) {
-    e.preventDefault();
-    $("#myModal").removeClass('is-active');
-});
-
-$(".add-to-goal").click(function (event) {
-    event.preventDefault();
-
-    if($(this).attr("goTime") === "no"){
-        return;
-    } else {
-
-        $(".add-to-goal").attr("goTime", "no");
-
-        let goalId = $(this).attr("id");
-        let amount = $(this).attr("amount");
-        let amountSaved = $(this).attr("amountSaved");
-        let description = $(this).attr("description");
-        let date = $(this).attr("date");
-
-        $(this).parent().append("<input type='text' placeholder='How much are you saving?' id='now-adds'></input>");
-        $(this).parent().append("<button id='addition-btn'>Add</button>");
-        $("#now-adds").on("input", function() {
-            this.value = this.value
-                .replace(/[^\d.]/g, '')
-                .replace(/(^[\d]{6})[\d]/g, '$1')
-                .replace(/(\..*)\./g, '.')
-                .replace(/(\.[\d]{2})./g, '$1');
-        });
-
-        $("#addition-btn").click(function () {
-            let newSavings = $("#now-adds").val();
-            newSavings = parseFloat(newSavings);
-            amountSaved = parseFloat(amountSaved);
-            amountSaved += newSavings;
-            $(this).prev().prev().attr("amountSaved", amountSaved);
-            amount = parseFloat(amount);
-            let difference = amount - amountSaved;
-            let progressBar = "#progress-" + goalId;
-            amount = amount.toString();
-            amountSaved = amountSaved.toString();
-
-            let updatedGoal = {
-                id: goalId,
-                date:  date,
-                description: description,
-                amount: amount,
-                amountSaved: amountSaved
-            };
-            $.ajax({
-                type: "POST",
-                dataType : 'json',
-                url: "/goals.json",
-                data: JSON.stringify(updatedGoal),
-                headers: {
-                    'content-type': 'application/json'
-                },
-                success: function(data, textStatus, jqXHR) {
-                    $("#now-adds").remove();
-                    $("#addition-btn").remove();
-                    $(".add-to-goal").attr("goTime", "yes");
-                },
-                error: function(request, status, error) {
-                    $("#now-adds").remove();
-                    $("#addition-btn").remove();
-                    $(".add-to-goal").attr("goTime", "yes");
-                    let liId = "#amount-" + goalId;
-                    let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
-                        "                                go: </strong><span\n" +
-                        "                                    >" + difference.toFixed(2) + "</span></li>";
-                    $(liId).html(html);
-                    $(liId).next("li").remove();
-                    $(progressBar).val(amountSaved);
+            ,
+                error: function (request, status, error) {
+                    $("#myModal").removeClass('is-active');
                 }
             });
+
+        });
+
+        $("#close-modal").click(function (e) {
+            e.preventDefault();
+            $("#myModal").removeClass('is-active');
+        });
+
+        $(".add-to-goal").click(function (event) {
+            event.preventDefault();
+
+            if ($(this).attr("goTime") === "no") {
+                return;
+            } else {
+
+                $(".add-to-goal").attr("goTime", "no");
+
+                let goalId = $(this).attr("id");
+                let amount = $(this).attr("amount");
+                let amountSaved = $(this).attr("amountSaved");
+                let description = $(this).attr("description");
+                let date = $(this).attr("date");
+
+                $(this).parent().append("<input type='text' placeholder='How much are you saving?' id='now-adds'></input>");
+                $(this).parent().append("<button id='addition-btn'>Add</button>");
+                $("#now-adds").on("input", function () {
+                    this.value = this.value
+                        .replace(/[^\d.]/g, '')
+                        .replace(/(^[\d]{6})[\d]/g, '$1')
+                        .replace(/(\..*)\./g, '.')
+                        .replace(/(\.[\d]{2})./g, '$1');
+                });
+
+                $("#addition-btn").click(function () {
+                    let newSavings = $("#now-adds").val();
+                    newSavings = parseFloat(newSavings);
+                    amountSaved = parseFloat(amountSaved);
+                    amountSaved += newSavings;
+                    $(this).prev().prev().attr("amountSaved", amountSaved);
+                    amount = parseFloat(amount);
+                    let difference = amount - amountSaved;
+                    let progressBar = "#progress-" + goalId;
+                    amount = amount.toString();
+                    amountSaved = amountSaved.toString();
+
+                    let updatedGoal = {
+                        id: goalId,
+                        date: date,
+                        description: description,
+                        amount: amount,
+                        amountSaved: amountSaved
+                    };
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'json',
+                        url: "/goals.json",
+                        data: JSON.stringify(updatedGoal),
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                            $("#now-adds").remove();
+                            $("#addition-btn").remove();
+                            $(".add-to-goal").attr("goTime", "yes");
+                        },
+                        error: function (request, status, error) {
+                            $("#now-adds").remove();
+                            $("#addition-btn").remove();
+                            $(".add-to-goal").attr("goTime", "yes");
+                            let liId = "#amount-" + goalId;
+                            let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
+                                "                                go: </strong><span\n" +
+                                "                                    >" + difference.toFixed(2) + "</span></li>";
+                            $(liId).html(html);
+                            $(liId).next("li").remove();
+                            $(progressBar).val(amountSaved);
+                        }
+                    });
+                })
+            }
         })
-    }
-})
 </script>
 </body>
 </html>
