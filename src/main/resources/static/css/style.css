@@ -77,3 +77,9 @@ tr:nth-child(even) {
 .progress::-webkit-progress-value {
     transition: width 0.5s ease;
 }
+
+.profile-goal {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 300px;
+}
