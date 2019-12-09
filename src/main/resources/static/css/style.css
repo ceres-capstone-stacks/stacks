@@ -4,8 +4,11 @@ overflow-y: auto;
 
 body {
     font-family: 'Public Sans', sans-serif;
-    /*position: relative;*/
+    position: relative;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 9.5em;
 }
 
 .button {
@@ -14,11 +17,12 @@ body {
 
 .footer {
     background-color: rgb(56, 63, 65);
-    height: 150px;
+    height: 9.5em;
     color: white;
-    /*position: absolute;*/
+    position: absolute;
     bottom: 0;
     width: 100%;
+    flex: 0 0 auto;
 }
 
 .bad-login {
@@ -69,4 +73,7 @@ tr:nth-child(even) {
     display: inline-flex;
     text-align: center;
     text-decoration-color: white;
+}
+.progress::-webkit-progress-value {
+    transition: width 0.5s ease;
 }

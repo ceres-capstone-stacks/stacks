@@ -85,11 +85,9 @@
                         </tr>
                         </tbody>
                     </table>
-
                     <button class="button is-link is-outlined is-rounded modal-button" data-target="#myModal" aria-haspopup="true">Made a
                         purchase?
                     </button>
-
                     <div class="modal" id="myModal">
                         <div class="modal-background"></div>
                         <div class="modal-content">
@@ -110,8 +108,7 @@
                                                     </div>
                                                     <label class="label">How much was this purchase?</label>
                                                     <div class="control has-icons-left">
-                                                        <input th:field="*{amount}" class="input" type="number"
-                                                               step=".01"
+                                                        <input th:field="*{amount}" class="input" type="text"
                                                                placeholder="ex. 45.25, 176.97" id="amount">
                                                         <span class="icon is-small is-left"><i
                                                                 class="fas fa-dollar-sign"></i></span>
@@ -143,7 +140,7 @@
                                                         <button class="button is-link is-rounded">Submit</button>
                                                     </div>
                                                     <div class="control">
-                                                        <a class="button is-link is-rounded is-outlined">Cancel</a>
+                                                        <a class="button is-link is-rounded is-outlined" id="close-modal">Cancel</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -177,12 +174,8 @@
                                 go: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
-<!--                        <div class="progress-container" th:with="result=${goal.amount - goal.amountSaved}" th:data-text="${#numbers.formatCurrency(result)}">-->
-
                             <progress class="progress is-success" th:max="${goal.amount}"
                                       th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
-
-<!--                        </div>-->
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
                         <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i class="far fa-edit"></i></a>
@@ -221,13 +214,13 @@
         })
     });
 
-    let billsAmount = $("#bills-amount").val();
-    let groceriesAmount = $("#groceries-amount").val();
-    let membershipAmount = $("#membership-amount").val();
-    let foodAmount = $("#food-amount").val();
-    let giftsAmount = $("#gifts-amount").val();
-    let autoAmount = $("#auto-amount").val();
-    let miscAmount = $("#misc-amount").val();
+    let billsAmount = parseFloat($("#bills-amount").val()).toFixed(2);
+    let groceriesAmount = parseFloat($("#groceries-amount").val()).toFixed(2);
+    let membershipAmount = parseFloat($("#membership-amount").val()).toFixed(2);
+    let foodAmount = parseFloat($("#food-amount").val()).toFixed(2);
+    let giftsAmount = parseFloat($("#gifts-amount").val()).toFixed(2);
+    let autoAmount = parseFloat($("#auto-amount").val()).toFixed(2);
+    let miscAmount = parseFloat($("#misc-amount").val()).toFixed(2);
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'pie',
@@ -260,6 +253,13 @@ document.querySelectorAll('.modal-button').forEach(function(el) {
 el.addEventListener('click', function() {
     var target = document.querySelector(el.getAttribute('data-target'));
     target.classList.add('is-active');
+    $("#amount").on("input", function() {
+        this.value = this.value
+            .replace(/[^\d.]/g, '')
+            .replace(/(^[\d]{6})[\d]/g, '$1')
+            .replace(/(\..*)\./g, '.')
+            .replace(/(\.[\d]{2})./g, '$1');
+    });
     target.querySelector('.modal-close').addEventListener('click',   function() {
         target.classList.remove('is-active');
     });
@@ -274,6 +274,7 @@ document.querySelectorAll('.mod2').forEach(function(el) {
         });
     });
 });
+
 let token = $("meta[name='_csrf']").attr("content");
 let header = $("meta[name='_csrf_header']").attr("content");
 $(document).ajaxSend(function(e,xhr) {
@@ -378,15 +379,18 @@ $("#expense-form").submit(function (event) {
         },
         success: function(data, textStatus, jqXHR) {
             $("#myModal").removeClass('is-active');
-            console.log(data);
         },
         error: function(request, status, error) {
             $("#myModal").removeClass('is-active');
-            console.log(error);
         }
 
     });
 
+});
+
+$("#close-modal").click(function (e) {
+    e.preventDefault();
+    $("#myModal").removeClass('is-active');
 });
 
 $(".add-to-goal").click(function (event) {
@@ -404,8 +408,15 @@ $(".add-to-goal").click(function (event) {
         let description = $(this).attr("description");
         let date = $(this).attr("date");
 
-        $(this).parent().append("<input type='number' placeholder='How much are you saving?' id='now-adds'></input>");
+        $(this).parent().append("<input type='text' placeholder='How much are you saving?' id='now-adds'></input>");
         $(this).parent().append("<button id='addition-btn'>Add</button>");
+        $("#now-adds").on("input", function() {
+            this.value = this.value
+                .replace(/[^\d.]/g, '')
+                .replace(/(^[\d]{6})[\d]/g, '$1')
+                .replace(/(\..*)\./g, '.')
+                .replace(/(\.[\d]{2})./g, '$1');
+        });
 
         $("#addition-btn").click(function () {
             let newSavings = $("#now-adds").val();
@@ -438,7 +449,6 @@ $(".add-to-goal").click(function (event) {
                     $("#now-adds").remove();
                     $("#addition-btn").remove();
                     $(".add-to-goal").attr("goTime", "yes");
-                    console.log(data);
                 },
                 error: function(request, status, error) {
                     $("#now-adds").remove();
@@ -451,7 +461,6 @@ $(".add-to-goal").click(function (event) {
                     $(liId).html(html);
                     $(liId).next("li").remove();
                     $(progressBar).val(amountSaved);
-                    console.log(error);
                 }
             });
         })
