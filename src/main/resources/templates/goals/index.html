@@ -24,23 +24,25 @@
 <div class="columns is-centered is-multiline is-full-mobile">
     <div class="column is-4 has-text-centered" th:each="goal : ${goal}">
         <div class="card">
-            <header class="card-header">
-                <p class="card-header-title" th:text="${goal.description}"></p>
-            </header>
             <div class="card-content">
+                <div class="goal-title">
+                    <h2 class="card-header-title" th:text="${goal.description}" style="font-size: 20pt"></h2>
+                </div>
                 <div class="content">
+                    <hr class="hero is-primary is-bold">
                     <p>You need to save <span th:text="${#numbers.formatCurrency(goal.amount)}"></span>.</p>
                     <p>You have saved <span th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span> so far.
                     </p>
                     <p th:with="result=${#numbers.formatCurrency(goal.amount - goal.amountSaved)}">You're short <span th:text="${result}"></span> to reach your goal!</p>
                 </div>
+                <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
             </div>
             <footer class="card-footer">
                 <a style="border-style: none" class="card-footer-item"
                    th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i
-                        class="far fa-edit"></i></a>
+                        class="far fa-edit" style="color: black"></i></a>
                 <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-                    <button class="card-footer-item" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
+                    <button class="card-footer-item" style="border-style: none"><i class="fas fa-trash-alt" style="color: red; height: 18px; width: 18px;"></i></button>
                 </form>
             </footer>
         </div>

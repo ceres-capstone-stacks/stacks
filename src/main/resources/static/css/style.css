@@ -64,3 +64,9 @@ tr:nth-child(even) {
 .table-container {
     width: 300vw;
 }
+
+.goal-title {
+    display: inline-flex;
+    text-align: center;
+    text-decoration-color: white;
+}
