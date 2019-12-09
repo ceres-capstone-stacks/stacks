@@ -130,6 +130,12 @@ public class UserController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Expense> allExpenses = expenseDao.findAll();
         List<Expense> expenses = new ArrayList<>();
+        allExpenses.sort(new Comparator<Expense>() {
+            @Override
+            public int compare(Expense o1, Expense o2) {
+                return -(o1.getDateAsInt() - o2.getDateAsInt());
+            }
+        });
         Double[] amounts = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         for(Expense expense : allExpenses){
             if(expense.getUser() != null) {
