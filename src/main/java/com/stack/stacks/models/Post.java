@@ -90,4 +90,15 @@ public class Post {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", user=" + user +
+                ", tags=" + tags +
+                '}';
+    }
 }
