@@ -31,7 +31,10 @@
             <div class="field">
                 <label class="label" for="expense-amount">How much was this purchase?</label>
                 <div class="control">
-                    <input class="input money-input" id="expense-amount" name="amount" th:value="${expenses.amount}">
+                    <div class="control has-icons-left">
+                        <input class="input money-input" id="expense-amount" name="amount" th:value="${expenses.amount}">
+                        <span class="icon is-small is-left"><i class="fas fa-dollar-sign"></i></span>
+                    </div>
                 </div>
             </div>
             <div class="control has-icons-left">
@@ -60,6 +63,10 @@
             .replace(/(\..*)\./g, '.')
             .replace(/(\.[\d]{2})./g, '$1');
     });
+
+    let expenseAmount = $("#expense-amount").val();
+    expenseAmount = parseFloat(expenseAmount).toFixed(2);
+    $("#expense-amount").val(expenseAmount);
 </script>
 </body>
 </html>
