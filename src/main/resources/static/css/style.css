@@ -107,3 +107,8 @@ tr:nth-child(even) {
     height: 22.125em !important;
     position: relative;
 }
+
+.goal-li{
+    display: flex;
+    justify-content: space-between;
+}
