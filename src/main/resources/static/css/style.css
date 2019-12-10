@@ -97,7 +97,7 @@ tr:nth-child(even) {
     min-height: 100%;
 }
 
-progress{
+.index-progress{
     position: absolute;
     bottom: 0;
     width: 85% !important;

@@ -35,7 +35,7 @@
                     </p>
                     <p th:with="result=${#numbers.formatCurrency(goal.amount - goal.amountSaved)}">You're short <span th:text="${result}"></span> to reach your goal!</p>
                 </div>
-                <progress class="progress is-success" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
+                <progress class="progress is-success index-progress" th:max="${goal.amount}" th:value="${goal.amountSaved}"></progress>
             </div>
             <footer class="card-footer">
                 <a style="border-style: none" class="card-footer-item"

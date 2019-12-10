@@ -497,8 +497,8 @@
                             $("#addition-btn").remove();
                             $(".add-to-goal").attr("goTime", "yes");
                             let liId = "#amount-" + goalId;
-                            let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
-                                "                                go: </strong><span\n" +
+                            let html = "<strong>You've saved: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>" +
+                                "                                Remaining: </strong><span\n" +
                                 "                                    >" + difference.toFixed(2) + "</span></li>";
                             $(liId).html(html);
                             $(liId).next("li").remove();
