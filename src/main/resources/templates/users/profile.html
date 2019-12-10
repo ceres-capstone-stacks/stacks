@@ -34,7 +34,7 @@
             <div class="panel-block">
                 <figure class="image is-16x9">
                     <div class="canvas-holder" style="width:50vw">
-                        <canvas id="myChart" style="display: block; height: 130px; width: 193"></canvas>
+                        <canvas id="myChart" style="display: block; height: 8em; width: 12em"></canvas>
                     </div>
                 </figure>
             </div>
@@ -180,18 +180,20 @@
                                   th:value="${goal.amountSaved}" th:id="'progress-' + ${goal.id}"></progress>
                         <p><strong>Projected accomplishment date: </strong><br><span th:text="${goal.date}"
                                                                                      class="date-span"></span></p>
-                        <div class="buttons"><a style="border-style: none" class="button"
-                                                th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i
-                                class="far fa-edit"></i></a>
+                        <div class="buttons" style="display: flex; justify-content: center">
+                            <a style="border-style: none" class="button"
+                               th:href="@{'/goals/' + ${goal.id} + '/edit'}"><i
+                                    class="far fa-edit"></i></a>
                             <form th:action="@{'/goals/' + ${goal.id} + '/delete'}" method="post">
-                                <button class="button" style="border-style: none"><i class="fas fa-trash-alt"
-                                                                                     style="color: red"></i></button>
+                                <button class="button" style="border-style: none"><span class="icon"><i
+                                        class="fas fa-trash-alt"
+                                        style="color: red"></i></span></button>
                             </form>
-                            <button class="button is-link is-rounded is-outlined add-to-goal" th:id="${goal.id}"
-                                    th:amount="${goal.amount}" th:amountSaved="${goal.amountSaved}"
-                                    th:date="${goal.date}" th:description="${goal.description}" th:goTime="yes">
-                                Add to Goal
-                            </button>
+                            <button class="button add-to-goal" style="border-style: none" th:id="${goal.id}"
+                                    th:amount="${goal.amount}"
+                                    th:amountSaved="${goal.amountSaved}" th:date="${goal.date}"
+                                    th:description="${goal.description}" th:goTime="yes">
+                                <i class="fas fa-plus-circle"></i></button>
                         </div>
                     </div>
                 </div>
@@ -200,7 +202,9 @@
                 <figure class="image is-16x9">
                     <div class="buttons">
                         <a href="goals" style="padding-right: 12px">View more goals....</a>
-                        <a href="/goals/create"><button class="button is-link is-rounded is-outlined" >Set a goal</button></a>
+                        <a href="/goals/create">
+                            <button class="button is-link is-rounded is-outlined">Set a goal</button>
+                        </a>
                     </div>
                     <div class="modal" id="myModal2">
                         <div class="modal-background"></div>
@@ -449,60 +453,60 @@
                     .replace(/(\.[\d]{2})./g, '$1');
             });
 
-                $("#addition-btn").click(function () {
-                    let newSavings = $("#now-adds").val();
-                    if(newSavings === "" || isNaN(newSavings)){
-                        $("#now-adds").remove();
-                        $("#addition-btn").remove();
-                        $(".add-to-goal").attr("goTime", "yes");
-                    }else {
-                        newSavings = parseFloat(newSavings);
-                        amountSaved = parseFloat(amountSaved);
-                        amountSaved += newSavings;
-                        $(this).prev().prev().attr("amountSaved", amountSaved);
-                        amount = parseFloat(amount);
-                        let difference = amount - amountSaved;
-                        let progressBar = "#progress-" + goalId;
-                        amount = amount.toString();
-                        amountSaved = amountSaved.toString();
+            $("#addition-btn").click(function () {
+                let newSavings = $("#now-adds").val();
+                if (newSavings === "" || isNaN(newSavings)) {
+                    $("#now-adds").remove();
+                    $("#addition-btn").remove();
+                    $(".add-to-goal").attr("goTime", "yes");
+                } else {
+                    newSavings = parseFloat(newSavings);
+                    amountSaved = parseFloat(amountSaved);
+                    amountSaved += newSavings;
+                    $(this).prev().prev().attr("amountSaved", amountSaved);
+                    amount = parseFloat(amount);
+                    let difference = amount - amountSaved;
+                    let progressBar = "#progress-" + goalId;
+                    amount = amount.toString();
+                    amountSaved = amountSaved.toString();
 
-                        let updatedGoal = {
-                            id: goalId,
-                            date: date,
-                            description: description,
-                            amount: amount,
-                            amountSaved: amountSaved
-                        };
-                        $.ajax({
-                            type: "POST",
-                            dataType: 'json',
-                            url: "/goals.json",
-                            data: JSON.stringify(updatedGoal),
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            success: function (data, textStatus, jqXHR) {
-                                $("#now-adds").remove();
-                                $("#addition-btn").remove();
-                                $(".add-to-goal").attr("goTime", "yes");
-                            },
-                            error: function (request, status, error) {
-                                $("#now-adds").remove();
-                                $("#addition-btn").remove();
-                                $(".add-to-goal").attr("goTime", "yes");
-                                let liId = "#amount-" + goalId;
-                                let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
-                                    "                                go: </strong><span\n" +
-                                    "                                    >" + difference.toFixed(2) + "</span></li>";
-                                $(liId).html(html);
-                                $(liId).next("li").remove();
-                                $(progressBar).val(amountSaved);
-                            }
-                        });
-                    }
-                })
-            }
-        })
+                    let updatedGoal = {
+                        id: goalId,
+                        date: date,
+                        description: description,
+                        amount: amount,
+                        amountSaved: amountSaved
+                    };
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'json',
+                        url: "/goals.json",
+                        data: JSON.stringify(updatedGoal),
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                            $("#now-adds").remove();
+                            $("#addition-btn").remove();
+                            $(".add-to-goal").attr("goTime", "yes");
+                        },
+                        error: function (request, status, error) {
+                            $("#now-adds").remove();
+                            $("#addition-btn").remove();
+                            $(".add-to-goal").attr("goTime", "yes");
+                            let liId = "#amount-" + goalId;
+                            let html = "<strong>How much you've saved so far: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>What you have left to\n" +
+                                "                                go: </strong><span\n" +
+                                "                                    >" + difference.toFixed(2) + "</span></li>";
+                            $(liId).html(html);
+                            $(liId).next("li").remove();
+                            $(progressBar).val(amountSaved);
+                        }
+                    });
+                }
+            })
+        }
+    })
 </script>
 </body>
 </html>
