@@ -32,6 +32,11 @@
             color: white;
             text-shadow: 2px 2px black;
         }
+
+        .screenie {
+            border: 1px solid black;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -51,12 +56,12 @@
     </div>
     <div class="column is-6 is-hidden-mobile">
         <figure class="image is-pulled-right">
-            <img th:src="@{/css/Expenses.png}" alt="goals" style="border-radius: 25px;box-shadow: 10px 10px">
+            <img class="screenie" th:src="@{/css/Expenses.png}" alt="goals" style="border-radius: 25px;box-shadow: 10px 10px">
         </figure>
     </div>
     <div class="column is-6 is-hidden-mobile">
         <figure class="image" style="padding-left: 40px">
-            <img th:src="@{/css/Goals.png}" alt="goals" style="border-radius: 25px;box-shadow: 10px 10px">
+            <img class="screenie" th:src="@{/css/Goals.png}" alt="goals" style="border-radius: 25px;box-shadow: 10px 10px">
         </figure>
     </div>
     <div class="column is-6 has-text">
@@ -68,7 +73,7 @@
     </div>
     <div class="column is-6 has-text-centered is-hidden-mobile">
         <figure class="image is-pulled-right">
-            <img th:src="@{/css/Posts.png}" alt="posts" style="border-radius: 25px;box-shadow: 10px 10px">
+            <img class="screenie" th:src="@{/css/Posts.png}" alt="posts" style="border-radius: 25px;box-shadow: 10px 10px">
         </figure>
     </div>
 </div>
