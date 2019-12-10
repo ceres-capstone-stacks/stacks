@@ -26,35 +26,46 @@
         <div class="column">
             <div class="buttons">
                 <a class="button is-info is-rounded is-outlined" href="/posts/create">Create a post</a>
-                <a class="button is-link is-rounded" href="/posts/myposts">Personal posts</a>
+                <a style="visibility: hidden" class="button is-link is-rounded" href="/posts/myposts">Personal posts</a>
             </div>
         </div>
     </div>
+
     <div class="column is-10" th:each="post : ${posts}">
-        <div class="panel">
-            <div class="panel-heading is-success hero is-primary is-bold">
-                <strong style="color: white" th:text="${post.title}"></strong>
-            </div>
-            <div class="panel-block " style="overflow-wrap: break-word">
-                <figure>
-                    <h4 class="has-text-centered subtitle"><strong><span th:text="${post.content}"></span></strong></h4>
-                    <div th:each=" tag : ${post.tags}" >
-                        <h4 class="is-4">Tags: <span th:text="${tag.name}"></span></h4>
-                    </div>
-                    <strong>-<small th:text="${post.user.getFirstName()}"></small> <small
-                        th:text="${post.user.getLastName()}"></small> @<small
-                            th:text="${post.user.getUsername()}"></small></strong>
-                    <div sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
-                        <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/posts/' + ${post.id} + '/edit'}"><i class="far fa-edit"></i></a>
-                            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
-                                <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
-                            </form>
-                        </div>
-                    </div>
+    <div class="box">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-64x64">
+                    <img src="https://imgplaceholder.com/420x320/cccccc/757575/glyphicon-user" alt="Image">
                 </figure>
             </div>
-        </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong th:text="${post.user.getFirstName()}" ></strong> <strong th:text="${post.user.getLastName()}"></strong> <small th:text="${post.user.getUsername()}" >@johnsmith</small>
+                        <br>
+                        <strong style="text-decoration: underline" th:text="${post.title}"></strong>
+                        <br th:text="${post.content}" >
+                    </p>
+                </div>
+                <nav class="level is-mobile">
+                    <div class="level-left">
+                        <div th:each=" tag : ${post.tags}" >
+                            <h4 class="is-4 tag"># <span th:text="${tag.name}"></span></h4>
+                        </div>
+                        <div style="display: block" sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
+                            <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/posts/' + ${post.id} + '/edit'}"><i class="far fa-edit"></i></a>
+                                <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post">
+                                    <button class="button" style="border-style: none"><i class="fas fa-trash-alt" style="color: red"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </article>
     </div>
+</div>
 </div>
 <th:block th:replace="fragments/footer.html :: main-footer"/>
 </body>
