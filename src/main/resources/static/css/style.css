@@ -88,3 +88,22 @@ tr:nth-child(even) {
     display: flex;
     justify-content: space-evenly;
 }
+
+.goal-div{
+    min-height: 18.75em;
+}
+
+.goal-card{
+    min-height: 100%;
+}
+
+progress{
+    position: absolute;
+    bottom: 0;
+    width: 85% !important;
+}
+
+.goal-content{
+    height: 22.125em !important;
+    position: relative;
+}
