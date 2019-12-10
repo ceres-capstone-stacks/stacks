@@ -7,6 +7,15 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Dashboard | Stacks</title>
     <th:block th:replace="fragments/header.html :: main-header"/>
+
+    <style>
+    .pad{
+        padding-right: 5em;
+    }
+        .hi{
+            height: 33em;
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="fragments/navbar.html :: main-nav"/>
@@ -26,22 +35,22 @@
 <input type="hidden" th:value="${amounts[5]}" id="auto-amount">
 <input type="hidden" th:value="${amounts[6]}" id="misc-amount">
 <div class="columns is-multiline is-half-mobile is-centered">
-    <div class="column is-6">
+    <div class="column is-6 mobile">
         <div class="panel">
             <p class="panel-heading hero is-success is-bold">
                 Spending Habits
             </p>
             <div class="panel-block">
                 <figure class="image is-16x9">
-                    <div class="canvas-holder" style="width:50vw">
+                    <div class="canvas-holder pad" style="width:50vw">
                         <canvas id="myChart" style="display: block; height: 8em; width: 12em"></canvas>
                     </div>
                 </figure>
             </div>
         </div>
     </div>
-    <div class="column is-6" style="float: right">
-        <div class="panel">
+    <div class="column is-6 mobile" style="float: right">
+        <div class="panel hi">
             <p class="panel-heading hero is-success is-bold">My Recent Transactions</p>
             <div class="panel-block">
                 <div class="table-container">
