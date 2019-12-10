@@ -164,6 +164,7 @@
 
         <div class="panel has-text-centered ">
             <p class="panel-heading hero is-success is-bold">My Current Goals</p>
+            <div id="goal-div">
             <div class="profile-goal " th:each="goal : ${goal}">
                 <div style="height: 250px; width: 400px; margin-left: 10px; margin-top: 10px">
                     <u><strong style="text-transform: uppercase" th:text="${goal.description}"></strong></u>
@@ -197,6 +198,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="panel-block">
                 <figure class="image is-16x9">

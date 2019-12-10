@@ -22,9 +22,9 @@
     </div>
 </div>
 <div class="columns is-centered is-multiline is-full-mobile">
-    <div class="column is-4 has-text-centered" th:each="goal : ${goal}">
-        <div class="card">
-            <div class="card-content">
+    <div class="column is-4 has-text-centered goal-div" th:each="goal : ${goal}">
+        <div class="card goal-card">
+            <div class="card-content goal-content">
                 <div class="goal-title">
                     <h2 class="card-header-title" th:text="${goal.description}" style="font-size: 20pt"></h2>
                 </div>

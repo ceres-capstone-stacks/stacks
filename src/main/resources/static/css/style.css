@@ -58,7 +58,7 @@ table {
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: .5em;
 }
 
 tr:nth-child(even) {
@@ -81,5 +81,29 @@ tr:nth-child(even) {
 .profile-goal {
     display: inline-flex;
     justify-content: space-evenly;
-    width: 300px;
+    width: 18.75em;
+}
+
+#goal-div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.goal-div{
+    min-height: 18.75em;
+}
+
+.goal-card{
+    min-height: 100%;
+}
+
+progress{
+    position: absolute;
+    bottom: 0;
+    width: 85% !important;
+}
+
+.goal-content{
+    height: 22.125em !important;
+    position: relative;
 }
