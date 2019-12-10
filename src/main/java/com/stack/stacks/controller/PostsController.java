@@ -95,8 +95,14 @@ public class PostsController {
     // to get the right post you want to edit
     @GetMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("posts", postDao.getOne(id));
-        return "posts/editPost";
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User postUser = postDao.getOne(id).getUser();
+        if(!currentUser.equals(postUser)){
+            return "redirect:/posts";
+        } else {
+            vModel.addAttribute("posts", postDao.getOne(id));
+            return "posts/editPost";
+        }
     }
 
     // to post the changes made to post
@@ -106,7 +112,7 @@ public class PostsController {
         oldPost.setTitle(title);
         oldPost.setContent(content);
         postDao.save(oldPost);
-        return "redirect:/posts/myposts";
+        return "redirect:/posts";
     }
 
     // to delete
