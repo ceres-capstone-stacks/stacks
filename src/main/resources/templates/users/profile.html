@@ -179,11 +179,11 @@
                     <u><strong style="text-transform: uppercase" th:text="${goal.description}"></strong></u>
                     <div>
                         <ul>
-                            <li><strong>Goal: </strong><span
+                            <li class="goal-li"><strong>Goal: </strong><span
                                     th:text="${#numbers.formatCurrency(goal.amount)}"></span></li>
-                            <li th:id="'amount-' + ${goal.id}"><strong>You've saved: </strong><span
+                            <li th:id="'amount-' + ${goal.id}" class="goal-li"><strong>You've saved: </strong><span
                                     th:text="${#numbers.formatCurrency(goal.amountSaved)}"></span></li>
-                            <li th:with="result=${goal.amount - goal.amountSaved}"><strong>Remaining: </strong><span
+                            <li th:with="result=${goal.amount - goal.amountSaved}" class="goal-li"><strong>Remaining: </strong><span
                                     th:text="${#numbers.formatCurrency(result)}"></span></li>
                         </ul>
                         <progress class="progress is-success" th:max="${goal.amount}"
@@ -435,6 +435,10 @@
 
     });
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     $("#close-modal").click(function (e) {
         e.preventDefault();
         $("#myModal").removeClass('is-active');
@@ -506,11 +510,11 @@
                             $("#addition-btn").remove();
                             $(".add-to-goal").attr("goTime", "yes");
                             let liId = "#amount-" + goalId;
-                            let html = "<strong>You've saved: </strong><span>$" + parseFloat(amountSaved).toFixed(2) + "</span></li><li><strong>" +
+                            let html = "<li class=\"goal-li\"><strong>Goal: </strong><span\n" +
+                                "                                    >$" + numberWithCommas(parseFloat(amount).toFixed(2)) + "</span></li><li class=\"goal-li\"><strong>You've saved: </strong><span>$" + numberWithCommas(parseFloat(amountSaved).toFixed(2)) + "</span></li><li class=\"goal-li\"><strong>" +
                                 "                                Remaining: </strong><span\n" +
-                                "                                    >" + difference.toFixed(2) + "</span></li>";
-                            $(liId).html(html);
-                            $(liId).next("li").remove();
+                                "                                    >$" + numberWithCommas(difference.toFixed(2)) + "</span></li>";
+                            $(liId).parent().html(html);
                             $(progressBar).val(amountSaved);
                         }
                     });
