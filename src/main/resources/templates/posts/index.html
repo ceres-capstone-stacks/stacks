@@ -51,7 +51,7 @@
                 <nav class="level is-mobile">
                     <div class="level-left">
                         <div th:each=" tag : ${post.tags}" >
-                            <h4 class="is-4 tag"># <span th:text="${tag.name}"></span></h4>
+                            <h4 class="is-4 tag" style="margin-right: .5em"># <span th:text="${tag.name}"></span></h4>
                         </div>
                         <div style="display: block" sec:authorize="isAuthenticated()" th:if="${post.user.id == #authentication.principal.id}">
                             <div class="buttons"><a style="border-style: none" class="button" th:href="@{'/posts/' + ${post.id} + '/edit'}"><i class="far fa-edit"></i></a>
