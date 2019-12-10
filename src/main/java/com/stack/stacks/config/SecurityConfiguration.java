@@ -60,6 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/posts/favorites", // only authenticated users can view favored posts
                         "/posts/create", // only authenticated users can create a post
                         "/posts/myposts", //only authenticated users can view their posts
+                        "/posts/{id}/edit",
                         "/profile", //ony authenticated users can view their profile
                         "/profile/expenses/{id}/edit", //only authenticated user can edit an expense
                         "/goals/{id}/edit"  
