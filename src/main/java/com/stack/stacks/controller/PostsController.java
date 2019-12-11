@@ -95,15 +95,20 @@ public class PostsController {
     // to get the right post you want to edit
     @GetMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, Model vModel) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User postUser = postDao.getOne(id).getUser();
-        if(!currentUser.equals(postUser)){
-            return "redirect:/posts";
-        } else {
-            vModel.addAttribute("posts", postDao.getOne(id));
-            return "posts/editPost";
-        }
+        vModel.addAttribute("posts", postDao.getOne(id));
+        return "posts/editPost";
     }
+//    @GetMapping("/posts/{id}/edit")
+//    public String editPost(@PathVariable long id, Model vModel) {
+//        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User postUser = postDao.getOne(id).getUser();
+//        if(!currentUser.equals(postUser)){
+//            return "redirect:/posts";
+//        } else {
+//            vModel.addAttribute("posts", postDao.getOne(id));
+//            return "posts/editPost";
+//        }
+//    }
 
     // to post the changes made to post
     @PostMapping("/posts/{id}/edit")
