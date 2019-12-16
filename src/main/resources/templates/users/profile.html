@@ -386,12 +386,12 @@
 
 
         let html = "<tr class=\"expense-item\">\n" +
-            "                            <td><span class=\"new-date-span\">" + formattedDate + "</span></td>\n" +
+            "                            <td>$" + formattedAmount + "</td>\n" +
             "                            <td>" + description + "</td>\n" +
             "                                <div>\n" +
             "                                    <td>" + typeString + "</td>\n" +
             "                                </div>\n" +
-            "                            <td>$" + formattedAmount + "</td>";
+            "                            <td><span class=\"new-date-span\">" + formattedDate + "</span></td>";
 
         if ($(".expense-item").length >= 5) {
             $(".expense-item").last().remove();
